@@ -1,0 +1,23 @@
+{
+  "author" : "",
+  "commands" : [
+    {
+      "script" : "script.js",
+      "handler" : "onRun",
+      "shortcut" : "",
+      "name" : "p5",
+      "identifier" : "p5"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "p5"
+    ],
+    "title" : "p5"
+  },
+  "identifier" : "com.example.sketch.af17a47e-7d4a-4fe2-9bcf-8d75d772ba1a",
+  "version" : "1.0",
+  "description" : "",
+  "authorEmail" : "",
+  "name" : "p5"
+}
