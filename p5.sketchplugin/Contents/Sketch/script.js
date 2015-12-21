@@ -43,8 +43,6 @@ var onRun = function(context) {
     else {
         artboard = p5canvas;
         frame = artboard.frame()
-        frame.setX(0)
-        frame.setY(0)
         frame.setWidth(canvasWidth)
         frame.setHeight(canvasHeight)
       }
@@ -117,6 +115,33 @@ var onRun = function(context) {
     var shape = MSShapeGroup.shapeWithBezierPath(path);
     var fill = shape.style().fills().addNewStylePart();
     fill.color = MSColor.colorWithSVGString(fillColor);
+
+    var shape = MSShapeGroup.shapeWithBezierPath(path);
+    var border = shape.style().borders().addNewStylePart();
+    border.color = MSColor.colorWithSVGString(strokeColor);
+    border.thickness = strokeThikness;
+
+    artboard.addLayers([shape]);
+  }
+
+  function triangle(x1,y1,x2,y2,x3,y3) {
+    var path = NSBezierPath.bezierPath();
+    path.moveToPoint(NSMakePoint(x1, y1));
+    path.lineToPoint(NSMakePoint(x1, y1));
+    path.lineToPoint(NSMakePoint(x2, y2));
+    path.lineToPoint(NSMakePoint(x3, y3));
+    path.lineToPoint(NSMakePoint(x1, y1));
+    path.closePath();
+
+    var shape = MSShapeGroup.shapeWithBezierPath(path);
+    var fill = shape.style().fills().addNewStylePart();
+    fill.color = MSColor.colorWithSVGString(fillColor);
+
+    var shape = MSShapeGroup.shapeWithBezierPath(path);
+    shape.setName("triangle");
+    var border = shape.style().borders().addNewStylePart();
+    border.color = MSColor.colorWithSVGString(strokeColor);
+    border.thickness = strokeThikness;
 
     artboard.addLayers([shape]);
   }
@@ -198,6 +223,7 @@ var onRun = function(context) {
     strokeWeight(4);
     fill("#e9e9e9");
     line(0, 0, canvasWidth, canvasHeight);
+    triangle(0,10,100,0,50,50)
   };
 
   setup();
