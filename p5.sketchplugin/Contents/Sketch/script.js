@@ -2,8 +2,9 @@
 // implement noStroke()
 // implement strokeWitdh()
 // Implement arc()
-// Implement triangle()
-// if there is an artboard named p5.canvas, draw there. Else create a artboard called p5.canvas and draw there
+// Fix artboard placement if there is an artboard already. It should loop, find the one most on the left and go to the left of that. Righ now it only goes to the left of the first artboard
+// Implement noise()?
+// Clean artboard on run
 
 @import 'utils.js'
 
@@ -16,6 +17,7 @@ var textFont = "Helvetica";
 var fillColor = "#000000";
 var strokeColor = "#000000";
 var strokeThikness = "1";
+var seeded;
 
 var onRun = function(context) {
   doc = context.document;
@@ -31,35 +33,33 @@ var onRun = function(context) {
 
     var p5canvas = getArtboardWithName("p5canvas");
 
-    if(!p5canvas) {
-        artboard = MSArtboardGroup.new()
-        frame = artboard.frame()
-        if (artboards == nil || [artboards count] == 0) {
-          frame.x = 0
-          frame.y = 100
-          log("this")
-        }
-        else {
-          //if p5canvas doesn’t exist already, we place it 50px before the first artboard
-          firstArtboard = artboards[0];
-          firstArtboardFrame = firstArtboard.frame()
-          firstArtboardFrameX = firstArtboardFrame.minX()
-          firstArtboardFrameY = firstArtboardFrame.minY()
-          frame.x = firstArtboardFrameX-canvasWidth-padding
-          frame.y = firstArtboardFrameY
-        }
-        frame.setWidth(canvasWidth)
-        frame.setHeight(canvasHeight)
-        artboard.setName("p5canvas")
-        artboard.setHasBackgroundColor(true);
-        doc.currentPage().addLayers([artboard])
+    if (!p5canvas) {
+      artboard = MSArtboardGroup.new()
+      frame = artboard.frame()
+      if (artboards == nil || [artboards count] == 0) {
+        frame.x = 0
+        frame.y = 100
+        log("this")
+      } else {
+        //if p5canvas doesn’t exist already, we place it 50px before the first artboard
+        firstArtboard = artboards[0];
+        firstArtboardFrame = firstArtboard.frame()
+        firstArtboardFrameX = firstArtboardFrame.minX()
+        firstArtboardFrameY = firstArtboardFrame.minY()
+        frame.x = firstArtboardFrameX - canvasWidth - padding
+        frame.y = firstArtboardFrameY
       }
-    else {
-        artboard = p5canvas;
-        frame = artboard.frame()
-        frame.setWidth(canvasWidth)
-        frame.setHeight(canvasHeight)
-      }
+      frame.setWidth(canvasWidth)
+      frame.setHeight(canvasHeight)
+      artboard.setName("p5canvas")
+      artboard.setHasBackgroundColor(true);
+      doc.currentPage().addLayers([artboard])
+    } else {
+      artboard = p5canvas;
+      frame = artboard.frame()
+      frame.setWidth(canvasWidth)
+      frame.setHeight(canvasHeight)
+    }
   }
 
   function point(x, y) {
@@ -138,7 +138,7 @@ var onRun = function(context) {
     artboard.addLayers([shape]);
   }
 
-  function triangle(x1,y1,x2,y2,x3,y3) {
+  function triangle(x1, y1, x2, y2, x3, y3) {
     var path = NSBezierPath.bezierPath();
     path.moveToPoint(NSMakePoint(x1, y1));
     path.lineToPoint(NSMakePoint(x1, y1));
@@ -228,16 +228,39 @@ var onRun = function(context) {
   };
 
   function setup() {
-    createCanvas(500, 600);
-    background("#f9f9f9");
+    createCanvas(640, 480);
+    background("#e5e1d6");
   }
 
   function draw() {
+    strokeWeight(5);
+    stroke("#f0f0f0");
+    triangle(0, 480, 0, 0, 480, 0);
+    ellipse(300, -42, 400, 400);
+    ellipse(300, -42, 230, 230);
+    ellipse(300, 155, 148, 148);
+    ellipse(300, 155, 130, 130);
+    noStroke();
+    ellipse(295, 155, 70, 70);
     stroke("#000000");
-    strokeWeight(4);
-    fill("#e9e9e9");
-    line(0, 0, canvasWidth, canvasHeight);
-    triangle(0,10,100,0,50,50)
+    strokeWeight(1);
+    ellipse(294, 155, 45, 45);
+    //grid ellipse 2
+    noStroke();
+    ellipse(158, 145, 100, 115);
+    ellipse(158, 145, 90, 103);
+    ellipse(158, 150, 80, 100);
+    ellipse(158, 158, 70, 90);
+    stroke("#000000");
+    strokeWeight(2);
+    ellipse(158, 160, 53, 70);
+    quad(640, 182, 556, 110, 474, 424, 640, 424);
+    quad(478, 44, 556, 110, 520, 246, 260, 294);
+    quad(-83, 425, 42, 74, 262, 283, 60, 536);
+    quad(162, 188, 222, 92, 334, 206, 262, 283);
+    quad(294, 164, 418, 36, 452, 72, 334, 206);
+    triangle(428, 0, 642, 184, 642, 0);
+    quad(460, 24, 480, 0, 512, 0, 478, 40);
   };
 
   setup();

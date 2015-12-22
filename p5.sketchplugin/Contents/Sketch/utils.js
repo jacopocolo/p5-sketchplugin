@@ -40,3 +40,24 @@ function predicate(format, array) {
 	//return result
 	return queryResult;
 }
+
+function random(min, max) {
+      var rand;
+      if (seeded) {
+        rand = lcg.rand();
+      } else {
+        rand = Math.random();
+      }
+      if (arguments.length === 0) {
+        return rand;
+      } else if (arguments.length === 1) {
+        return rand * min;
+      } else {
+        if (min > max) {
+          var tmp = min;
+          min = max;
+          max = tmp;
+        }
+        return rand * (max - min) + min;
+      }
+    };
