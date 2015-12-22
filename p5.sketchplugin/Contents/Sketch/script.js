@@ -8,6 +8,7 @@
 @import 'utils.js'
 
 var doc;
+var padding = 50;
 var canvasWidth = 600
 var canvasHeight = 800;
 var textSize = 12;
@@ -21,6 +22,7 @@ var onRun = function(context) {
   var selection = context.selection;
   var page = [doc currentPage];
   var view = [doc currentView];
+  var artboards = [[doc currentPage] artboards];
   var artboard;
 
   function createCanvas(width, height) {
@@ -32,8 +34,20 @@ var onRun = function(context) {
     if(!p5canvas) {
         artboard = MSArtboardGroup.new()
         frame = artboard.frame()
-        frame.setX(0)
-        frame.setY(0)
+        if (artboards == nil || [artboards count] == 0) {
+          frame.x = 0
+          frame.y = 100
+          log("this")
+        }
+        else {
+          //if p5canvas doesn’t exist already, we place it 50px before the first artboard
+          firstArtboard = artboards[0];
+          firstArtboardFrame = firstArtboard.frame()
+          firstArtboardFrameX = firstArtboardFrame.minX()
+          firstArtboardFrameY = firstArtboardFrame.minY()
+          frame.x = firstArtboardFrameX-canvasWidth-padding
+          frame.y = firstArtboardFrameY
+        }
         frame.setWidth(canvasWidth)
         frame.setHeight(canvasHeight)
         artboard.setName("p5canvas")
@@ -214,7 +228,7 @@ var onRun = function(context) {
   };
 
   function setup() {
-    createCanvas(500, 500);
+    createCanvas(500, 600);
     background("#f9f9f9");
   }
 
