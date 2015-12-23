@@ -13,7 +13,7 @@ var padding = 50;
 var canvasWidth = 600
 var canvasHeight = 800;
 var textSize = 12;
-var textFont = "Helvetica";
+var font = "Georgia";
 var fillColor = "#000000";
 var strokeColor = "#000000";
 var strokeThikness = "1";
@@ -39,7 +39,6 @@ var onRun = function(context) {
       if (artboards == nil || [artboards count] == 0) {
         frame.x = 0
         frame.y = 100
-        log("this")
       } else {
         //if p5canvas doesn’t exist already, we place it 50px before the first artboard
         firstArtboard = artboards[0];
@@ -87,6 +86,7 @@ var onRun = function(context) {
     path.closePath();
 
     var shape = MSShapeGroup.shapeWithBezierPath(path);
+    shape.setName("Line");
     var border = shape.style().borders().addNewStylePart();
     border.color = MSColor.colorWithSVGString(strokeColor);
     border.thickness = strokeThikness;
@@ -109,6 +109,7 @@ var onRun = function(context) {
     fill.color = MSColor.colorWithSVGString(fillColor);
 
     var shape = MSShapeGroup.shapeWithBezierPath(path);
+    shape.setName("Rectangle");
     var border = shape.style().borders().addNewStylePart();
     border.color = MSColor.colorWithSVGString(strokeColor);
     border.thickness = strokeThikness;
@@ -131,6 +132,7 @@ var onRun = function(context) {
     fill.color = MSColor.colorWithSVGString(fillColor);
 
     var shape = MSShapeGroup.shapeWithBezierPath(path);
+    shape.setName("Rectangle");
     var border = shape.style().borders().addNewStylePart();
     border.color = MSColor.colorWithSVGString(strokeColor);
     border.thickness = strokeThikness;
@@ -168,6 +170,7 @@ var onRun = function(context) {
     ovalShape.frame = MSRect.rectWithRect(NSMakeRect(centerX, centerY, c, d));
 
     var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
+    shapeGroup.setName("Oval");
     var fill = shapeGroup.style().fills().addNewStylePart();
     fill.color = MSColor.colorWithSVGString(fillColor);
 
@@ -180,15 +183,14 @@ var onRun = function(context) {
 
   function text(str, x, y, x2, y2) {
     var textLayer = artboard.addLayerOfType("text");
-    textLayer.textColor = MSColor.colorWithSVGString(fillColor);
-    textLayer.fontSize = textSize;
-    textLayer.setFontPostscriptName(textFont);
+    textLayer.textColor = MSColor.colorWithSVGString(strokeColor);
+    textLayer.fontSize = 50;
+    textLayer.setFontPostscriptName(font.toString());
     textLayer.setName(str);
     textLayer.setNameIsFixed(true);
     textLayer.setStringValue(str);
-
-    textLayer.frame().setX(x);
-    textLayer.frame().setY(y);
+    textLayer.frame().setX(Number(x));
+    textLayer.frame().setY(Number(y));
 
     if (x2 == undefined || y2 == undefined) {
       resizeLayerToFitText(textLayer);
@@ -196,6 +198,7 @@ var onRun = function(context) {
       textLayer.frame().setWidth(x2);
       textLayer.frame().setHeight(y2);
     }
+
     return textLayer;
   };
 
@@ -204,7 +207,7 @@ var onRun = function(context) {
   };
 
   function textFont(font) {
-    textFont = font;
+    font = font;
   };
 
   function fill(color) {
@@ -227,41 +230,52 @@ var onRun = function(context) {
     artboard.setBackgroundColor(MSColor.colorWithSVGString(color));
   };
 
+
+
+
+
+
+
+
+  var i = 0;
+  numberToDraw = 100;
+
   function setup() {
-    createCanvas(640, 480);
-    background("#e5e1d6");
+    createCanvas(500, 500);
+    background("#e6e6e6");
   }
 
   function draw() {
-    strokeWeight(5);
-    stroke("#f0f0f0");
-    triangle(0, 480, 0, 0, 480, 0);
-    ellipse(300, -42, 400, 400);
-    ellipse(300, -42, 230, 230);
-    ellipse(300, 155, 148, 148);
-    ellipse(300, 155, 130, 130);
-    noStroke();
-    ellipse(295, 155, 70, 70);
-    stroke("#000000");
-    strokeWeight(1);
-    ellipse(294, 155, 45, 45);
-    //grid ellipse 2
-    noStroke();
-    ellipse(158, 145, 100, 115);
-    ellipse(158, 145, 90, 103);
-    ellipse(158, 150, 80, 100);
-    ellipse(158, 158, 70, 90);
-    stroke("#000000");
-    strokeWeight(2);
-    ellipse(158, 160, 53, 70);
-    quad(640, 182, 556, 110, 474, 424, 640, 424);
-    quad(478, 44, 556, 110, 520, 246, 260, 294);
-    quad(-83, 425, 42, 74, 262, 283, 60, 536);
-    quad(162, 188, 222, 92, 334, 206, 262, 283);
-    quad(294, 164, 418, 36, 452, 72, 334, 206);
-    triangle(428, 0, 642, 184, 642, 0);
-    quad(460, 24, 480, 0, 512, 0, 478, 40);
-  };
+    stroke("rgb(0,0,255)");
+    fill("rgb(0,255,0)")
+    ellipse(canvasWidth / 2, canvasHeight / 2, 100, 100);
+    line(0, 0, canvasWidth, canvasHeight);
+    line(0, canvasHeight, canvasWidth, 0);
+
+    //a simple grid
+    for (x = 0; x < canvasWidth; x = x + 50) {
+      line(x, 0, x, canvasHeight)
+    }
+    for (y = 0; y < canvasHeight; y = y + 50) {
+      line(0, y, canvasWidth, y)
+    }
+    textFont("Georgia")
+    stroke("rgb(255,0,0)")
+    text('Hello world', canvasWidth / 2-130, canvasHeight / 2+50)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   setup();
   draw();
