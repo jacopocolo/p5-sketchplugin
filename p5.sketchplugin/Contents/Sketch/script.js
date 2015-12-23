@@ -1,13 +1,14 @@
 // To-do
-// implement noStroke()
-// implement strokeWitdh()
 // Implement arc()
 // Fix artboard placement if there is an artboard already. It should loop, find the one most on the left and go to the left of that. Righ now it only goes to the left of the first artboard
 // Implement noise()?
 // Clean artboard on run
+// Fix resizeLayerToFitText
 
 @import 'utils.js'
 @import 'sketch.js'
+
+var ctx, doc, selection, page, view, artboard, artboards;
 
 var doc;
 var padding = 50;
@@ -19,8 +20,6 @@ var fillColor = "#000000";
 var strokeColor = "#000000";
 var strokeThikness = "1";
 var seeded;
-
-var ctx, doc, selection, page, view, artboard, artboards;
 
 function createCanvas(width, height) {
   canvasWidth = width;
@@ -36,12 +35,21 @@ function createCanvas(width, height) {
       frame.y = 100
     } else {
       //if p5canvas doesn’t exist already, we place it 50px before the first artboard
+      var numberOfArtboards = [artboards count];
+      minX = 0;
+      minY = 0;
+      for (i = 0; i < numberOfArtboards; i++) {
+          if (artboards[i].frame().minX() <= minX) {
+            minX = artboards[i].frame().minX();
+            minY = artboards[i].frame().minY();
+          }
+      }
       firstArtboard = artboards[0];
       firstArtboardFrame = firstArtboard.frame()
       firstArtboardFrameX = firstArtboardFrame.minX()
       firstArtboardFrameY = firstArtboardFrame.minY()
-      frame.x = firstArtboardFrameX - canvasWidth - padding
-      frame.y = firstArtboardFrameY
+      frame.x = minX - canvasWidth - padding
+      frame.y = minY
     }
     frame.setWidth(canvasWidth)
     frame.setHeight(canvasHeight)
@@ -186,7 +194,7 @@ function text(str, x, y, x2, y2) {
   textLayer.frame().setX(Number(x));
   textLayer.frame().setY(Number(y));
 
-  if (x2 == undefined || y2 == undefined) {
+  if (x2 == undefined || y2 == undefined || x2 == null || y2 == null) {
     resizeLayerToFitText(textLayer);
   } else {
     textLayer.frame().setWidth(x2);
@@ -200,8 +208,8 @@ function textSize(size) {
   textSize = size;
 };
 
-function textFont(font) {
-  font = font;
+function textFont(textFont) {
+  font = textFont;
 };
 
 function fill(color) {

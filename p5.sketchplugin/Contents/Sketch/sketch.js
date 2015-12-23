@@ -1,5 +1,5 @@
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(300, 500);
     background("#e6e6e6");
   }
 
@@ -17,7 +17,7 @@ function setup() {
     for (y = 0; y < canvasHeight; y = y + 50) {
       line(0, y, canvasWidth, y)
     }
-    textFont("Georgia")
+    textFont("Helvetica Bold")
     stroke("rgb(255,0,0)")
-    text('Hello', canvasWidth / 2-130, canvasHeight / 2+50)
+    text('Hello world', canvasWidth / 2-130, canvasHeight / 2+50)
   }
