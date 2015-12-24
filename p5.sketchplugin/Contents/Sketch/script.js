@@ -2,6 +2,7 @@
 // Implement arc()
 // Fix artboard placement if there is an artboard already. It should loop, find the one most on the left and go to the left of that. Righ now it only goes to the left of the first artboard
 // Implement noise()?
+// Implement noFill()
 // Clean artboard on run
 // Fix resizeLayerToFitText
 
@@ -20,6 +21,12 @@ var fillColor = "#000000";
 var strokeColor = "#000000";
 var strokeThikness = "1";
 var seeded;
+
+var PI = Math.PI;
+var HALF_PI = PI / 2;
+var QUARTER_PI = PI / 4;
+var TAU = PI * 2;
+var TWO_PI = PI * 2;
 
 function createCanvas(width, height) {
   canvasWidth = width;
@@ -187,7 +194,7 @@ function arc(a,b,c,d,start,stop) {
   var center = NSMakePoint(a, b)
   path = [NSBezierPath bezierPath]
   [path moveToPoint:center]
-  [path appendBezierPathWithArcWithCenter:center radius:c startAngle:start endAngle:stop]
+  [path appendBezierPathWithArcWithCenter:center radius:c startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
   [path closePath]
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);

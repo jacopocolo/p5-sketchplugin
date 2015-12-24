@@ -61,3 +61,7 @@ function random(min, max) {
         return rand * (max - min) + min;
       }
     };
+
+function radiansToDegrees(radian) {
+  return radian*(180/PI);
+}
