@@ -183,6 +183,24 @@ function ellipse(a, b, c, d) {
   artboard.addLayers([shapeGroup]);
 }
 
+function arc(a,b,c,d,start,stop) {
+  var center = NSMakePoint(a, b)
+  path = [NSBezierPath bezierPath]
+  [path moveToPoint:center]
+  [path appendBezierPathWithArcWithCenter:center radius:c startAngle:start endAngle:stop]
+  [path closePath]
+
+  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  shape.setName("Arc");
+  var fill = shape.style().fills().addNewStylePart();
+  fill.color = MSColor.colorWithSVGString(fillColor);
+  var border = shape.style().borders().addNewStylePart();
+  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.thickness = strokeThikness;
+
+  artboard.addLayers([shape]);
+}
+
 function text(str, x, y, x2, y2) {
   var textLayer = artboard.addLayerOfType("text");
   textLayer.textColor = MSColor.colorWithSVGString(strokeColor);
@@ -225,7 +243,7 @@ function strokeWeight(weight) {
 };
 
 function noStroke() {
-  strokeWeight = 0; //not the best solution but it works
+  strokeThikness = 0; //not the best solution but it works
 };
 
 function background(color) {
