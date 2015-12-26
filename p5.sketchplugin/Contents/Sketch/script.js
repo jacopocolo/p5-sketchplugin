@@ -23,7 +23,7 @@ var strokeThikness = "1";
 var seeded;
 
 var PI = Math.PI;
-var HALF_PI = PI / 2;
+var HALF_PI = Math.PI / 2;
 var QUARTER_PI = PI / 4;
 var TAU = PI * 2;
 var TWO_PI = PI * 2;
@@ -192,20 +192,42 @@ function ellipse(a, b, c, d) {
 
 function arc(a,b,c,d,start,stop) {
   var center = NSMakePoint(a, b)
+  rect = NSMakeRect(a-c/2, b-d/2, c, d)
+  var rad;
+  if (c > d) {rad = c} else {rad = d}
+
+  clipPath = [NSBezierPath bezierPath]
+  [clipPath moveToPoint:center]
+  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
+  [clipPath closePath]
+
   path = [NSBezierPath bezierPath]
-  [path moveToPoint:center]
-  [path appendBezierPathWithArcWithCenter:center radius:c startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
+  [path appendBezierPathWithOvalInRect:rect]
   [path closePath]
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  shape.setName("Arc");
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
+  shape.setName("Arc");
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
 
-  artboard.addLayers([shape]);
+  var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
+  var fill = mask.style().fills().addNewStylePart();
+  fill.color = MSColor.colorWithSVGString(fillColor);
+  mask.setName("Arc");
+
+  artboard.addLayers([shape])
+  artboard.addLayers([mask])
+  mask.select_byExpandingSelection(true, true)
+  shape.select_byExpandingSelection(true, true)
+
+  var intersectAction = doc.actionsController().actionWithName("MSIntersectAction");
+  if (intersectAction.validate()) {
+      intersectAction.booleanIntersect(nil)
+  }
+  doc.currentPage().deselectAllLayers()
 }
 
 function text(str, x, y, x2, y2) {
