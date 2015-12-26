@@ -41,6 +41,22 @@ function predicate(format, array) {
 	return queryResult;
 }
 
+function deleteLayer(layer){
+	var parent = [layer parentGroup];
+	if(parent) [parent removeLayer: layer];
+}
+
+
+function deleteAllLayers(artboardName) {
+    var all_layers = getArtboardWithName(artboardName).layers()
+    for(var i=0; i < [all_layers count]; i++){
+    var layer = all_layers.objectAtIndex(i)
+    layer.select_byExpandingSelection(true, true)
+    deleteLayer(layer)
+    doc.currentPage().deselectAllLayers()
+  }
+}
+
 function random(min, max) {
       var rand;
       if (seeded) {

@@ -17,7 +17,7 @@ var canvasWidth = 600
 var canvasHeight = 800;
 var textSize = 12;
 var font = "Georgia";
-var fillColor = "#000000";
+var fillColor = "#ffffff";
 var strokeColor = "#000000";
 var strokeThikness = "1";
 var seeded;
@@ -64,6 +64,7 @@ function createCanvas(width, height) {
     artboard.setHasBackgroundColor(true);
     doc.currentPage().addLayers([artboard])
   } else {
+    deleteAllLayers("p5canvas")
     artboard = p5canvas;
     frame = artboard.frame()
     frame.setWidth(canvasWidth)
@@ -117,8 +118,6 @@ function rect(x, y, w, h) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
-
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
@@ -140,8 +139,6 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
-
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
@@ -162,8 +159,6 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
-
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("triangle");
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);

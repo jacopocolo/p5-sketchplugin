@@ -1,13 +1,8 @@
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(500, 500);
     background("#e6e6e6");
   }
 
   function draw() {
-    fill("#0000FF");
-    arc(canvasWidth/2,canvasHeight/2,500,500,0,0.5);
-    fill("#FF0000");
-    arc(canvasWidth/2,canvasHeight/2,500,500,0.5,PI);
-    fill("#00FF00");
-    arc(canvasWidth/2,canvasHeight/2,500,500,PI,TWO_PI);
+    rect(random(0,500),random(0,500),random(0,500),random(0,500))
   }
