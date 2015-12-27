@@ -1,10 +1,9 @@
 // To-do
-// Implement arc()
-// Fix artboard placement if there is an artboard already. It should loop, find the one most on the left and go to the left of that. Righ now it only goes to the left of the first artboard
 // Implement noise()?
 // Implement noFill()
-// Clean artboard on run
-// Fix resizeLayerToFitText
+// Fix layer deletion on canvas
+//Make consistent functions for fill() and stroke()
+//implement rotate()
 
 @import 'utils.js'
 @import 'sketch.js'
@@ -27,6 +26,11 @@ var HALF_PI = Math.PI / 2;
 var QUARTER_PI = PI / 4;
 var TAU = PI * 2;
 var TWO_PI = PI * 2;
+
+// This function checks if a canvas already exists and if it doesn’t it draws it
+// If the canvas already exists, it deletes all the layers inside and draw new ones
+// The idea is to mimic the behaviour of the Processing canvas, where every time you
+// run the code, you create something new.
 
 function createCanvas(width, height) {
   canvasWidth = width;
@@ -72,6 +76,9 @@ function createCanvas(width, height) {
   }
 }
 
+// A simple point. Here it’s drawn as a 1x1 pixels rectangl.
+// It does have a fill color, it doesn’t have a stroke color
+// You can call it like this: point(100,100)
 function point(x, y) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -88,7 +95,10 @@ function point(x, y) {
 
   artboard.addLayers([shape]);
 }
-
+// A simple line from x1, y1 to x2, y2. It sadly doesn’t behave like the Sketch
+// line but as a path. I.E.: you cannot edit it as a line.
+// It doesn’t have a fill color, it has a stroke color
+// You can call it like this: line(0,0,100,100)
 function line(x1, y1, x2, y2) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -104,7 +114,9 @@ function line(x1, y1, x2, y2) {
 
   artboard.addLayers([shape]);
 }
-
+// A rectangle that starts from x, y and has a height of h and a width of w.
+// The angles are always at 90 degrees. It has both a fill and a stroke color
+// You can call it like this: rect(0,0,100,200)
 function rect(x, y, w, h) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -126,6 +138,9 @@ function rect(x, y, w, h) {
   artboard.addLayers([shape]);
 }
 
+// A four sided polygon. With corners in (x1, y1), (x2, y2), (x3, y3), (x4, y4)
+// It has both a fill and a stroke color
+// You can call it like this: quad(0,0,100,200,400,400,200,90,20)
 function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -147,6 +162,9 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   artboard.addLayers([shape]);
 }
 
+// A three sided polygon. With corners in (x1, y1), (x2, y2), (x3, y3)
+// It has both a fill and a stroke color
+// You can call it like this: triangle(0,0,100,200,400,400,200)
 function triangle(x1, y1, x2, y2, x3, y3) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -167,6 +185,9 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   artboard.addLayers([shape]);
 }
 
+// An ellipse centered in (a, b) and with a width of c and an height of d
+// It has both a fill and a stroke color
+// You can call it like this: ellipse(250,250,500,100)
 function ellipse(a, b, c, d) {
   centerX = a - c / 2;
   centerY = b - d / 2;
@@ -185,6 +206,11 @@ function ellipse(a, b, c, d) {
   artboard.addLayers([shapeGroup]);
 }
 
+// An arc with the center in (a, b) a width of c and an height of d
+// Start and stop are starting point and ending point of the angle misured in radians
+// You can use degreesToRadians(degrees) to convert from degrees to radians
+// It has both a fill and a stroke color
+// You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
   var center = NSMakePoint(a, b)
   rect = NSMakeRect(a-c/2, b-d/2, c, d)
@@ -225,6 +251,10 @@ function arc(a,b,c,d,start,stop) {
   doc.currentPage().deselectAllLayers()
 }
 
+// A text block with str as content, placred in (x, y) and with optional values
+// of (x2, y2) to set the size of the bounding box. If x2 and y2 are not set
+// the bounding box will wrap around the text
+// You can call it like this: text("Hello world",10,10,100,200)
 function text(str, x, y, x2, y2) {
   var textLayer = artboard.addLayerOfType("text");
   textLayer.textColor = MSColor.colorWithSVGString(strokeColor);

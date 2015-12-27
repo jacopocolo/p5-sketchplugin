@@ -12,7 +12,6 @@ function jsArray(array) {
 
   //find artboard with name
   function getArtboardWithName(name) {
-
   	var artboards = jsArray([doc artboards]);
   	for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
@@ -49,12 +48,14 @@ function deleteLayer(layer){
 
 function deleteAllLayers(artboardName) {
     var all_layers = getArtboardWithName(artboardName).layers()
-    for(var i=0; i < [all_layers count]; i++){
-    var layer = all_layers.objectAtIndex(i)
-    layer.select_byExpandingSelection(true, true)
-    deleteLayer(layer)
-    doc.currentPage().deselectAllLayers()
+    while ([all_layers count] > 0) {
+    var i = 0;
+    var layer = all_layers.objectAtIndex(i);
+    layer.select_byExpandingSelection(true, true);
+    deleteLayer(layer);
+    i = i+1;
   }
+  doc.currentPage().deselectAllLayers()
 }
 
 function random(min, max) {
@@ -80,4 +81,16 @@ function random(min, max) {
 
 function radiansToDegrees(radian) {
   return radian*(180/PI);
+}
+
+function degreesToRadians(degrees) {
+  return degrees * Math.PI/180;
+}
+
+function resizeLayerToFitText(layer) {
+	[layer adjustFrameToFit];
+    [layer select:true byExpandingSelection:false];
+    [layer setIsEditingText:true];
+    [layer setIsEditingText:false];
+    [layer select:false byExpandingSelection:false];
 }

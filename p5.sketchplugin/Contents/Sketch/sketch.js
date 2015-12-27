@@ -4,5 +4,7 @@ function setup() {
   }
 
   function draw() {
-    rect(random(0,500),random(0,500),random(0,500),random(0,500))
-  }
+    fill("#00ff00")
+    line(10,10,random(480),480)
+    rect(random(100),random(100),100,random(100))
+}
