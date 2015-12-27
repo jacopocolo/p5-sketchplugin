@@ -1,8 +1,9 @@
 // To-do
 // Implement noise()?
 // Implement noFill()
-// Fix layer deletion on canvas
+// Implement map()
 //Make consistent functions for fill() and stroke()
+// Implement rgba() for both fill() and stroke()
 //implement rotate()
 
 @import 'utils.js'
@@ -10,17 +11,17 @@
 
 var ctx, doc, selection, page, view, artboard, artboards;
 
-var doc;
-var padding = 50;
-var canvasWidth = 600
-var canvasHeight = 800;
-var textSize = 12;
-var font = "Georgia";
-var fillColor = "#ffffff";
-var strokeColor = "#000000";
-var strokeThikness = "1";
+var padding = 50; //distance from p5canvas to the first artboard
+var canvasWidth = 600 //default
+var canvasHeight = 800 //default
+var textSize = 12 //default
+var font = "Helverica" //default
+var fillColor = "#ffffff"; //default
+var strokeColor = "#000000"; //default
+var strokeThikness = "1"; //default
 var seeded;
 
+// Trigoniometry constants
 var PI = Math.PI;
 var HALF_PI = Math.PI / 2;
 var QUARTER_PI = PI / 4;
@@ -275,6 +276,24 @@ function text(str, x, y, x2, y2) {
 
   return textLayer;
 };
+
+function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
+  var path = NSBezierPath.bezierPath();
+  [path moveToPoint:NSMakePoint(x1, y1)]
+  [path curveToPoint:NSMakePoint(x4, y4)
+        controlPoint1:NSMakePoint(x2, y2)
+        controlPoint2:NSMakePoint(x3, y3)]
+
+  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  shape.setName("Bezier");
+  var border = shape.style().borders().addNewStylePart();
+  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.thickness = strokeThikness;
+  var fill = shape.style().fills().addNewStylePart();
+  fill.color = MSColor.colorWithSVGString(fillColor);
+
+  artboard.addLayers([shape]);
+}
 
 function textSize(size) {
   textSize = size;

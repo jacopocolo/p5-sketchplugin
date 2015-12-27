@@ -51,11 +51,9 @@ function deleteAllLayers(artboardName) {
     while ([all_layers count] > 0) {
     var i = 0;
     var layer = all_layers.objectAtIndex(i);
-    layer.select_byExpandingSelection(true, true);
     deleteLayer(layer);
     i = i+1;
   }
-  doc.currentPage().deselectAllLayers()
 }
 
 function random(min, max) {

@@ -4,7 +4,7 @@ function setup() {
   }
 
   function draw() {
-    fill("#00ff00")
-    line(10,10,random(480),480)
-    rect(random(100),random(100),100,random(100))
+    fill("#0000ff")
+    noStroke()
+    bezier(10, 10, 10, 10, 90, 45, 45, 90);
 }
