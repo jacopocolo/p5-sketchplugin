@@ -5,6 +5,6 @@ function setup() {
 
   function draw() {
     fill("#0000ff")
-    noStroke()
+    line(0,0,100,100)
     bezier(10, 10, 10, 10, 90, 45, 45, 90);
 }

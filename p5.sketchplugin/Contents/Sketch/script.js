@@ -103,9 +103,7 @@ function point(x, y) {
 function line(x1, y1, x2, y2) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
-  path.lineToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x2, y2));
-  path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
