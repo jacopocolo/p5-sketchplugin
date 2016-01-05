@@ -52,11 +52,11 @@ It sets the background color of the p5canvas artboard. The default color is whit
 
 You can call it like this: 
 ```javascript
-background(“#00FF00”)
+background("#00FF00")
 ```
 or
 ```javascript
-background(“rgb(0,255,0)”)
+background("rgb(0,255,0)")
 ```
 
 ##2D primitives
@@ -145,7 +145,7 @@ You can call it like this:
 ```javascript
 text("Hello world",10,10,100,200)
 ```
-and it will draw a text layer that says “Hello world” with the upper left corner in 10,10 and a width of 100 and a height of 200 pixels.
+and it will draw a text layer that says "Hello world" with the upper left corner in 10,10 and a width of 100 and a height of 200 pixels.
 
 
 ####bezier(x1,y1,x2,y2,x3,y3,x4,y4)
@@ -178,9 +178,9 @@ It sets the font of the text. The default font is Helvetica.
 
 You can call it like this: 
 ```javascript
-textFont(“Georgia”)
+textFont("Georgia")
 ```
-and it will set the font of text() to Georgia. If you want to set bold, light or else you need to use the full name like this: textFont(“Georgia Bold”).
+and it will set the font of text() to Georgia. If you want to set bold, light or else you need to use the full name like this: textFont("Georgia Bold").
 
 
 ####fill(color)
@@ -189,11 +189,11 @@ It sets the color of the fill. The default fill color is white. It accepts both 
 
 You can call it like this: 
 ```javascript
-fill(“#0000FF”)
+fill("#0000FF")
 ```
 or 
 ```javascript
-fill(“rgb(0,0,255)”)
+fill("rgb(0,0,255)")
 ```
 
 ####stroke(color)
@@ -202,11 +202,11 @@ It sets the color of the border. The default stroke color is black. It accepts b
 
 You can call it like this:
 ```javascript
-stroke(“#FF0000”)
+stroke("#FF0000")
 ```
 or 
 ```javascript
-stroke(“rgb(255,0,0)”)
+stroke("rgb(255,0,0)")
 ```
 
 ####strokeWeight(weight)
