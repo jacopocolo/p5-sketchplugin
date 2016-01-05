@@ -15,7 +15,7 @@ Right now P5Sketch works somewhat like p5.js: in the plugin package there’s a 
 
 Inside setup() you must call a createCanvas function, setting up a canvas to draw in.
 
-Inside draw() you can call your the drawing functions.
+Inside draw() you can call your drawing functions.
 
 An example (the one you will find as a default in the sketch.js file) is:
 
