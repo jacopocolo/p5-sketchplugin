@@ -1,6 +1,8 @@
 #P5Sketch
 #####Version: 0.0.1
 
+![p5Sketch](http://i.imgur.com/DzCuF8S.jpg "p5sketch")
+
 P5Sketch is a plugin for running [p5.js](http://p5js.org/) code inside Sketch. The idea is to allow designers to draw complex graphics and work somewhat easily with dynamic datasets, with very few lines of code. (I.e.: with this thing you can finally draw proper pie charts in Sketch!)
 
 The plugin is in very very early stages of development and I’m open to both help and suggestions from anyone (please use the [issues](https://github.com/jacopocolo/p5-sketchplugin/issues) tab for bugs and discussions). At the moment this repository is here for me and for anyone who want to try out this thing.
