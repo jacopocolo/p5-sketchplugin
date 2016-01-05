@@ -13,7 +13,7 @@ If you still want to try this thing out, here’s how to do it.
 
 ##Instructions
 
-Right now P5Sketch works somewhat like p5.js: in the plugin package there’s a file called sketch.js. Inside the file there are two functions setup() and draw(). Inside these two functions you call other functions that draw stuff on the canvas.
+P5Sketch works somewhat like p5.js: in the plugin package there’s a file called sketch.js. Inside the file there are two functions setup() and draw(). Inside these two functions you call other functions that draw stuff on the canvas.
 
 Inside setup() you must call a createCanvas function, setting up a canvas to draw in.
 
@@ -23,19 +23,24 @@ An example (the one you will find as a default in the sketch.js file) is:
 
 ```javascript
 setup() {
-createCanvas(500,500) //let’s create a 500x500 pixels artboard to draw in
+createCanvas(500,500) //It creates a 500x500 pixels artboard to draw in
 }
 
 draw() {
-line(0,0,100,100) //let’s draw a line that starts from 0,0 and ends in 100,100
+line(0,0,100,100) //It draws a line that starts in x: 0 y: 0 and ends in x: 100 y: 100
 }
 ```
 
-As of today, the only way to edit the sketch.js file is to do it manually, opening the sketch plugin folder, opening the sketchplugin package and editing the sketch.js file with a code editor and then running the plugin from the plugin menu (Sketch is not the best in keeping up with updates in the plugin folder so you might have to run it few times before you see actual changes in the canvas). I hope to improve the experience adding a user interface for this plugin soon.
+As of today, the only way to edit this sketch.js file is to do it manually, opening the sketch plugin folder, opening the sketchplugin package and editing the sketch.js file with a code editor and then running the plugin from the plugin menu (Sketch is not the best in keeping up with updates in the plugin folder so you might have to run it few times before you see actual changes in the canvas). I hope to improve the experience adding a user interface for this plugin soon.
 
-Here’s the list of functions you can call as of today:
+P5.js is an extremely powerful framework, able to do a lot of things: 2d graphics, raster manipulation, 3d… At the moment this plugin allows to call a very limited selection of functions, mostly 2d primitives. Here’s the list of functions you can call as of today:
 
-##Setup functions
+- [Setup functions](/#setup-functions)
+- [2d primitives](/#2d-primitives)
+- [Attributes functions](/#attributes functions)
+- [Utility functions](/#utility-functions)
+
+##[Setup functions](#setup-functions)
 
 ####createCanvas(width, height)
 
@@ -61,7 +66,7 @@ or
 background("rgb(0,255,0)")
 ```
 
-##2D primitives
+##[2D primitives](#2d-primitives)
 
 ####point(x, y)
 
@@ -161,7 +166,7 @@ bezier(10,10,25,25,75,75,50,50)
 and it will draw a bezier curve starting in 10,10 and ending in 50,50. The control point for the beginning of the curve is in 25,25 and the control point for the end of the curve is in 75,75.
 
 
-##Attributes functions
+##[Attributes functions](#attributes-functions)
 
 ####textSize(size)
 
@@ -229,7 +234,7 @@ You can call it like this:
 noStroke()
 ```
 
-##Utility functions
+##[Utility functions](#utility-functions)
 
 ####random(min, max)
 
