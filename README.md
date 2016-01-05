@@ -1,25 +1,23 @@
 #P5Sketch
+#####Version: 0.0.1
 
-P5Sketch is a plugin for running [p5.js]([http://p5js.org](http://p5js.org/)) code inside Sketch.
-Version: 0.0.1
+P5Sketch is a plugin for running [p5.js](http://p5js.org/) code inside Sketch. The idea is to allow designers to draw complex graphics and work somewhat easily with dynamic datasets, with very few lines of code. (I.e.: with this thing you can finally draw proper pie charts in Sketch!)
 
-Sketch plugins are Javascript based, p5.js is also Javascript based so I thought that it would have been cool to be able to write p5.js code directly in Sketch. So designers can draw complex graphics and work somewhat easily with dynamic datasets, with very few lines of code. (I.e.: with this thing you can finally draw proper pie charts in Sketch!)
+The plugin is in very very early stages of development and I’m open to both help and suggestions from anyone. At the moment this repository is here for me and for anyone who want to try out this thing.
 
-The plugin is in very very early stages of development and I’m open to both help and suggestions from anyone. At the moment this repository is here for me and for anyone who want to try out this thing. 
-
-I didn’t experience crashes, not even when running broken while loops. But I strongly suggest you to save your work before running the plugin or working on a clean file. 
+I didn’t experience crashes, not even when running broken while loops. But I strongly suggest you to save your work before running the plugin or working on a clean file.
 
 If you still want to try this thing out, here’s how to do it.
 
 ##Instructions
 
-Right now P5Sketch works somewhat like p5.js: in the plugin package there’s a file called sketch.js. Inside the file there are two functions setup() and draw(). Inside these two functions, you call other functions that draw stuff on the canvas.
+Right now P5Sketch works somewhat like p5.js: in the plugin package there’s a file called sketch.js. Inside the file there are two functions setup() and draw(). Inside these two functions you call other functions that draw stuff on the canvas.
 
 Inside setup() you must call a createCanvas function, setting up a canvas to draw in.
 
 Inside draw() you can call your the drawing functions.
 
-An example (the one you will find as a default in the sketch.js file) is
+An example (the one you will find as a default in the sketch.js file) is:
 
 ```javascript
 setup() {
@@ -39,9 +37,9 @@ Here’s the list of functions you can call as of today:
 
 ####createCanvas(width, height)
 
-This function checks if a canvas already exists and if it doesn’t it draws it. If the canvas already exists, it deletes all the layers inside and draw new ones. The idea is to mimic the behaviour of the Processing canvas, where every time you run the code, you create something new.
+This function checks if a canvas artboard already exists and if it doesn’t it draws it. If the canvas already exists, it deletes all the layers inside and draw new ones. The idea is to mimic the behaviour of the Processing canvas, where every time you run the code, you create something new.
 
-You can call it like this: createCanvas(500, 500) and it will create a 500x500 pixels canvas called p5canvas.
+You can call it like this: createCanvas(500, 500) and it will create a 500x500 pixels artboard called p5canvas. If you don’t have a canvas in your page, it will create a new one to the left of the artboard to the most left.
 
 
 ####background(color)
