@@ -35,10 +35,10 @@ As of today, the only way to edit this sketch.js file is to do it manually, open
 
 P5.js is an extremely powerful framework, able to do a lot of things: 2d graphics, raster manipulation, 3d… At the moment this plugin allows to call a very limited selection of functions, mostly 2d primitives. Here’s the list of functions you can call as of today:
 
-- [Setup functions](/#setup-functions)
-- [2d primitives](/#2d-primitives)
-- [Attributes functions](/#attributes functions)
-- [Utility functions](/#utility-functions)
+- [Setup functions](https://github.com/jacopocolo/p5-sketchplugin/#setup-functions)
+- [2d primitives](https://github.com/jacopocolo/p5-sketchplugin/#2d-primitives)
+- [Attributes functions](https://github.com/jacopocolo/p5-sketchplugin/#attributes functions)
+- [Utility functions](https://github.com/jacopocolo/p5-sketchplugin/#utility-functions)
 
 ##[Setup functions](#setup-functions)
 
