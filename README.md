@@ -21,11 +21,11 @@ An example (the one you will find as a default in the sketch.js file) is:
 
 ```javascript
 setup() {
-createCanvas(500,500)
+createCanvas(500,500) //let’s create a 500x500 pixels artboard to draw in
 }
 
 draw() {
-line(0,0,100,100)
+line(0,0,100,100) //let’s draw a line that starts from 0,0 and ends in 100,100
 }
 ```
 
