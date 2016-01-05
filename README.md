@@ -46,8 +46,14 @@ You can call it like this: createCanvas(500, 500) and it will create a 500x500 p
 
 It sets the background color of the p5canvas artboard. The default color is white. It accepts both hex and rgb values.
 
-You can call it like this: background(“#00FF00”) or background(“rgb(0,255,0)”).
-
+You can call it like this: 
+```javascript
+background(“#00FF00”)
+```
+or
+```javascript
+background(“rgb(0,255,0)”)
+```
 
 ##2D primitives
 
