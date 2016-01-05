@@ -37,7 +37,7 @@ P5.js is an extremely powerful framework, able to do a lot of things: 2d graphic
 
 - [Setup functions](https://github.com/jacopocolo/p5-sketchplugin/#setup-functions)
 - [2d primitives](https://github.com/jacopocolo/p5-sketchplugin/#2d-primitives)
-- [Attributes functions](https://github.com/jacopocolo/p5-sketchplugin/#attributes functions)
+- [Attributes functions](https://github.com/jacopocolo/p5-sketchplugin/#attributes-functions)
 - [Utility functions](https://github.com/jacopocolo/p5-sketchplugin/#utility-functions)
 
 ##[Setup functions](#setup-functions)
