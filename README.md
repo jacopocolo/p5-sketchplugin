@@ -21,7 +21,8 @@ Inside draw() you can call your the drawing functions.
 
 An example (the one you will find as a default in the sketch.js file) is
 
-```setup() {
+```javascript
+setup() {
 createCanvas(500,500)
 }
 
