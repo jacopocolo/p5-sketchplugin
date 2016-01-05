@@ -261,7 +261,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Make consistent functions for fill() and stroke()
 
-- Implement rgba() for both fill() and stroke()
+- Implement rgba for both fill() and stroke()
 
 - Implement rotate()
 
