@@ -38,11 +38,13 @@ Here’s the list of functions you can call as of today:
 ##Setup functions
 
 **createCanvas(width, height)**
+
 This function checks if a canvas already exists and if it doesn’t it draws it. If the canvas already exists, it deletes all the layers inside and draw new ones. The idea is to mimic the behaviour of the Processing canvas, where every time you run the code, you create something new.
 
 You can call it like this: createCanvas(500, 500) and it will create a 500x500 pixels canvas called p5canvas. 
 
 **background(color)**
+
 It sets the background color of the p5canvas artboard. The default color is white. It accepts both hex and rgb values.
 
 You can call it like this: background(“#00FF00”) or background(“rgb(0,255,0)”)
@@ -50,36 +52,43 @@ You can call it like this: background(“#00FF00”) or background(“rgb(0,255,
 ##2D primitives
 
 **point(x, y)**
+
 A simple point. Sketch doesn’t really have a point shape so here it’s drawn as a 1x1 pixel rectangle. It does have a fill color, it doesn’t have a stroke color. 
 
 You can call it like this: point(100,100) and it will draw a 1x1 pixel rectangle in 100, 100
 
 **line(x1, y1, x2, y2)**
+
 A simple line from x1, y1 to x2, y2. It sadly doesn’t behave like the Sketch line but as a path. I.E.: you cannot edit it as a line. It doesn’t have a fill color, it has a stroke color.
 
 You can call it like this: line(0,0,100,100) and it will draw a line starting at 0,0 and ending at 100,100
 
 **rect(x, y, w, h)**
+
 A rectangle that starts from x, y and has a height of h and a width of w. The angles are always at 90 degrees. It has both a fill and a stroke color. 
 
 You can call it like this: rect(0,0,100,200) and it will draw a rectangle with the top left corner in 0,0 and with a width of 100 pixels and a height of 200 pixels.
 
 **quad(x1, y1, x2, y2, x3, y3, x4, y4)**
+
 A four sided polygon. With corners in x1,y1 x2,y2 x3,y3 x4,y4. It has both a fill and a stroke color. 
 
 You can call it like this: quad(0,0,100,200,400,400,200,90) and it will draw a shape with corners in 0,0 100,200 400,400 and 200,90.
 
 **triangle(x1, y1, x2, y2, x3, y3)**
+
 A three sided polygon. With corners in x1,y1 x2,y2 x3,y3. It has both a fill and a stroke color.
 
 You can call it like this: triangle(0,0,100,200,400,400) and it will draw a shape with corners in 0,0 100,200 400,400.
 
 **ellipse(a, b, c, d)**
+
 An ellipse centered in (a, b) and with a width of c and an height of d. It has both a fill and a stroke color.
 
 You can call it like this: ellipse(250,250,500,100) and it will draw an ellipse centred in 250,250 with a width of 500 and an height of 100. If you want a perfect circle, you must use the same value for c and d.
 
 **arc(a,b,c,d,start,stop)**
+
 An arc with the center in (a, b) a width of c and an height of d, Start and stop are starting point and ending point of the angle measured in radians. You can use degreesToRadians(degrees) to convert from degrees to radians. It has both a fill and a stroke color
 
 You can call it like this: arc(250,250,500,100,0,PI) and it will draw an arc centred in 250,250, with a width of 500 and an height of 100. The arc starts at 0 and stops at PI, going clockwise. The plugin will generate a shape with two intersecting shapes for every arc you draw.
@@ -117,11 +126,13 @@ It sets the color of the border. The default stroke color is black. It accepts b
 You can call it like this: stroke(“#FF0000”) or stroke(“rgb(255,0,0)”).
 
 **strokeWeight(weight)**
+
 It sets the thickness of the border in pixels. The default thickness is 1.  
 
 You can call it like this: strokeWeight(8).
 
 **noStroke()**
+
 It removes the stroke from the shape.
 
 You can call it like this: noStroke().
@@ -129,6 +140,7 @@ You can call it like this: noStroke().
 ##Utility functions
 
 **random(min, max)**
+
 It returns a random number. Takes either 0, 1 or 2 arguments. If no argument is given, returns a random number between 0 and 1. If one argument is given, returns a random number between 0 and the number. If two arguments are given, returns a random number between them, inclusive.
 
 You can call it like this: random() or random(10) or random(1, 100).
