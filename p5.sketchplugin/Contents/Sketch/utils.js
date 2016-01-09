@@ -1,3 +1,17 @@
+//parser: grabs the code from Sketch and saves it to file
+function parseCode() {
+  var all_layers = getArtboardWithName("p5code").layers()
+  var code = [all_layers objectAtIndex: 0]
+  sketch = code.stringValue().toString()
+
+  var string = [NSString stringWithFormat: "%@", sketch],
+    filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
+
+  [string writeToFile: filePath atomically: true
+    encoding: NSUTF8StringEncoding error: nil
+  ];
+}
+
 //get javascript array from NSArray
 function jsArray(array) {
   var length = [array count];

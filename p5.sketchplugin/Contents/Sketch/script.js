@@ -1,4 +1,5 @@
 // To-do
+// Fix canvas sizing! Should seth both height and width
 // Implement noise()?
 // Implement noFill()
 // Implement map()
@@ -63,8 +64,8 @@ function createCanvas(width, height) {
       frame.x = minX - canvasWidth - padding
       frame.y = minY
     }
-    frame.setWidth(canvasWidth)
     frame.setHeight(canvasHeight)
+    frame.setWidth(canvasWidth)
     artboard.setName("p5canvas")
     artboard.setHasBackgroundColor(true);
     doc.currentPage().addLayers([artboard])
@@ -72,8 +73,8 @@ function createCanvas(width, height) {
     deleteAllLayers("p5canvas")
     artboard = p5canvas;
     frame = artboard.frame()
-    frame.setWidth(canvasWidth)
     frame.setHeight(canvasHeight)
+    frame.setWidth(canvasWidth)
   }
 }
 
@@ -329,6 +330,7 @@ var onRun = function(context) {
   view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
+  parseCode();
   setup();
   draw();
 };
