@@ -4,7 +4,7 @@
     {
       "script" : "script.js",
       "handler" : "onRun",
-      "shortcut" : "",
+      "shortcut" : "cmd+alt+R",
       "name" : "p5",
       "identifier" : "p5"
     }

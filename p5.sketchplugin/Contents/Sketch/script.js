@@ -1,5 +1,4 @@
 // To-do
-// Fix canvas sizing! Should seth both height and width
 // Implement noise()?
 // Implement noFill()
 // Implement map()
@@ -37,15 +36,17 @@ var TWO_PI = PI * 2;
 function createCanvas(width, height) {
   canvasWidth = width;
   canvasHeight = height;
+  parseCode();
 
   var p5canvas = getArtboardWithName("p5canvas");
+  var p5code = getArtboardWithName("p5code");
 
   if (!p5canvas) {
     artboard = MSArtboardGroup.new()
     frame = artboard.frame()
     if (artboards == nil || [artboards count] == 0) {
       frame.x = 0
-      frame.y = 100
+      frame.y = 0
     } else {
       //if p5canvas doesn’t exist already, we place it 50px before the first artboard
       var numberOfArtboards = [artboards count];
@@ -64,17 +65,19 @@ function createCanvas(width, height) {
       frame.x = minX - canvasWidth - padding
       frame.y = minY
     }
-    frame.setHeight(canvasHeight)
     frame.setWidth(canvasWidth)
+    frame.setHeight(canvasHeight)
     artboard.setName("p5canvas")
     artboard.setHasBackgroundColor(true);
     doc.currentPage().addLayers([artboard])
+    setUpP5Code()
   } else {
     deleteAllLayers("p5canvas")
     artboard = p5canvas;
     frame = artboard.frame()
-    frame.setHeight(canvasHeight)
     frame.setWidth(canvasWidth)
+    frame.setHeight(canvasHeight)
+    setUpP5Code()
   }
 }
 
@@ -329,8 +332,8 @@ var onRun = function(context) {
   page = [doc currentPage];
   view = [doc currentView];
   artboards = [[doc currentPage] artboards];
-
   parseCode();
   setup();
+  draw();
   draw();
 };

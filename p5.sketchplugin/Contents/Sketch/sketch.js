@@ -1,8 +1,7 @@
 function setup() {
-createCanvas(200, 100);
-}
+	createCanvas(500, 500)
+};
 
 function draw() {
-//line(0,0,100,200);
-rect(0, 0 ,random(100) ,random(200));
-}
+	line(0, 0, 100, 100);
+};

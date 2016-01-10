@@ -1,5 +1,7 @@
-//parser: grabs the code from Sketch and saves it to file
+//parser: grabs the code from Sketch artboard and saves it to file for execution
 function parseCode() {
+  var p5code = getArtboardWithName("p5code");
+  if (p5code) {
   var all_layers = getArtboardWithName("p5code").layers()
   var code = [all_layers objectAtIndex: 0]
   sketch = code.stringValue().toString()
@@ -8,8 +10,81 @@ function parseCode() {
     filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
 
   [string writeToFile: filePath atomically: true
-    encoding: NSUTF8StringEncoding error: nil
-  ];
+    encoding: NSUTF8StringEncoding error: nil];
+  }
+}
+
+function setUpP5Code() {
+  var p5canvas = getArtboardWithName("p5canvas");
+  var p5code = getArtboardWithName("p5code");
+  //first canvas artboard, then code artboard
+  if (!p5code) {
+    //create the artboard
+    var codeArtboard = MSArtboardGroup.new()
+    var p5canvasFrame = p5canvas.frame()
+    frame = codeArtboard.frame();
+    frame.setWidth(500);
+    frame.setHeight(500);
+    frame.x = p5canvas.frame().minX()-500
+    frame.y = 0;
+    codeArtboard.setName("p5code");
+    codeArtboard.setHasBackgroundColor(true);
+    codeArtboard.setBackgroundColor(MSColor.colorWithSVGString("#282C34"));
+    doc.currentPage().addLayers([codeArtboard])
+
+    //add sketch.js text layer
+    var textLayer = codeArtboard.addLayerOfType("text");
+    textLayer.textColor = MSColor.colorWithSVGString("#CCCCCC");
+    textLayer.fontSize = 14;
+    textLayer.setFontPostscriptName("Menlo");
+    textLayer.setName("sketch.js");
+    textLayer.setNameIsFixed(true);
+    textLayer.setStringValue("function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}");
+    textLayer.frame().setX(20);
+    textLayer.frame().setY(60);
+    resizeLayerToFitText(textLayer);
+
+    //add shortcut info text layer
+    var shortcutTextLayer = codeArtboard.addLayerOfType("text");
+    shortcutTextLayer.textColor = MSColor.colorWithSVGString("#727475");
+    shortcutTextLayer.fontSize = 12;
+    shortcutTextLayer.setFontPostscriptName("Menlo");
+    shortcutTextLayer.setName("Instructions");
+    shortcutTextLayer.setNameIsFixed(true);
+    shortcutTextLayer.setStringValue("Cmd + alt + r to run the code");
+    shortcutTextLayer.frame().setX(20);
+    shortcutTextLayer.frame().setY(20);
+    resizeLayerToFitText(shortcutTextLayer);
+    shortcutTextLayer.setIsLocked(true);
+
+    //add run from file label
+    var labelTextLayer = codeArtboard.addLayerOfType("text");
+    labelTextLayer.textColor = MSColor.colorWithSVGString("#727475");
+    labelTextLayer.fontSize = 12;
+    labelTextLayer.setFontPostscriptName("Menlo");
+    labelTextLayer.setName("Label");
+    labelTextLayer.setNameIsFixed(true);
+    labelTextLayer.setStringValue("Read from file:");
+    labelTextLayer.frame().setX(345);
+    labelTextLayer.frame().setY(20);
+    resizeLayerToFitText(labelTextLayer);
+    labelTextLayer.setIsLocked(true);
+
+    //add run from file value
+    var runFromFileTextLayer = codeArtboard.addLayerOfType("text");
+    runFromFileTextLayer.textColor = MSColor.colorWithSVGString("#727475");
+    runFromFileTextLayer.fontSize = 12;
+    runFromFileTextLayer.setFontPostscriptName("Menlo");
+    runFromFileTextLayer.setName("runFromFile");
+    runFromFileTextLayer.setNameIsFixed(true);
+    runFromFileTextLayer.setStringValue("NO");
+    runFromFileTextLayer.frame().setX(465);
+    runFromFileTextLayer.frame().setY(20);
+    resizeLayerToFitText(runFromFileTextLayer);
+    runFromFileTextLayer.setIsLocked(true);
+
+    return textLayer, shortcutTextLayer, labelTextLayer, runFromFileTextLayer
+  }
 }
 
 //get javascript array from NSArray
