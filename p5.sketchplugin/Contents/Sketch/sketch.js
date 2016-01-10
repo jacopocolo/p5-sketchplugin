@@ -3,5 +3,5 @@ function setup() {
 };
 
 function draw() {
-	line(0, 0, 100, 100);
-};
+	line(0, 0, 100, 250);
+}

@@ -32,6 +32,16 @@ function setUpP5Code() {
     codeArtboard.setBackgroundColor(MSColor.colorWithSVGString("#282C34"));
     doc.currentPage().addLayers([codeArtboard])
 
+    //read what is in sketch.js so it can be placed in the code editor
+    filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
+    var file = [NSData dataWithContentsOfFile:filePath];
+    var codeString = [[NSString alloc] initWithData:file encoding:NSUTF8StringEncoding];
+
+    //let’s be sure that there’s something in the code editor
+    if (!codeString || codeString == null || codeString == undefined || codeString == nil) {
+      codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
+    }
+
     //add sketch.js text layer
     var textLayer = codeArtboard.addLayerOfType("text");
     textLayer.textColor = MSColor.colorWithSVGString("#CCCCCC");
@@ -39,7 +49,7 @@ function setUpP5Code() {
     textLayer.setFontPostscriptName("Menlo");
     textLayer.setName("sketch.js");
     textLayer.setNameIsFixed(true);
-    textLayer.setStringValue("function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}");
+    textLayer.setStringValue(codeString);
     textLayer.frame().setX(20);
     textLayer.frame().setY(60);
     resizeLayerToFitText(textLayer);
@@ -64,8 +74,8 @@ function setUpP5Code() {
     labelTextLayer.setFontPostscriptName("Menlo");
     labelTextLayer.setName("Label");
     labelTextLayer.setNameIsFixed(true);
-    labelTextLayer.setStringValue("Read from file:");
-    labelTextLayer.frame().setX(345);
+    labelTextLayer.setStringValue("Read just from file:");
+    labelTextLayer.frame().setX(310);
     labelTextLayer.frame().setY(20);
     resizeLayerToFitText(labelTextLayer);
     labelTextLayer.setIsLocked(true);
