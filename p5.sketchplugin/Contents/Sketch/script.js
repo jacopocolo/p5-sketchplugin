@@ -211,7 +211,7 @@ function ellipse(a, b, c, d) {
 
 // An arc with the center in (a, b) a width of c and an height of d
 // Start and stop are starting point and ending point of the angle misured in radians
-// You can use degreesToRadians(degrees) to convert from degrees to radians
+// You can use degrees(rad) to convert from degrees to radians
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
@@ -222,7 +222,7 @@ function arc(a,b,c,d,start,stop) {
 
   clipPath = [NSBezierPath bezierPath]
   [clipPath moveToPoint:center]
-  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
+  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:degrees(start) endAngle:degrees(stop)]
   [clipPath closePath]
 
   path = [NSBezierPath bezierPath]
