@@ -19,6 +19,8 @@ var font = "Helverica" //default
 var fillColor = "#ffffff"; //default
 var strokeColor = "#000000"; //default
 var strokeThikness = "1"; //default
+var strokeEnding; //default
+var strokeJoining; //default
 var seeded;
 
 // Trigoniometry constants
@@ -108,12 +110,15 @@ function line(x1, y1, x2, y2) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x2, y2));
+  //path.setLineCapStyle(NSRoundLineCapStyle)
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
+  var borderOptions = shape.style().borderOptions();
+  borderOptions.lineCapStyle = strokeEnding;
 
   artboard.addLayers([shape]);
 }
@@ -211,7 +216,7 @@ function ellipse(a, b, c, d) {
 
 // An arc with the center in (a, b) a width of c and an height of d
 // Start and stop are starting point and ending point of the angle misured in radians
-// You can use degrees(rad) to convert from degrees to radians
+// You can use degreesToRadians(degrees) to convert from degrees to radians
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
@@ -222,7 +227,7 @@ function arc(a,b,c,d,start,stop) {
 
   clipPath = [NSBezierPath bezierPath]
   [clipPath moveToPoint:center]
-  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:degrees(start) endAngle:degrees(stop)]
+  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
   [clipPath closePath]
 
   path = [NSBezierPath bezierPath]
@@ -236,6 +241,9 @@ function arc(a,b,c,d,start,stop) {
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
+  var borderOptions = shape.style().borderOptions();
+  borderOptions.lineCapStyle = strokeEnding;
+
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
   var fill = mask.style().fills().addNewStylePart();
@@ -291,6 +299,8 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
+  var borderOptions = shape.style().borderOptions();
+  borderOptions.lineCapStyle = strokeEnding;
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
 
@@ -317,6 +327,24 @@ function strokeWeight(weight) {
   strokeThikness = weight;
 };
 
+function strokeCap(cap) {
+  cap = cap.toString().toLowerCase();
+  var value;
+    if (cap == "square") {value = 0}
+    else if (cap == "round") {value = 1}
+    else if (cap == "project") {value = 2};
+  strokeEnding = value;
+};
+
+function strokeJoint(join) {
+  join = join.toLowerCase();
+  var value;
+    if (join == "miter") {value = 0}
+    else if (join == "round") {value = 1}
+    else if (join == "bevel") {value = 2};
+  strokeJoining = value;
+};
+
 function noStroke() {
   strokeThikness = 0; //not the best solution but it works
 };
@@ -334,6 +362,5 @@ var onRun = function(context) {
   artboards = [[doc currentPage] artboards];
   parseCode();
   setup();
-  draw();
   draw();
 };

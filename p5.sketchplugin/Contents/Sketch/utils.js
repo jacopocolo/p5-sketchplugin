@@ -5,6 +5,7 @@ function parseCode() {
   var all_layers = getArtboardWithName("p5code").layers()
   var code = [all_layers objectAtIndex: 0]
   sketch = code.stringValue().toString()
+  sketch = sketch.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
   var string = [NSString stringWithFormat: "%@", sketch],
     filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
@@ -176,12 +177,12 @@ function random(min, max) {
       }
     };
 
-function degrees(rad) {
-  return rad*(180/PI);
+function radiansToDegrees(radian) {
+  return radian*(180/PI);
 }
 
-function radians(deg) {
-  return deg * Math.PI/180;
+function degreesToRadians(degrees) {
+  return degrees * Math.PI/180;
 }
 
 function resizeLayerToFitText(layer) {
