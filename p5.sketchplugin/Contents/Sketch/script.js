@@ -12,8 +12,8 @@
 var ctx, doc, selection, page, view, artboard, artboards;
 
 var padding = 50; //distance from p5canvas to the first artboard
-var canvasWidth = 600 //default
-var canvasHeight = 800 //default
+var width = 600 //default
+var height = 800 //default
 var textSize = 12 //default
 var font = "Helverica" //default
 var fillColor = "#ffffff"; //default
@@ -22,6 +22,7 @@ var strokeThikness = "1"; //default
 var strokeEnding; //default
 var strokeJoining; //default
 var seeded;
+var rotationValue = 0;
 
 // Trigoniometry constants
 var PI = Math.PI;
@@ -35,9 +36,9 @@ var TWO_PI = PI * 2;
 // The idea is to mimic the behaviour of the Processing canvas, where every time you
 // run the code, you create something new.
 
-function createCanvas(width, height) {
-  canvasWidth = width;
-  canvasHeight = height;
+function createCanvas(w, h) {
+  width = w;
+  height = h;
   parseCode();
 
   var p5canvas = getArtboardWithName("p5canvas");
@@ -64,11 +65,11 @@ function createCanvas(width, height) {
       firstArtboardFrame = firstArtboard.frame()
       firstArtboardFrameX = firstArtboardFrame.minX()
       firstArtboardFrameY = firstArtboardFrame.minY()
-      frame.x = minX - canvasWidth - padding
+      frame.x = minX - width - padding
       frame.y = minY
     }
-    frame.setWidth(canvasWidth)
-    frame.setHeight(canvasHeight)
+    frame.setWidth(width)
+    frame.setHeight(height)
     artboard.setName("p5canvas")
     artboard.setHasBackgroundColor(true);
     doc.currentPage().addLayers([artboard])
@@ -77,8 +78,8 @@ function createCanvas(width, height) {
     deleteAllLayers("p5canvas")
     artboard = p5canvas;
     frame = artboard.frame()
-    frame.setWidth(canvasWidth)
-    frame.setHeight(canvasHeight)
+    frame.setWidth(width)
+    frame.setHeight(height)
     setUpP5Code()
   }
 }
@@ -100,6 +101,8 @@ function point(x, y) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
 
+  shape.setRotation(rotationValue);
+
   artboard.addLayers([shape]);
 }
 // A simple line from x1, y1 to x2, y2. It sadly doesn’t behave like the Sketch
@@ -119,6 +122,8 @@ function line(x1, y1, x2, y2) {
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
+
+  shape.setRotation(rotationValue);
 
   artboard.addLayers([shape]);
 }
@@ -142,6 +147,8 @@ function rect(x, y, w, h) {
   var border = shape.style().borders().addNewStylePart();
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
+
+  shape.setRotation(rotationValue);
 
   artboard.addLayers([shape]);
 }
@@ -167,6 +174,8 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
 
+  shape.setRotation(rotationValue);
+
   artboard.addLayers([shape]);
 }
 
@@ -190,6 +199,8 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
 
+  shape.setRotation(rotationValue);
+
   artboard.addLayers([shape]);
 }
 
@@ -211,12 +222,14 @@ function ellipse(a, b, c, d) {
   border.color = MSColor.colorWithSVGString(strokeColor);
   border.thickness = strokeThikness;
 
+  shapeGroup.setRotation(rotationValue);
+
   artboard.addLayers([shapeGroup]);
 }
 
 // An arc with the center in (a, b) a width of c and an height of d
 // Start and stop are starting point and ending point of the angle misured in radians
-// You can use degreesToRadians(degrees) to convert from degrees to radians
+// You can use radians(degrees) to convert from degrees to radians
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
@@ -227,7 +240,7 @@ function arc(a,b,c,d,start,stop) {
 
   clipPath = [NSBezierPath bezierPath]
   [clipPath moveToPoint:center]
-  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:radiansToDegrees(start) endAngle:radiansToDegrees(stop)]
+  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:degrees(start) endAngle:degrees(stop)]
   [clipPath closePath]
 
   path = [NSBezierPath bezierPath]
@@ -244,11 +257,13 @@ function arc(a,b,c,d,start,stop) {
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
 
-
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
   var fill = mask.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
   mask.setName("Arc");
+
+  mask.setRotation(rotationValue);
+  shape.setRotation(rotationValue);
 
   artboard.addLayers([shape])
   artboard.addLayers([mask])
@@ -284,6 +299,8 @@ function text(str, x, y, x2, y2) {
     textLayer.frame().setHeight(y2);
   }
 
+  textLayer.setRotation(rotationValue);
+
   return textLayer;
 };
 
@@ -303,6 +320,8 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   borderOptions.lineCapStyle = strokeEnding;
   var fill = shape.style().fills().addNewStylePart();
   fill.color = MSColor.colorWithSVGString(fillColor);
+
+  shape.setRotation(rotationValue);
 
   artboard.addLayers([shape]);
 }
@@ -349,6 +368,11 @@ function noStroke() {
 function background(color) {
   artboard.setBackgroundColor(MSColor.colorWithSVGString(color));
 };
+
+function rotate(rad) {
+    rotationValue = rotationValue+degrees(rad);
+    rotationValue = -rotationValue;
+  }
 
 var onRun = function(context) {
   ctx = context;

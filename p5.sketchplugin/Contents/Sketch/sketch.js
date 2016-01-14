@@ -1,11 +1,17 @@
+var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
+
 function setup() {
-	createCanvas(500, 500);
-};
+  createCanvas(720, 400);
+}
 
 function draw() {
-	strokeWeight(10);
-	strokeCap(ROUND);
-	bezier(85, 20, 10, 10, 90, 90, 15, 80);
-	strokeCap(ROUND);
-	line(0,0,100,100);
+  pieChart(300, angles);
+}
+
+function pieChart(diameter, data) {
+  var lastAngle = 0;
+  for (var i = 0; i < data.length; i++) {
+    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
+    lastAngle += radians(angles[i]);
+  }
 }

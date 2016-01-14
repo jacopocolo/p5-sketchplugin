@@ -177,13 +177,13 @@ function random(min, max) {
       }
     };
 
-function radiansToDegrees(radian) {
-  return radian*(180/PI);
-}
+    function degrees(rad) {
+      return rad*(180/PI);
+    }
 
-function degreesToRadians(degrees) {
-  return degrees * Math.PI/180;
-}
+    function radians(deg) {
+      return deg * Math.PI/180;
+    }
 
 function resizeLayerToFitText(layer) {
 	[layer adjustFrameToFit];
