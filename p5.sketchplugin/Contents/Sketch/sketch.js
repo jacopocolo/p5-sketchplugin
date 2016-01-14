@@ -4,6 +4,8 @@ function setup() {
 
 function draw() {
 	strokeWeight(10);
-	strokeCap("project");
+	strokeCap(ROUND);
 	bezier(85, 20, 10, 10, 90, 90, 15, 80);
+	strokeCap(ROUND);
+	line(0,0,100,100);
 }

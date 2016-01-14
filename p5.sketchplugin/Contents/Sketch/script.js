@@ -327,22 +327,19 @@ function strokeWeight(weight) {
   strokeThikness = weight;
 };
 
+//Caps and joins values. Only valid in uppercase
+var SQUARE = 0;
+var MITER = 0;
+var ROUND = 1;
+var PROJECT = 2;
+var BEVEL = 2;
+
 function strokeCap(cap) {
-  cap = cap.toString().toLowerCase();
-  var value;
-    if (cap == "square") {value = 0}
-    else if (cap == "round") {value = 1}
-    else if (cap == "project") {value = 2};
-  strokeEnding = value;
+  strokeEnding = cap;
 };
 
 function strokeJoint(join) {
-  join = join.toLowerCase();
-  var value;
-    if (join == "miter") {value = 0}
-    else if (join == "round") {value = 1}
-    else if (join == "bevel") {value = 2};
-  strokeJoining = value;
+  strokeJoining = join;
 };
 
 function noStroke() {
