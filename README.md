@@ -270,7 +270,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Implement rgba for both fill() and stroke()
 
-- ~~ Implement rotate()~~
+- ~~Implement rotate()~~
 
 - Implement border radius for rect()
 
