@@ -46,7 +46,7 @@ P5.js is an extremely powerful framework, able to do a lot of things: 2d graphic
 
 This function checks if a canvas artboard already exists and if it doesn’t it draws it. If the canvas already exists, it deletes all the layers inside and draw new ones. The idea is to mimic the behaviour of the Processing canvas, where every time you run the code, you create something new.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 createCanvas(500, 500)
 ```
@@ -57,7 +57,7 @@ and it will create a 500x500 pixels artboard called p5canvas. If you don’t hav
 
 It sets the background color of the p5canvas artboard. The default color is white. It accepts both hex and rgb values.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 background("#00FF00")
 ```
@@ -72,7 +72,7 @@ background("rgb(0,255,0)")
 
 A simple point. Sketch doesn’t really have a point shape so here it’s drawn as a 1x1 pixel rectangle. It does have a fill color, it doesn’t have a stroke color. 
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 point(100,100)
 ```
@@ -83,7 +83,7 @@ and it will draw a 1x1 pixel rectangle in 100, 100.
 
 A simple line from x1, y1 to x2, y2. It sadly doesn’t behave like the Sketch line but as a path. I.E.: you cannot edit it as a line. It doesn’t have a fill color, it has a stroke color.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 line(0,0,100,100)
 ```
@@ -94,7 +94,7 @@ and it will draw a line starting at 0,0 and ending at 100,100.
 
 A rectangle that starts from x, y and has a height of h and a width of w. The angles are always at 90 degrees. It has both a fill and a stroke color. 
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 rect(0,0,100,200)
 ```
@@ -105,7 +105,7 @@ and it will draw a rectangle with the top left corner in 0,0 and with a width of
 
 A four sided polygon. With corners in x1,y1 x2,y2 x3,y3 x4,y4. It has both a fill and a stroke color. 
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 quad(0,0,100,200,400,400,200,90)
 ```
@@ -116,7 +116,7 @@ and it will draw a shape with corners in 0,0 100,200 400,400 and 200,90.
 
 A three sided polygon. With corners in x1,y1 x2,y2 x3,y3. It has both a fill and a stroke color.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 triangle(0,0,100,200,400,400)
 ```
@@ -127,7 +127,7 @@ and it will draw a shape with corners in 0,0 100,200 400,400.
 
 An ellipse centered in (a, b) and with a width of c and an height of d. It has both a fill and a stroke color.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 ellipse(250,250,500,100)
 ```
@@ -137,7 +137,7 @@ and it will draw an ellipse centred in 250,250 with a width of 500 and an height
 
 An arc with the center in (a, b) a width of c and an height of d, Start and stop are starting point and ending point of the angle measured in radians. You can use degreesToRadians(degrees) to convert from degrees to radians. It has both a fill and a stroke color
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 arc(250,250,500,100,0,PI)
 ```
@@ -148,7 +148,7 @@ and it will draw an arc centred in 250,250, with a width of 500 and an height of
 
 A text block with str as content, placred in (x, y) and with optional values of (x2, y2) to set the width and the height of the bounding box. If x2 and y2 are not set the bounding box will wrap around the text. It doesn’t have a fill color, it has a stroke color.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 text("Hello world",10,10,100,200)
 ```
@@ -159,7 +159,7 @@ and it will draw a text layer that says "Hello world" with the upper left corner
 
 A Bezier curve. The curve starts in x1,y1 and ends in x4,y4. x2,y2 and x3,y3 are the control points for the curve. It has both a fill and a stroke color.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 bezier(10,10,25,25,75,75,50,50)
 ```
@@ -172,7 +172,7 @@ and it will draw a bezier curve starting in 10,10 and ending in 50,50. The contr
 
 It sets the size of the text in pixels. 
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 textSize(24)
 ```
@@ -183,7 +183,7 @@ and it will set the size of a text() to 24 pixels. The default text size is 12.
 
 It sets the font of the text. The default font is Helvetica.
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 textFont("Georgia")
 ```
@@ -194,11 +194,11 @@ and it will set the font of text() to Georgia. If you want to set bold, light or
 
 It sets the color of the fill. The default fill color is white. It accepts both hex and rgb values. It doesn’t accept (yet) RGBA values. 
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 fill("#0000FF")
 ```
-or 
+or
 ```javascript
 fill("rgb(0,0,255)")
 ```
@@ -211,7 +211,7 @@ You can call it like this:
 ```javascript
 stroke("#FF0000")
 ```
-or 
+or
 ```javascript
 stroke("rgb(255,0,0)")
 ```
@@ -220,7 +220,7 @@ stroke("rgb(255,0,0)")
 
 It sets the thickness of the border in pixels. The default thickness is 1.  
 
-You can call it like this: 
+You can call it like this:
 ```javascript
 strokeWeight(8)
 ```
@@ -260,7 +260,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
-- Implement noise()
+- ~~Implement noise()~~
 
 - Implement noFill()
 
