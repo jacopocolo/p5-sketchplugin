@@ -264,7 +264,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Implement noFill()
 
-- Implement map()
+- ~~Implement map()~~
 
 - Make consistent functions for fill() and stroke()
 
