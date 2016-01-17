@@ -18,7 +18,9 @@ var height = 800 //default
 var textSize = 12 //default
 var font = "Helverica" //default
 var fillColor = MSColor.colorWithRed_green_blue_alpha(255,255,255,1); //default
+var hasFill = true;
 var strokeColor = MSColor.colorWithRed_green_blue_alpha(0,0,0,1); //default
+var hasStroke = true;
 var strokeThikness = "1"; //default
 var strokeEnding; //default
 var strokeJoining; //default
@@ -99,8 +101,10 @@ function point(x, y) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
+  if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -119,10 +123,13 @@ function line(x1, y1, x2, y2) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+
+  if (hasStroke == true) {
+  border.color = strokeColor;
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -142,12 +149,18 @@ function rect(x, y, w, h) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  var fill = shape.style().fills().addNewStylePart();
-  fill.color = fillColor;
   shape.setName("Rectangle");
+
+  if (hasFill == true) {
+    var fill = shape.style().fills().addNewStylePart();
+    fill.color = fillColor;
+  }
+
+  if (hasStroke == true) {
   var border = shape.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -168,12 +181,18 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
+  shape.setName("Rectangle");
+
+  if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;
-  shape.setName("Rectangle");
+  }
+
+  if (hasStroke == true) {
   var border = shape.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -193,12 +212,18 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
+  if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
+
   shape.setName("triangle");
+
+  if (hasStroke == true) {
   var border = shape.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -216,12 +241,16 @@ function ellipse(a, b, c, d) {
 
   var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
   shapeGroup.setName("Oval");
+  if (hasFill == true) {
   var fill = shapeGroup.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
 
+  if (hasStroke == true) {
   var border = shapeGroup.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
+  }
 
   shapeGroup.setRotation(rotationValue);
 
@@ -249,18 +278,27 @@ function arc(a,b,c,d,start,stop) {
   [path closePath]
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
+
+  if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
+
   shape.setName("Arc");
+
+  if (hasStroke == true) {
   var border = shape.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
+  }
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
+  if (hasFill == true) {
   var fill = mask.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
   mask.setName("Arc");
 
   mask.setRotation(rotationValue);
@@ -284,7 +322,9 @@ function arc(a,b,c,d,start,stop) {
 // You can call it like this: text("Hello world",10,10,100,200)
 function text(str, x, y, x2, y2) {
   var textLayer = artboard.addLayerOfType("text");
+  if (hasFill == true) {
   textLayer.textColor = fillColor;
+  }
   textLayer.fontSize = 50;
   textLayer.setFontPostscriptName(font.toString());
   textLayer.setName(str);
@@ -314,13 +354,19 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Bezier");
+
+  if (hasStroke == true) {
   var border = shape.style().borders().addNewStylePart();
   border.color = strokeColor;
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
+  }
+  
+  if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;
+  }
 
   shape.setRotation(rotationValue);
 
@@ -419,7 +465,11 @@ function strokeJoint(join) {
 };
 
 function noStroke() {
-  strokeThikness = 0; //not the best solution but it works
+  hasStroke = false;
+};
+
+function noFill() {
+  hasFill = false;
 };
 
 function background(r, g, b, a) {
@@ -448,7 +498,6 @@ function background(r, g, b, a) {
     backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
   }
 
-  log(backgroundColor);
   artboard.setBackgroundColor(backgroundColor);
 };
 

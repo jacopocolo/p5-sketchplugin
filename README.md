@@ -260,9 +260,11 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
+- Code “read just from file”
+
 - ~~Implement noise()~~
 
-- Implement noFill()
+- ~~Implement noFill()~~
 
 - ~~Implement map()~~
 
