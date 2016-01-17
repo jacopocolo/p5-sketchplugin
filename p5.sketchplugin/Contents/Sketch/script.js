@@ -16,8 +16,8 @@ var width = 600 //default
 var height = 800 //default
 var textSize = 12 //default
 var font = "Helverica" //default
-var fillColor = "#ffffff"; //default
-var strokeColor = "#000000"; //default
+var fillColor = MSColor.colorWithRed_green_blue_alpha(255,255,255,1); //default
+var strokeColor = MSColor.colorWithRed_green_blue_alpha(0,0,0,1); //default
 var strokeThikness = "1"; //default
 var strokeEnding; //default
 var strokeJoining; //default
@@ -142,10 +142,10 @@ function rect(x, y, w, h) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
   shape.setName("Rectangle");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
 
   shape.setRotation(rotationValue);
@@ -168,10 +168,10 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
   shape.setName("Rectangle");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
 
   shape.setRotation(rotationValue);
@@ -193,10 +193,10 @@ function triangle(x1, y1, x2, y2, x3, y3) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
   shape.setName("triangle");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
 
   shape.setRotation(rotationValue);
@@ -216,10 +216,10 @@ function ellipse(a, b, c, d) {
   var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
   shapeGroup.setName("Oval");
   var fill = shapeGroup.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
 
   var border = shapeGroup.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
 
   shapeGroup.setRotation(rotationValue);
@@ -249,10 +249,10 @@ function arc(a,b,c,d,start,stop) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
   shape.setName("Arc");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
@@ -283,7 +283,7 @@ function arc(a,b,c,d,start,stop) {
 // You can call it like this: text("Hello world",10,10,100,200)
 function text(str, x, y, x2, y2) {
   var textLayer = artboard.addLayerOfType("text");
-  textLayer.textColor = MSColor.colorWithSVGString(strokeColor);
+  textLayer.textColor = fillColor;
   textLayer.fontSize = 50;
   textLayer.setFontPostscriptName(font.toString());
   textLayer.setName(str);
@@ -314,12 +314,12 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Bezier");
   var border = shape.style().borders().addNewStylePart();
-  border.color = MSColor.colorWithSVGString(strokeColor);
+  border.color = strokeColor;
   border.thickness = strokeThikness;
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
 
   shape.setRotation(rotationValue);
 
@@ -338,9 +338,56 @@ function fill(color) {
   fillColor = color;
 };
 
-function stroke(color) {
-  strokeColor = color;
-};
+function fill(r, g, b, a) {
+    r = r/255;
+    g = g/255;
+    b = b/255;
+    if (a == undefined) {
+      if (g == undefined && b == undefined) {
+        if (r[0] == "#") {
+            fillColor = MSColor.colorWithSVGString(r); //it’s an hex color
+            return
+        } else {
+        fillColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+        return
+        }
+      }
+      else {
+      fillColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+      return
+      }
+    }
+    else {
+      fillColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+      return
+    }
+  };
+
+  function stroke(r, g, b, a) {
+      r = r/255;
+      g = g/255;
+      b = b/255;
+      if (a == undefined) {
+        if (g == undefined && b == undefined) {
+          if (r[0] == "#") {
+              strokeColor = MSColor.colorWithSVGString(r); //it’s an hex color
+              return
+          } else {
+          strokeColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          return
+          }
+        }
+        else {
+        strokeColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        return
+        }
+      }
+      else {
+        strokeColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        return
+      }
+    };
+
 
 function strokeWeight(weight) {
   strokeThikness = weight;
