@@ -8,6 +8,7 @@
 
 @import 'utils.js'
 @import 'sketch.js'
+@import 'notsupported.js'
 
 var ctx, doc, selection, page, view, artboard, artboards;
 
@@ -99,7 +100,7 @@ function point(x, y) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   var fill = shape.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
 
   shape.setRotation(rotationValue);
 
@@ -259,7 +260,7 @@ function arc(a,b,c,d,start,stop) {
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
   var fill = mask.style().fills().addNewStylePart();
-  fill.color = MSColor.colorWithSVGString(fillColor);
+  fill.color = fillColor;
   mask.setName("Arc");
 
   mask.setRotation(rotationValue);
@@ -338,51 +339,60 @@ function fill(color) {
   fillColor = color;
 };
 
+//GRAY NEED FIXING!
 function fill(r, g, b, a) {
-    r = r/255;
-    g = g/255;
-    b = b/255;
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
             fillColor = MSColor.colorWithSVGString(r); //it’s an hex color
             return
         } else {
+        r = r/255;
         fillColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
         return
         }
       }
       else {
+      r = r/255;
+      g = g/255;
+      b = b/255;
       fillColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
       return
       }
     }
     else {
+      r = r/255;
+      g = g/255;
+      b = b/255;
       fillColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
       return
     }
   };
 
   function stroke(r, g, b, a) {
-      r = r/255;
-      g = g/255;
-      b = b/255;
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
               strokeColor = MSColor.colorWithSVGString(r); //it’s an hex color
               return
           } else {
+          r = r/255;
           strokeColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
           return
           }
         }
         else {
+        r = r/255;
+        g = g/255;
+        b = b/255;
         strokeColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
         return
         }
       }
       else {
+        r = r/255;
+        g = g/255;
+        b = b/255;
         strokeColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
@@ -412,8 +422,34 @@ function noStroke() {
   strokeThikness = 0; //not the best solution but it works
 };
 
-function background(color) {
-  artboard.setBackgroundColor(MSColor.colorWithSVGString(color));
+function background(r, g, b, a) {
+  var backgroundColor = MSColor.colorWithSVGString("#ffffff");
+
+  if (a == undefined) {
+    if (g == undefined && b == undefined) {
+      if (r[0] == "#") {
+          backgroundColor = MSColor.colorWithSVGString(r); //it’s an hex color
+      } else {
+      r = r/255;
+      backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+      }
+    }
+    else {
+    r = r/255;
+    g = g/255;
+    b = b/255;
+    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+    }
+  }
+  else {
+    r = r/255;
+    g = g/255;
+    b = b/255;
+    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+  }
+
+  log(backgroundColor);
+  artboard.setBackgroundColor(backgroundColor);
 };
 
 function rotate(rad) {
