@@ -262,6 +262,12 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Code “read just from file”
 
+- Default should use Sketch default colors: “#D8D8D8” for fill, “#979797” for stroke
+
+- Implement beginShape(), vertex(), bezierVertex(), endShape()
+
+- Implement blendMode()
+
 - ~~Implement noise()~~
 
 - ~~Implement noFill()~~
