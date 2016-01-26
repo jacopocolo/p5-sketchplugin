@@ -1,9 +1,25 @@
+var runFromFile = false;
+
 //parser: grabs the code from Sketch artboard and saves it to file for execution
 function parseCode() {
   var p5code = getArtboardWithName("p5code");
   if (p5code) {
-  var all_layers = getArtboardWithName("p5code").layers()
-  var code = [all_layers objectAtIndex: 0]
+  var all_layers = getArtboardWithName("p5code").layers();
+  var code;
+  for (x = 0; x < [all_layers count]; x++) {
+    //find the sketch.js layer
+    if (all_layers.objectAtIndex(x).name() == "sketch.js") {
+      code = all_layers.objectAtIndex(x);
+      }
+    //find the runFromFile layer
+    if (all_layers.objectAtIndex(x).name() == "runFromFile") {
+      if (all_layers.objectAtIndex(x).stringValue() == "YES") {
+        runFromFile = true;
+      }
+    }
+  }
+  //write che content of the sketch.js layer into the sketch.js file only if readFromFile is false
+  if (runFromFile == false) {
   sketch = code.stringValue().toString()
   sketch = sketch.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
@@ -13,6 +29,7 @@ function parseCode() {
   [string writeToFile: filePath atomically: true
     encoding: NSUTF8StringEncoding error: nil];
   }
+}
 }
 
 function setUpP5Code() {
@@ -95,7 +112,42 @@ function setUpP5Code() {
     runFromFileTextLayer.setIsLocked(true);
 
     return textLayer, shortcutTextLayer, labelTextLayer, runFromFileTextLayer
-  }
+  }  else {
+    //this is one ugly function but what it does is:
+    //check if runFromFile is true.
+    //if it is it reads the content of the file, it writes it to sketch.js layer, changes the color and locks it
+    //if it’s not it unlocks the layer and changes the color back to normal 
+    if (runFromFile == true) {
+        //read what is in sketch.js so it can be placed in the code editor
+        filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
+        var file = [NSData dataWithContentsOfFile:filePath];
+        var codeString = [[NSString alloc] initWithData:file encoding:NSUTF8StringEncoding];
+
+        //let’s be sure that there’s something in the code editor
+        if (!codeString || codeString == null || codeString == undefined || codeString == nil) {
+          codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
+        }
+
+        var all_layers = getArtboardWithName("p5code").layers();
+        for (x = 0; x < [all_layers count]; x++) {
+          //find the sketch.js layer
+          if (all_layers.objectAtIndex(x).name() == "sketch.js") {
+            all_layers.objectAtIndex(x).textColor = MSColor.colorWithSVGString("#808080");
+            all_layers.objectAtIndex(x).setIsLocked(true);
+            all_layers.objectAtIndex(x).setStringValue(codeString);
+            }
+          } //end loop
+        } else {
+          var all_layers = getArtboardWithName("p5code").layers();
+          for (x = 0; x < [all_layers count]; x++) {
+            //find the sketch.js layer
+            if (all_layers.objectAtIndex(x).name() == "sketch.js") {
+              all_layers.objectAtIndex(x).textColor = MSColor.colorWithSVGString("#CCCCCC");
+              all_layers.objectAtIndex(x).setIsLocked(false);
+              }
+            }
+        }
+      }
 }
 
 //get javascript array from NSArray

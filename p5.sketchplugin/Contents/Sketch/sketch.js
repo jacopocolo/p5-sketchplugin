@@ -1,10 +1,11 @@
-var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
-
 function setup() {
   createCanvas(720, 400);
  }
 
 function draw() {
-  background(100);
-  rect(10,10,100,100);
+  background(0);
+  noFill();
+  stroke(255,255,255)
+  rect(10,10,100,500);
+  line(0,0,100,100);
 }
