@@ -268,6 +268,10 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Implement blendMode()
 
+- Limit code layer width
+
+- Have p5Code artboard update its size based on code lenght
+
 - ~~Implement noise()~~
 
 - ~~Implement noFill()~~
