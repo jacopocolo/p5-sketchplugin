@@ -4,21 +4,15 @@ var runFromFile = false;
 function parseCode() {
   var p5code = getArtboardWithName("p5code");
   if (p5code) {
-  var all_layers = getArtboardWithName("p5code").layers();
-  var code;
-  for (x = 0; x < [all_layers count]; x++) {
-    //find the sketch.js layer
-    if (all_layers.objectAtIndex(x).name() == "sketch.js") {
-      code = all_layers.objectAtIndex(x);
-      }
-    //find the runFromFile layer
-    if (all_layers.objectAtIndex(x).name() == "runFromFile") {
-      if (all_layers.objectAtIndex(x).stringValue() == "YES") {
+  var code = getLayerWithName("sketch.js", "p5code");
+  var runFromLayer = getLayerWithName("runFromFile", "p5code");
+
+  //checks if we are running from file or not
+  if (runFromLayer.stringValue() == "YES") {
         runFromFile = true;
-      }
-    }
   }
-  //write che content of the sketch.js layer into the sketch.js file only if readFromFile is false
+
+  //write che content of the sketch.js layer into the sketch.js file only if readFromFile is false. Otherwise we are just reading
   if (runFromFile == false) {
   sketch = code.stringValue().toString()
   sketch = sketch.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
@@ -35,7 +29,7 @@ function parseCode() {
 function setUpP5Code() {
   var p5canvas = getArtboardWithName("p5canvas");
   var p5code = getArtboardWithName("p5code");
-  //first canvas artboard, then code artboard
+  //if p5code doesn’t exist already we create the canvas artboard, then code artboard
   if (!p5code) {
     //create the artboard
     var codeArtboard = MSArtboardGroup.new()
@@ -112,11 +106,12 @@ function setUpP5Code() {
     runFromFileTextLayer.setIsLocked(true);
 
     return textLayer, shortcutTextLayer, labelTextLayer, runFromFileTextLayer
+    //this else kicks in only if the p5code already exists
   }  else {
-    //this is one ugly function but what it does is:
+
     //check if runFromFile is true.
-    //if it is it reads the content of the file, it writes it to sketch.js layer, changes the color and locks it
-    //if it’s not it unlocks the layer and changes the color back to normal 
+    //if it is it: 1) reads the content of the file 2) it writes it to sketch.js layer 3) changes the color and locks it
+    //if it’s not it 1) unlocks the layer and 2) changes the color back to normal
     if (runFromFile == true) {
         //read what is in sketch.js so it can be placed in the code editor
         filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
@@ -127,25 +122,14 @@ function setUpP5Code() {
         if (!codeString || codeString == null || codeString == undefined || codeString == nil) {
           codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
         }
-
-        var all_layers = getArtboardWithName("p5code").layers();
-        for (x = 0; x < [all_layers count]; x++) {
-          //find the sketch.js layer
-          if (all_layers.objectAtIndex(x).name() == "sketch.js") {
-            all_layers.objectAtIndex(x).textColor = MSColor.colorWithSVGString("#808080");
-            all_layers.objectAtIndex(x).setIsLocked(true);
-            all_layers.objectAtIndex(x).setStringValue(codeString);
-            }
-          } //end loop
+        var sketchTextLayer = getLayerWithName("sketch.js", "p5code");
+            sketchTextLayer.textColor = MSColor.colorWithSVGString("#808080");
+            sketchTextLayer.setIsLocked(true);
+            sketchTextLayer.setStringValue(codeString);
         } else {
-          var all_layers = getArtboardWithName("p5code").layers();
-          for (x = 0; x < [all_layers count]; x++) {
-            //find the sketch.js layer
-            if (all_layers.objectAtIndex(x).name() == "sketch.js") {
-              all_layers.objectAtIndex(x).textColor = MSColor.colorWithSVGString("#CCCCCC");
-              all_layers.objectAtIndex(x).setIsLocked(false);
-              }
-            }
+          var sketchTextLayer = getLayerWithName("sketch.js", "p5code");
+              sketchTextLayer.textColor = MSColor.colorWithSVGString("#CCCCCC");
+              sketchTextLayer.setIsLocked(false);
         }
       }
 }
@@ -172,9 +156,18 @@ function jsArray(array) {
   	  		return artboard;
   	  	}
   	}
-
   	return;
   }
+
+//find layer based on layer name and artboard name
+function getLayerWithName(layerName, artboardName) {
+  var all_layers = getArtboardWithName(artboardName).layers();
+    for (x = 0; x < [all_layers count]; x++) {
+      if (all_layers.objectAtIndex(x).name() == layerName) {
+        return all_layers.objectAtIndex(x);
+    }
+  }
+}
 
   //filter array using predicate
 function predicate(format, array) {
