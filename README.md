@@ -161,9 +161,9 @@ A Bezier curve. The curve starts in x1,y1 and ends in x4,y4. x2,y2 and x3,y3 are
 
 You can call it like this:
 ```javascript
-bezier(10,10,25,25,75,75,50,50)
+bezier(85, 20, 10, 10, 90, 90, 15, 80);
 ```
-and it will draw a bezier curve starting in 10,10 and ending in 50,50. The control point for the beginning of the curve is in 25,25 and the control point for the end of the curve is in 75,75.
+and it will draw a bezier curve starting in 85,20 and ending in 15,80. The control point for the beginning of the curve is in 20,10 and the control point for the end of the curve is in 90,90.
 
 
 ##[Attributes functions](#attributes-functions)
