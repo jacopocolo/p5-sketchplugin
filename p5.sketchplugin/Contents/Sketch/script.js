@@ -362,7 +362,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
-  
+
   if (hasFill == true) {
   var fill = shape.style().fills().addNewStylePart();
   fill.color = fillColor;

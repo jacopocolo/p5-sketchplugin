@@ -123,7 +123,7 @@ function setUpP5Code() {
           codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
         }
         var sketchTextLayer = getLayerWithName("sketch.js", "p5code");
-            sketchTextLayer.textColor = MSColor.colorWithSVGString("#808080");
+            sketchTextLayer.textColor = MSColor.colorWithRed_green_blue_alpha(204,204,204,0.2);
             sketchTextLayer.setIsLocked(true);
             sketchTextLayer.setStringValue(codeString);
         } else {
@@ -132,6 +132,8 @@ function setUpP5Code() {
               sketchTextLayer.setIsLocked(false);
         }
       }
+      //in any case, set the width of sketch.js as fixed
+      resizeSketchjs();
 }
 
 //get javascript array from NSArray
@@ -318,4 +320,9 @@ function resizeLayerToFitText(layer) {
     [layer setIsEditingText:true];
     [layer setIsEditingText:false];
     [layer select:false byExpandingSelection:false];
+}
+
+function resizeSketchjs(){
+  var sketchjs = getLayerWithName("sketch.js", "p5code");
+    sketchjs.frame().setWidth(450);
 }
