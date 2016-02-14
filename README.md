@@ -260,15 +260,15 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
-- Code “read just from file”
+- ~~Code “read just from file”~~
 
-- Default should use Sketch default colors: “#D8D8D8” for fill, “#979797” for stroke
+- ~~Default should use Sketch default colors: “#D8D8D8” for fill, “#979797” for stroke~~
 
 - Implement beginShape(), vertex(), bezierVertex(), endShape()
 
 - Implement blendMode()
 
-- Limit code layer width
+- ~~Limit code layer width~~
 
 - Have p5Code artboard update its size based on code lenght
 
