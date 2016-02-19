@@ -17,9 +17,9 @@ var width = 600 //default
 var height = 800 //default
 var textSize = 12 //default
 var font = "Helverica" //default
-var fillColor = MSColor.colorWithRed_green_blue_alpha(216,216,216,1); //default Sketch fill
+var fillColor = MSColor.colorWithSVGString("#D8D8D8"); //default Sketch fill #D8D8D8
 var hasFill = true;
-var strokeColor = MSColor.colorWithRed_green_blue_alpha(151,151,151,1); //default Sketch stroke
+var strokeColor = MSColor.colorWithSVGString("#979797"); //default Sketch stroke #979797
 var hasStroke = true;
 var strokeThikness = "1"; //default
 var strokeEnding; //default
