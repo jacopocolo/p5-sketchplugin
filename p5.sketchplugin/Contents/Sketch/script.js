@@ -135,6 +135,56 @@ function line(x1, y1, x2, y2) {
 
   artboard.addLayers([shape]);
 }
+
+//Shapes functions
+var newShape;
+var firstPoint = true;
+var CLOSE = "CLOSE"
+
+function beginShape() {
+  newShape = NSBezierPath.bezierPath();
+}
+
+function vertex(x1, y1) {
+  //move to point only if it’s the first point of the shape
+  if (firstPoint == true) {
+  newShape.moveToPoint(NSMakePoint(x1, y1));
+  }
+  newShape.lineToPoint(NSMakePoint(x1, y1));
+  firstPoint = false;
+}
+
+function bezierVertex(x2,y2,x3,y3,x4,y4) {
+  [newShape curveToPoint:NSMakePoint(x4, y4)
+        controlPoint1:NSMakePoint(x2, y2)
+        controlPoint2:NSMakePoint(x3, y3)]
+}
+
+function endShape(mode) {
+  if (mode == "CLOSE") {
+  newShape.closePath();
+  }
+
+  var shape = MSShapeGroup.shapeWithBezierPath(newShape);
+  shape.setName("Shape");
+
+  if (hasFill == true) {
+      var fill = shape.style().fills().addNewStylePart();
+      fill.color = fillColor;
+  }
+
+  if (hasStroke == true) {
+  var border = shape.style().borders().addNewStylePart();
+  border.color = strokeColor;
+  border.thickness = strokeThikness;
+  }
+
+  shape.setRotation(rotationValue);
+
+  artboard.addLayers([shape]);
+  firstPoint = true; //reset after you close the shape
+}
+
 // A rectangle that starts from x, y and has a height of h and a width of w.
 // The angles are always at 90 degrees. It has both a fill and a stroke color
 // You can call it like this: rect(0,0,100,200)
