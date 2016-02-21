@@ -1,23 +1,22 @@
+var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
+
 function setup() {
-  createCanvas(500, 500);
-  background(255);
+  createCanvas(720, 400);
+  noStroke();
+  noLoop();  // Run once and stop
 }
 
 function draw() {
-  star(0, 0, 5, 70, 3); 
+  background(100);
+  pieChart(300, angles);
 }
 
-function star(x, y, radius1, radius2, npoints) {
-  var angle = TWO_PI / npoints;
-  var halfAngle = angle/2.0;
-  beginShape();
-  for (var a = 0; a < TWO_PI; a += angle) {
-    var sx = x + cos(a) * radius2;
-    var sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a+halfAngle) * radius1;
-    sy = y + sin(a+halfAngle) * radius1;
-    vertex(sx, sy);
+function pieChart(diameter, data) {
+  var lastAngle = 0;
+  for (var i = 0; i < data.length; i++) {
+    var gray = map(i, 0, data.length, 0, 255);
+    fill(gray);
+    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
+    lastAngle += radians(angles[i]);
   }
-  endShape(CLOSE);
 }

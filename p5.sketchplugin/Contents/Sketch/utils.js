@@ -234,31 +234,17 @@ function radians(deg) {
       return deg * Math.PI/180;
     }
 
-//needs fixing
+function cos(angle) {
+      return Math.cos(angle)
+};
 
-// function cos(angle) {
-//       if (this._angleMode === constants.RADIANS) {
-//         return Math.cos(angle);
-//       } else {
-//         return Math.cos(this.radians(angle));
-//       }
-// };
-//
-// function sin(angle) {
-//   if (this._angleMode === constants.RADIANS) {
-//     return Math.sin(angle);
-//   } else {
-//     return Math.sin(this.radians(angle));
-//   }
-// };
-//
-// function tan(angle) {
-//   if (this._angleMode === constants.RADIANS) {
-//     return Math.tan(angle);
-//   } else {
-//     return Math.tan(this.radians(angle));
-//   }
-// };
+function sin(angle) {
+   return Math.sin(angle);
+};
+
+function tan(angle) {
+    return Math.tan(angle);
+};
 
 function map(n, start1, stop1, start2, stop2) {
   return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
@@ -388,4 +374,10 @@ function resizeLayerToFitText(layer) {
 function resizeSketchjs(){
   var sketchjs = getLayerWithName("sketch.js", "p5code");
     sketchjs.frame().setWidth(450);
+    var h = sketchjs.frame().height();
+  var p5code = getArtboardWithName("p5code");
+    var r = p5code.rect();
+    r.size.height = h+120;
+    r.size.width = 500;
+    p5code.setRect(r);
 }
