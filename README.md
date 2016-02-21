@@ -268,13 +268,17 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - ~~Implement beginShape(), vertex(), bezierVertex(), endShape()~~
 
-- Implement cos(), sin() and tan()
+- ~~Implement cos(), sin() and tan()~~
+
+- Implement [all the calculation functions](http://p5js.org/reference/#group-Math)
 
 - Implement blendMode()
 
 - ~~Limit code layer width~~
 
-- Have p5Code artboard update its size based on code length
+- ~~Have p5Code artboard update its size based on code length~~
+
+- Improve p5Code resizing
 
 - ~~Implement noise()~~
 
