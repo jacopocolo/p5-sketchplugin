@@ -270,7 +270,9 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - ~~Implement cos(), sin() and tan()~~
 
-- Implement [all the calculation functions](http://p5js.org/reference/#group-Math)
+- ~~Implement [all the calculation functions](http://p5js.org/reference/#group-Math)~~
+
+- Test all the calc functions
 
 - Implement blendMode()
 
