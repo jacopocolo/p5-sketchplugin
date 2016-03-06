@@ -246,9 +246,63 @@ function tan(angle) {
     return Math.tan(angle);
 };
 
+function abs(n) {return Math.abs(n)};
+
+function ceil(n) {return Math.ceil(n)};
+
+function constrain(n, low, high) {
+  return Math.max(Math.min(n, high), low);
+};
+
+function dist(x1, y1, x2, y2) {
+  return Math.sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+};
+
+function exp(n) {return Math.exp(n)};
+
+function floor(n) {return Math.floor(n)};
+
+function lerp(start, stop, amt) {
+  return amt*(stop-start)+start;
+};
+
+function log(n) {return Math.log(n)};
+
+function mag(x, y) {
+  return Math.sqrt(x*x+y*y);
+};
+
 function map(n, start1, stop1, start2, stop2) {
   return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
   };
+
+function max(n) {
+  if (arguments[0] instanceof Array) {
+    return Math.max.apply(null,arguments[0]);
+  } else {
+    return Math.max.apply(null,arguments);
+  }
+};
+
+function min(n) {
+  if (arguments[0] instanceof Array) {
+    return Math.min.apply(null,arguments[0]);
+  } else {
+    return Math.min.apply(null,arguments);
+  }
+};
+
+function norm(n, start, stop) {
+  return this.map(n, start, stop, 0, 1);
+};
+
+function pow(n) {return Math.pow(n)};
+
+function round(n) {return Math.round(n)};
+
+function sq(n) {return n*n};
+
+function sqrt(n) {return Math.sqrt(n)};
 
   var PERLIN_YWRAPB = 4;
   var PERLIN_YWRAP = 1<<PERLIN_YWRAPB;
@@ -378,28 +432,72 @@ function resizeSketchjs(){
     var h = sketchjs.frame().height();
   var p5code = getArtboardWithName("p5code");
     var r = p5code.rect();
-    r.size.height = h+120
-
-function setup() {
-  createCanvas(720, 400);
-  noStroke();
-  noLoop();  // Run once and stop
-}
-
-function draw() {
-  background(100);
-  pieChart(300, angles);
-}
-
-function pieChart(diameter, data) {
-  var lastAngle = 0;
-  for (var i = 0; i < data.length; i++) {
-    var gray = map(i, 0, data.length, 0, 255);
-    fill(gray);
-    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
-    lastAngle += radians(angles[i]);
-  }
-};
+    r.size.height = h+100;
     r.size.width = 500;
     p5code.setRect(r);
+}
+
+//STILL TESTING THESE
+
+function nf() {
+  if (arguments[0] instanceof Array) {
+    var a = arguments[1];
+    var b = arguments[2];
+    return arguments[0].map(function (x) {
+      return doNf(x, a, b);
+    });
+  }
+  else{
+    var typeOfFirst = Object.prototype.toString.call(arguments[0]);
+    if(typeOfFirst === '[object Arguments]'){
+      if(arguments[0].length===3){
+        return this.nf(arguments[0][0],arguments[0][1],arguments[0][2]);
+      }
+      else if(arguments[0].length===2){
+        return this.nf(arguments[0][0],arguments[0][1]);
+      }
+      else{
+        return this.nf(arguments[0][0]);
+      }
+    }
+    else {
+      return doNf.apply(this, arguments);
+    }
+  }
+};
+
+function doNf() {
+  var num = arguments[0];
+  var neg = num < 0;
+  var n = neg ? num.toString().substring(1) : num.toString();
+  var decimalInd = n.indexOf('.');
+  var intPart = decimalInd !== -1 ? n.substring(0, decimalInd) : n;
+  var decPart = decimalInd !== -1 ? n.substring(decimalInd + 1) : '';
+  var str = neg ? '-' : '';
+  if (arguments.length === 3) {
+    var decimal = '';
+    if(decimalInd !== -1 || arguments[2] - decPart.length > 0){
+      decimal = '.';
+    }
+    if (decPart.length > arguments[2]) {
+      decPart = decPart.substring(0, arguments[2]);
+    }
+    for (var i = 0; i < arguments[1] - intPart.length; i++) {
+      str += '0';
+    }
+    str += intPart;
+    str += decimal;
+    str += decPart;
+    for (var j = 0; j < arguments[2] - decPart.length; j++) {
+      str += '0';
+    }
+    return str;
+  }
+  else {
+    for (var k = 0; k < Math.max(arguments[1] - intPart.length, 0); k++) {
+      str += '0';
+    }
+    str += n;
+    return str;
+  }
 }
