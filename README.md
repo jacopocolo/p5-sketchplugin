@@ -278,7 +278,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - ~~Have p5Code artboard update its size based on code length~~
 
-- Improve p5Code resizing
+- ~~Improve p5Code resizing~~
 
 - ~~Implement noise()~~
 

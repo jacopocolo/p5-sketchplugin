@@ -2,7 +2,7 @@
   "author" : "",
   "commands" : [
     {
-      "script" : "script.js",
+      "script" : "import.js",
       "handler" : "onRun",
       "shortcut" : "cmd+alt+R",
       "name" : "p5",
@@ -15,7 +15,7 @@
     ],
     "title" : "p5"
   },
-  "identifier" : "com.example.sketch.p5",
+  "identifier" : "com.jacopocolo.sketch.p5",
   "version" : "0.1",
   "description" : "",
   "authorEmail" : "",

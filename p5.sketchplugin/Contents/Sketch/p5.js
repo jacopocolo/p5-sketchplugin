@@ -1,14 +1,3 @@
-// To-do
-// Implement noise()?
-// Implement noFill()
-// Implement map()
-//Make consistent functions for fill() and stroke()
-// Implement rgba() for both fill() and stroke()
-//implement rotate()
-
-@import 'utils.js'
-@import 'sketch.js'
-@import 'notsupported.js'
 
 var ctx, doc, selection, page, view, artboard, artboards;
 

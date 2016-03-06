@@ -123,7 +123,7 @@ function setUpP5Code() {
           codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
         }
         var sketchTextLayer = getLayerWithName("sketch.js", "p5code");
-            sketchTextLayer.textColor = MSColor.colorWithRed_green_blue_alpha(204,204,204,0.2);
+            sketchTextLayer.textColor = MSColor.colorWithRed_green_blue_alpha(0.8,0.8,0.8,0.2);
             sketchTextLayer.setIsLocked(true);
             sketchTextLayer.setStringValue(codeString);
         } else {
@@ -374,10 +374,32 @@ function resizeLayerToFitText(layer) {
 function resizeSketchjs(){
   var sketchjs = getLayerWithName("sketch.js", "p5code");
     sketchjs.frame().setWidth(450);
+    sketchjs.setTextBehaviour(1);
     var h = sketchjs.frame().height();
   var p5code = getArtboardWithName("p5code");
     var r = p5code.rect();
-    r.size.height = h+120;
+    r.size.height = h+90var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
+
+function setup() {
+  createCanvas(720, 400);
+  noStroke();
+  noLoop();  // Run once and stop
+}
+
+function draw() {
+  background(100);
+  pieChart(300, angles);
+}
+
+function pieChart(diameter, data) {
+  var lastAngle = 0;
+  for (var i = 0; i < data.length; i++) {
+    var gray = map(i, 0, data.length, 0, 255);
+    fill(gray);
+    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
+    lastAngle += radians(angles[i]);
+  }
+};
     r.size.width = 500;
     p5code.setRect(r);
 }
