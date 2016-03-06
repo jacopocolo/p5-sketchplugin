@@ -2,7 +2,7 @@
   "author" : "",
   "commands" : [
     {
-      "script" : "import.js",
+      "script" : "p5.js",
       "handler" : "onRun",
       "shortcut" : "cmd+alt+R",
       "name" : "p5",

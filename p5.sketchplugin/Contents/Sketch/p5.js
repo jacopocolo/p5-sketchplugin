@@ -1,3 +1,6 @@
+@import 'utils.js'
+@import 'notsupported.js'
+@import 'sketch.js'
 
 var ctx, doc, selection, page, view, artboard, artboards;
 

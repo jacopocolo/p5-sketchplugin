@@ -123,7 +123,7 @@ function setUpP5Code() {
           codeString = "function setup() {\n	createCanvas(500, 500)\n};\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
         }
         var sketchTextLayer = getLayerWithName("sketch.js", "p5code");
-            sketchTextLayer.textColor = MSColor.colorWithRed_green_blue_alpha(0.8,0.8,0.8,0.2);
+            sketchTextLayer.textColor = MSColor.colorWithRed_green_blue_alpha(207,207,207,0.2);
             sketchTextLayer.setIsLocked(true);
             sketchTextLayer.setStringValue(codeString);
         } else {
@@ -378,7 +378,7 @@ function resizeSketchjs(){
     var h = sketchjs.frame().height();
   var p5code = getArtboardWithName("p5code");
     var r = p5code.rect();
-    r.size.height = h+90var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
+    r.size.height = h+120
 
 function setup() {
   createCanvas(720, 400);
