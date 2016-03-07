@@ -93,9 +93,14 @@ function point(x, y) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  if (hasFill == true) {
-  var fill = shape.style().fills().addNewStylePart();
-  fill.color = fillColor;
+  shape.setName("Point");
+  var border = shape.style().borders().addNewStylePart();
+
+  if (hasStroke == true) {
+  border.color = strokeColor;
+  border.thickness = strokeThikness;
+  var borderOptions = shape.style().borderOptions();
+  borderOptions.lineCapStyle = strokeEnding;
   }
 
   shape.setRotation(rotationValue);
