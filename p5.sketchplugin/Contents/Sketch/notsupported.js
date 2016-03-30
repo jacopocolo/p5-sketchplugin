@@ -3,7 +3,7 @@ function noLoop() {
 }
 
 function colorMode() {
-  log("colorMode is not supported, YET")
+  log("colorMode is not supported… YET")
 }
 
 function frameCount() {
@@ -11,5 +11,5 @@ function frameCount() {
 }
 
 function frameRate() {
-  log("frameRate() is not supported. It doesn’t make sense in Sketch") 
+  log("frameRate() is not supported. It doesn’t make sense in Sketch")
 }
