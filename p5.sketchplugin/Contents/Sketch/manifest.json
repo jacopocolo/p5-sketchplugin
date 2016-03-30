@@ -4,14 +4,22 @@
     {
       "script" : "p5.js",
       "handler" : "onRun",
-      "shortcut" : "cmd+alt+R",
+      "shortcut" : "cmd+alt+ctrl+R",
       "name" : "p5",
       "identifier" : "p5"
+    },
+    {
+      "script" : "p5.js",
+      "handler" : "runAgain",
+      "shortcut" : "cmd+alt+R",
+      "name" : "Run Again",
+      "identifier" : "runAgain"
     }
   ],
   "menu" : {
     "items" : [
-      "p5"
+      "p5",
+      "runAgain"
     ],
     "title" : "p5"
   },

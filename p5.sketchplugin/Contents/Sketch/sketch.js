@@ -1,12 +1,9 @@
-var distances = [];
-var maxDistance;
-var spacer;
-
 function setup() {
-  createCanvas(400, 400);
+	createCanvas(100,100);
 }
 
 function draw() {
+	stroke(255,0,0);
 	background(255);
-  rect(10,10,100,100);
+	line(0,0,50,random(50));
 }
