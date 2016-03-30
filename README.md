@@ -260,7 +260,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
-- Set a default background color when background color is not set and artboard is already created
+- ~~Set a default background color when background color is not set and artboard is already created~~
 
 - ~~Code “read just from file”~~
 
