@@ -77,7 +77,7 @@ function createCanvas(w, h) {
     frame.setWidth(width)
     frame.setHeight(height)
     artboard.setName("p5canvas")
-    artboard.setHasBackgroundColor(true);
+    artboard.setHasBackgroundColor(false);
     doc.currentPage().addLayers([artboard])
     //setUpP5Code()
   } else {
@@ -86,6 +86,7 @@ function createCanvas(w, h) {
     frame = artboard.frame()
     frame.setWidth(width)
     frame.setHeight(height)
+    artboard.setHasBackgroundColor(false);
     //setUpP5Code()
   }
 }
@@ -529,6 +530,7 @@ function noFill() {
 };
 
 function background(r, g, b, a) {
+  artboard.setHasBackgroundColor(true);
   var backgroundColor = MSColor.colorWithSVGString("#ffffff");
 
   if (a == undefined) {
@@ -1150,7 +1152,7 @@ var onRun = function(context) {
   code = result.data;
   //all of this needs to happen only if Run is pressed
   saveCode(code);
-  //hacky hack, but apparently it’s the only way to prevent Sketch from using the chached version of
+  //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
   eval(code+'; setup(); draw();');
 };
 
