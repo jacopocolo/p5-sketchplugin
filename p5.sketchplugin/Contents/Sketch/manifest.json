@@ -5,7 +5,7 @@
       "script" : "p5.js",
       "handler" : "onRun",
       "shortcut" : "cmd+alt+ctrl+R",
-      "name" : "p5",
+      "name" : "Edit and run",
       "identifier" : "p5"
     },
     {

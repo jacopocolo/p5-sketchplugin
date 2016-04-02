@@ -1,8 +1,6 @@
 @import 'utils.js'
 @import 'notsupported.js'
 
-var pluginName = "p5Sketch"
-
 var ctx, doc, selection, page, view, artboards;
 
 function exposeContext(context) {
@@ -30,6 +28,9 @@ var strokeEnding; //default
 var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
+var hasTraslate = null;
+var deltaX;
+var deltaY;
 
 // Trigoniometry constants
 var PI = Math.PI;
@@ -95,6 +96,10 @@ function createCanvas(w, h) {
 // It does have a fill color, it doesn’t have a stroke color
 // You can call it like this: point(100,100)
 function point(x, y) {
+  if (hasTraslate) {
+    x = x+deltaX
+    y = y+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
   path.lineToPoint(NSMakePoint(x, y));
@@ -124,6 +129,12 @@ function point(x, y) {
 // It doesn’t have a fill color, it has a stroke color
 // You can call it like this: line(0,0,100,100)
 function line(x1, y1, x2, y2) {
+  if (hasTraslate) {
+    x1 = x1+deltaX
+    y1 = y1+deltaY
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x2, y2));
@@ -155,6 +166,10 @@ function beginShape() {
 }
 
 function vertex(x1, y1) {
+  if (hasTraslate) {
+    x1 = x1+deltaX
+    y1 = y1+deltaY
+  }
   //move to point only if it’s the first point of the shape
   if (firstPoint == true) {
   newShape.moveToPoint(NSMakePoint(x1, y1));
@@ -164,6 +179,14 @@ function vertex(x1, y1) {
 }
 
 function bezierVertex(x2,y2,x3,y3,x4,y4) {
+  if (hasTraslate) {
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+    x3 = x3+deltaX
+    y3 = y3+deltaY
+    x4 = x3+deltaX
+    y4 = y3+deltaY
+  }
   [newShape curveToPoint:NSMakePoint(x4, y4)
         controlPoint1:NSMakePoint(x2, y2)
         controlPoint2:NSMakePoint(x3, y3)]
@@ -198,6 +221,10 @@ function endShape(mode) {
 // The angles are always at 90 degrees. It has both a fill and a stroke color
 // You can call it like this: rect(0,0,100,200)
 function rect(x, y, w, h) {
+  if (hasTraslate) {
+    x = x+deltaX
+    y = y+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
   path.lineToPoint(NSMakePoint(x, y));
@@ -230,6 +257,16 @@ function rect(x, y, w, h) {
 // It has both a fill and a stroke color
 // You can call it like this: quad(0,0,100,200,400,400,200,90,20)
 function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
+  if (hasTraslate) {
+    x1 = x1+deltaX
+    y1 = y1+deltaY
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+    x3 = x3+deltaX
+    y3 = y3+deltaY
+    x4 = x4+deltaX
+    y4 = y4+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x1, y1));
@@ -262,6 +299,14 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
 // It has both a fill and a stroke color
 // You can call it like this: triangle(0,0,100,200,400,400,200)
 function triangle(x1, y1, x2, y2, x3, y3) {
+  if (hasTraslate) {
+    x1 = x1+deltaX
+    y1 = y1+deltaY
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+    x3 = x3+deltaX
+    y3 = y3+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x1, y1));
@@ -293,6 +338,10 @@ function triangle(x1, y1, x2, y2, x3, y3) {
 // It has both a fill and a stroke color
 // You can call it like this: ellipse(250,250,500,100)
 function ellipse(a, b, c, d) {
+  if (hasTraslate) {
+    a = a+deltaX
+    b = b+deltaY
+  }
   centerX = a - c / 2;
   centerY = b - d / 2;
   var ovalShape = MSOvalShape.alloc().init();
@@ -322,6 +371,10 @@ function ellipse(a, b, c, d) {
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
+  if (hasTraslate) {
+    a = a+deltaX
+    b = b+deltaY
+  }
   var center = NSMakePoint(a, b)
   rect = NSMakeRect(a-c/2, b-d/2, c, d)
   var rad;
@@ -380,6 +433,12 @@ function arc(a,b,c,d,start,stop) {
 // the bounding box will wrap around the text
 // You can call it like this: text("Hello world",10,10,100,200)
 function text(str, x, y, x2, y2) {
+  if (hasTraslate) {
+    x = x+deltaX
+    y = y+deltaY
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+  }
   var textLayer = artboard.addLayerOfType("text");
   if (hasFill == true) {
   textLayer.textColor = fillColor;
@@ -405,6 +464,16 @@ function text(str, x, y, x2, y2) {
 };
 
 function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
+  if (hasTraslate) {
+    x1 = x1+deltaX
+    y1 = y1+deltaY
+    x2 = x2+deltaX
+    y2 = y2+deltaY
+    x3 = x3+deltaX
+    y3 = y3+deltaY
+    x4 = x4+deltaX
+    y4 = y4+deltaY
+  }
   var path = NSBezierPath.bezierPath();
   [path moveToPoint:NSMakePoint(x1, y1)]
   [path curveToPoint:NSMakePoint(x4, y4)
@@ -563,6 +632,12 @@ function rotate(rad) {
     rotationValue = rotationValue+degrees(rad);
     rotationValue = -rotationValue;
   }
+
+function translate(x, y) {
+  hasTraslate = true;
+  deltaX = x;
+  deltaY = y;
+}
 
   var seeded = false;
 
@@ -1208,17 +1283,6 @@ function onRun(context) {
 
 	// get the user input
 	[NSApp runModalForWindow:window]
-
-  // codePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
-  // var file = [NSData dataWithContentsOfFile:filePath];
-  // //var codeString = [[NSString alloc] initWithData:file encoding:NSUTF8StringEncoding];
-  // var codeString = null;
-  // //let’s be sure that there’s something in the code editor
-  // if (!codeString || codeString == null || codeString == undefined || codeString == nil || codeString == "") {
-  //   codeString = "function setup() {createCanvas(500, 500)};function draw() {	line(0, 0, 100, 100);}"
-  // }
-  // log(codeString);
-  // [webView stringByEvaluatingJavaScriptFromString:@"setValue('function setup() {createCanvas(500, 500)};function draw() {	line(0, 0, 100, 100);}');"];
 
 	if (!userClickedCancel) {
     var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
