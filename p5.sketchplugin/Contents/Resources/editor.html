@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="codemirror.css" />
+
+	<script type="text/javascript" src="codemirror.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+	<script type="text/javascript" src="jquery-2.2.2.min.js"></script>
+
+	<style>
+		body,
+		html {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			border: 1px solid #BEBEBE;
+			box-sizing: border-box;
+		}
+
+		.CodeMirror {
+			height: 90%;
+			width: 100%;
+		}
+
+		.header {
+			height: 10%;
+			width: 100%;
+			background-color: "#000000";
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 12px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<span>Write some p5.js code or select from preset:</span>
+		<select>
+			<option value="latest">Latest sketch</option>
+			<option value="piechart">Pie chart</option>
+			<option value="grid">Grid</option>
+			<option value="esle">Something else</option>
+		</select>
+	</div>
+	<script type="text/javascript">
+		var options = {
+			lineNumbers: true,
+			autofocus: true,
+			lineWrapping: true
+		};
+		var myCodeMirror = CodeMirror(document.body, options);
+
+		var initialValue = undefined;
+		var defaultValue = "function setup() {\n	createCanvas(500, 500)\n}\n\nfunction draw() {\n	line(0, 0, 100, 100);\n}"
+
+		var getValue = function() {
+			return myCodeMirror.getValue();
+		};
+
+		var setValue = function(value) {
+			myCodeMirror.setValue(value);
+		};
+
+		jQuery.get('../Sketch/sketch.js', function(data) {
+			initialValue = data;
+			console.log(data);
+			if (initialValue == null) {
+				setValue(defaultValue);
+			} else {
+				setValue(initialValue);
+			};
+		});
+	</script>
+</body>
+
+</html>

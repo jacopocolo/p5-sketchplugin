@@ -1146,14 +1146,92 @@ function doNf() {
 RUNNING FUNCTIONS
 ----------------*/
 
-var onRun = function(context) {
-  exposeContext(context)
-  var result = createPluginPanel();
-  code = result.data;
-  //all of this needs to happen only if Run is pressed
-  saveCode(code);
-  //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
-  eval(code+'; setup(); draw();');
+function onRun(context) {
+  exposeContext(context);
+	var defaults = [NSUserDefaults standardUserDefaults], default_values = [NSMutableDictionary dictionary];
+
+	if (![defaults objectForKey:"rectName"]){
+		log("nil");
+		[default_values setObject:"0" forKey:"rectWidth"];
+		[default_values setObject:"0" forKey:"rectHeight"];
+		[default_values setObject:"Rectangle" forKey:"rectName"];
+		[defaults registerDefaults:default_values];
+	}
+
+	// create a window
+	var window = [[NSWindow alloc] init]
+	var windowTitle = "P5Sketch"
+	[window setTitle:windowTitle]
+	[window setFrame:NSMakeRect(0, 0, 500, 420) display:false]
+
+  var filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Resources/editor.html";
+
+  var frame = NSMakeRect(0,60,500,340);
+  var url = [NSURL fileURLWithPath:filePath];
+  var webView = [[WebView alloc] initWithFrame:frame]
+  [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]]
+  //var mask = NSTitledWindowMask + NSClosableWindowMask + NSMiniaturizableWindowMask + NSResizableWindowMask + NSUtilityWindowMask;
+  [[window contentView] addSubview:webView]
+  [window center]
+
+	// create OK button
+	var okButton = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)]
+	var userClickedOK = false
+	[okButton setTitle:"  Run  "]
+	[okButton setBezelStyle:NSRoundedBezelStyle]
+	[okButton sizeToFit]
+	[okButton setFrame:NSMakeRect([window frame].size.width - [okButton frame].size.width - 20, 14, [okButton frame].size.width, [okButton frame].size.height)]
+	[okButton setKeyEquivalent:"\r"] // return key
+	[okButton setCOSJSTargetFunction:function(sender) {
+		userClickedOK = true
+		[window orderOut:nil]
+		[NSApp stopModal]
+	}];
+
+	[[window contentView] addSubview:okButton]
+
+	// create cancel button
+	var cancelButton = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)]
+	var userClickedCancel = false
+	[cancelButton setTitle:"  Cancel  "]
+	[cancelButton setBezelStyle:NSRoundedBezelStyle]
+	[cancelButton sizeToFit]
+	[cancelButton setFrame:NSMakeRect([okButton frame].origin.x - [cancelButton frame].size.width, 14, [cancelButton frame].size.width, [cancelButton frame].size.height)]
+	[cancelButton setKeyEquivalent:@"\033"] // escape key
+	[cancelButton setCOSJSTargetFunction:function(sender) {
+		userClickedCancel = true
+		[window orderOut:nil]
+		[NSApp stopModal]
+	}]
+
+	[[window contentView] addSubview:cancelButton]
+
+	// get the user input
+	[NSApp runModalForWindow:window]
+
+  // codePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
+  // var file = [NSData dataWithContentsOfFile:filePath];
+  // //var codeString = [[NSString alloc] initWithData:file encoding:NSUTF8StringEncoding];
+  // var codeString = null;
+  // //let’s be sure that there’s something in the code editor
+  // if (!codeString || codeString == null || codeString == undefined || codeString == nil || codeString == "") {
+  //   codeString = "function setup() {createCanvas(500, 500)};function draw() {	line(0, 0, 100, 100);}"
+  // }
+  // log(codeString);
+  // [webView stringByEvaluatingJavaScriptFromString:@"setValue('function setup() {createCanvas(500, 500)};function draw() {	line(0, 0, 100, 100);}');"];
+
+	if (!userClickedCancel) {
+    var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
+    log(code);
+    saveCode(code);
+    //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
+    eval(code+'; setup(); draw();');
+	}
+
+	// let the GC gather these guys (and the targets!)
+	okButton = nil;
+	cancelButton = nil;
+	window = nil;
 };
 
 var runAgain = function(context) {
