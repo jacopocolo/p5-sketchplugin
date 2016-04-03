@@ -17,7 +17,7 @@ var artboard; //p5Canvas
 var padding = 50; //distance from p5canvas to the first artboard
 var width = 600 //default
 var height = 800 //default
-var textSize = 12 //default
+var size = 12 //default
 var font = "Helverica" //default
 var fillColor = MSColor.colorWithSVGString("#D8D8D8"); //default Sketch fill #D8D8D8
 var hasFill = true;
@@ -29,8 +29,8 @@ var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
 var hasTraslate = null;
-var deltaX;
-var deltaY;
+var deltaX = 0; //default translate
+var deltaY = 0; //default translate
 
 // Trigoniometry constants
 var PI = Math.PI;
@@ -443,7 +443,7 @@ function text(str, x, y, x2, y2) {
   if (hasFill == true) {
   textLayer.textColor = fillColor;
   }
-  textLayer.fontSize = 50;
+  textLayer.fontSize = size;
   textLayer.setFontPostscriptName(font.toString());
   textLayer.setName(str);
   textLayer.setNameIsFixed(true);
@@ -501,8 +501,8 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   artboard.addLayers([shape]);
 }
 
-function textSize(size) {
-  textSize = size;
+function textSize(fontSize) {
+  size = fontSize;
 };
 
 function textFont(textFont) {
@@ -635,8 +635,8 @@ function rotate(rad) {
 
 function translate(x, y) {
   hasTraslate = true;
-  deltaX = x;
-  deltaY = y;
+  deltaX += x;
+  deltaY += y;
 }
 
   var seeded = false;
@@ -1225,14 +1225,6 @@ function onRun(context) {
   exposeContext(context);
 	var defaults = [NSUserDefaults standardUserDefaults], default_values = [NSMutableDictionary dictionary];
 
-	if (![defaults objectForKey:"rectName"]){
-		log("nil");
-		[default_values setObject:"0" forKey:"rectWidth"];
-		[default_values setObject:"0" forKey:"rectHeight"];
-		[default_values setObject:"Rectangle" forKey:"rectName"];
-		[defaults registerDefaults:default_values];
-	}
-
 	// create a window
 	var window = [[NSWindow alloc] init]
 	var windowTitle = "P5Sketch"
@@ -1286,7 +1278,6 @@ function onRun(context) {
 
 	if (!userClickedCancel) {
     var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
-    log(code);
     saveCode(code);
     //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
     eval(code+'; setup(); draw();');

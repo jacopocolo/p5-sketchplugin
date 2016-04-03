@@ -3,6 +3,8 @@ function setup() {
 }
 
 function draw() {
-  	translate(50,50);
-  	bezier(0, 0, 0, 0, 90, 90, 15, 80);
+  	translate(10,10);
+	rect(0, 0, 100, 100);
+  	translate(100,100);
+	rect(0, 0, 100, 100);
 }

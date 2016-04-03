@@ -6,6 +6,14 @@ function colorMode() {
   log("colorMode is not supported… YET")
 }
 
+function push() {
+  log("colorMode is not supported… YET")
+}
+
+function pop() {
+  log("colorMode is not supported… YET")
+}
+
 function frameCount() {
   log("frameCount() is not supported. It doesn’t make sense in Sketch")
 }
