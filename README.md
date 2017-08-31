@@ -1,4 +1,4 @@
-# P5Sketch (on hiatus, waiting to have time to update the API)
+# P5Sketch
 #####Version: 0.0.1
 
 ![p5Sketch](http://i.imgur.com/DzCuF8S.jpg "There’s an undocumented thing in this screenshot!")

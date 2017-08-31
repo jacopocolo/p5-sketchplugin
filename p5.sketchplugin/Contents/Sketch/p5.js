@@ -15,7 +15,18 @@ function exposeContext(context) {
 var artboard; //p5Canvas
 
 //values of drawingStyle are: size [0], font [1], fillColor [2], hasFill [3], strokeColor [3], hasStroke [4], strokeThikness [5], strokeEnding [6]
-var drawingStyle = [[14, "Helvetica", MSColor.colorWithSVGString("#D8D8D8"), true, MSColor.colorWithSVGString("#979797"), true, 1, 0]]
+var drawingStyle = [[14, "Helvetica", MSImmutableColor.colorWithSVGString("#D8D8D8"), true, MSImmutableColor.colorWithSVGString("#979797"), true, 1, 0]]
+
+// var drawingStyle = {
+//   size:'14',
+//   font:'Helvetica',
+//   fillColor:'MSImmutableColor.colorWithSVGString("#D8D8D8")',
+//   hasFill:true,
+//   strokeColor:'MSImmutableColor.colorWithSVGString("#979797")',
+//   hasStroke:true,
+//   strokeThikness:1,
+//   strokeEnding:0
+// }
 
 var padding = 50; //distance from p5canvas to the first artboard
 var width = 600 //default
@@ -118,7 +129,7 @@ function point(x, y) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Point");
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
   border.color = drawingStyle[drawingStyle.length-1][4];
@@ -149,7 +160,7 @@ function line(x1, y1, x2, y2) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
   border.color = drawingStyle[drawingStyle.length-1][4];
@@ -208,12 +219,12 @@ function endShape(mode) {
   shape.setName("Shape");
 
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-      var fill = shape.style().fills().addNewStylePart();
+      var fill = shape.style().addStylePartOfType(0);
       fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   }
@@ -245,12 +256,12 @@ function rect(x, y, w, h) {
   shape.setName("Rectangle");
 
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-    var fill = shape.style().fills().addNewStylePart();
+    var fill = shape.style().addStylePartOfType(0);
     fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   }
@@ -287,12 +298,12 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   shape.setName("Rectangle");
 
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = shape.style().fills().addNewStylePart();
+  var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   }
@@ -324,14 +335,14 @@ function triangle(x1, y1, x2, y2, x3, y3) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = shape.style().fills().addNewStylePart();
+  var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   shape.setName("triangle");
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   }
@@ -357,12 +368,12 @@ function ellipse(a, b, c, d) {
   var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
   shapeGroup.setName("Oval");
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = shapeGroup.style().fills().addNewStylePart();
+  var fill = shapeGroup.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shapeGroup.style().borders().addNewStylePart();
+  var border = shapeGroup.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   }
@@ -399,14 +410,14 @@ function arc(a,b,c,d,start,stop) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
 
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = shape.style().fills().addNewStylePart();
+  var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
   shape.setName("Arc");
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   var borderOptions = shape.style().borderOptions();
@@ -415,7 +426,7 @@ function arc(a,b,c,d,start,stop) {
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = mask.style().fills().addNewStylePart();
+  var fill = mask.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
   mask.setName("Arc");
@@ -428,11 +439,11 @@ function arc(a,b,c,d,start,stop) {
   mask.select_byExpandingSelection(true, true)
   shape.select_byExpandingSelection(true, true)
 
-  var intersectAction = doc.actionsController().actionWithName("MSIntersectAction");
+  var intersectAction = doc.actionsController().actionForID("MSIntersectAction");
   if (intersectAction.validate()) {
       intersectAction.booleanIntersect(nil)
   }
-  doc.currentPage().deselectAllLayers()
+  doc.currentPage().changeSelectionBySelectingLayers(nil);
 }
 
 // A text block with str as content, placred in (x, y) and with optional values
@@ -491,7 +502,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   shape.setName("Bezier");
 
   if (drawingStyle[drawingStyle.length-1][5] == true) {
-  var border = shape.style().borders().addNewStylePart();
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingStyle[drawingStyle.length-1][4];
   border.thickness = drawingStyle[drawingStyle.length-1][6];
   var borderOptions = shape.style().borderOptions();
@@ -499,7 +510,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   }
 
   if (drawingStyle[drawingStyle.length-1][3] == true) {
-  var fill = shape.style().fills().addNewStylePart();
+  var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingStyle[drawingStyle.length-1][2];
   }
 
@@ -528,7 +539,7 @@ function fill(r, g, b, a) {
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
-            drawingStyle[drawingStyle.length-1][2] = MSColor.colorWithSVGString(r); //it’s an hex color
+            drawingStyle[drawingStyle.length-1][2] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
             return
         } else {
         r = r/255;
@@ -557,7 +568,7 @@ function fill(r, g, b, a) {
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
-              drawingStyle[drawingStyle.length-1][4] = MSColor.colorWithSVGString(r); //it’s an hex color
+              drawingStyle[drawingStyle.length-1][4] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
               return
           } else {
           r = r/255;
@@ -611,12 +622,12 @@ function noFill() {
 
 function background(r, g, b, a) {
   artboard.setHasBackgroundColor(true);
-  var backgroundColor = MSColor.colorWithSVGString("#ffffff");
+  var backgroundColor = MSImmutableColor.colorWithSVGString("#ffffff");
 
   if (a == undefined) {
     if (g == undefined && b == undefined) {
       if (r[0] == "#") {
-          backgroundColor = MSColor.colorWithSVGString(r); //it’s an hex color
+          backgroundColor = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
       } else {
       r = r/255;
       backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
