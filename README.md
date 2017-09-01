@@ -1,5 +1,5 @@
 # P5Sketch
-##### Version: 0.0.1
+##### Version: 0.0.2
 
 ![p5Sketch](http://i.imgur.com/DzCuF8S.jpg "There’s an undocumented thing in this screenshot!")
 
@@ -141,8 +141,9 @@ You can call it like this:
 ```javascript
 arc(250,250,500,100,0,PI)
 ```
-and it will draw an arc centred in 250,250, with a width of 500 and an height of 100. The arc starts at 0 and stops at PI, going clockwise. The plugin will generate a shape with two intersecting shapes for every arc you draw.
+and it will draw an arc centred in 250,250, with a width of 500 and an height of 100. The arc starts at 0 and stops at PI, going clockwise.
 
+NOTE: P5 has another argument for arc: OPEN, CHORD, PIE. Currently all arcs render as PIE.
 
 #### text(str, x, y, x2, y2)
 
@@ -261,8 +262,6 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
 - Text stroke should render as border
-
-- Arc could support: OPEN, CHORD, PIE. Now it's only PIE
 
 - ~~Set a default background color when background color is not set and artboard is already created~~
 

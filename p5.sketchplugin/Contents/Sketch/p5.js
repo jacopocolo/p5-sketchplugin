@@ -487,7 +487,7 @@ function text(str, x, y, x2, y2) {
     resizeLayerToFitText(textLayer);
   } else {
     //this doesn't work
-    //textLayer.fixedWidth(true);
+    textLayer.setTextBehaviour(1);
     textLayer.frame().setWidth(x2);
     textLayer.frame().setHeight(y2);
   }
