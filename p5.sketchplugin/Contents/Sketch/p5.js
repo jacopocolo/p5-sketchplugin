@@ -586,11 +586,11 @@ function fill(r, g, b, a) {
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
-              drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+              drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
               return
           } else {
           r = r/255;
-          drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
           return
           }
         }
@@ -598,7 +598,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
         return
         }
       }
@@ -606,7 +606,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
     };

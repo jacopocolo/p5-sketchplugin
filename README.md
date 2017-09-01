@@ -1,5 +1,5 @@
 # P5Sketch
-#####Version: 0.0.1
+##### Version: 0.0.1
 
 ![p5Sketch](http://i.imgur.com/DzCuF8S.jpg "There’s an undocumented thing in this screenshot!")
 
@@ -259,6 +259,10 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 ## Messy to-do list
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
+
+- Text stroke should render as border
+
+- Arc could support: OPEN, CHORD, PIE. Now it's only PIE
 
 - ~~Set a default background color when background color is not set and artboard is already created~~
 
