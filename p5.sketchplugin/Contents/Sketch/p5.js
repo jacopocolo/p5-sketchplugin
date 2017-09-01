@@ -15,30 +15,43 @@ function exposeContext(context) {
 var artboard; //p5Canvas
 
 //values of drawingStyle are: size [0], font [1], fillColor [2], hasFill [3], strokeColor [3], hasStroke [4], strokeThikness [5], strokeEnding [6]
-var drawingStyle = [[14, "Helvetica", MSImmutableColor.colorWithSVGString("#D8D8D8"), true, MSImmutableColor.colorWithSVGString("#979797"), true, 1, 0]]
+//var drawingStyle = [[14, "Helvetica", MSImmutableColor.colorWithSVGString("#D8D8D8"), true, MSImmutableColor.colorWithSVGString("#979797"), true, 1, 0]]
+// function returnLatest(array) {
+//   return array[array.length-1];
+// };
 
-// var drawingStyle = {
-//   size:'14',
-//   font:'Helvetica',
-//   fillColor:'MSImmutableColor.colorWithSVGString("#D8D8D8")',
-//   hasFill:true,
-//   strokeColor:'MSImmutableColor.colorWithSVGString("#979797")',
-//   hasStroke:true,
-//   strokeThikness:1,
-//   strokeEnding:0
-// }
+var drawingStyle = {
+  //translate: ,
+  //rotate: ,
+  sizes: ['14'],
+  size: function() {return this.sizes[this.sizes.length-1]},
+  fonts: ['Helvetica'],
+  font: function() {return this.fonts[this.fonts.length-1]},
+  fillColors: [MSImmutableColor.colorWithSVGString("#D8D8D8")],
+  fillColor: function() {return this.fillColors[this.fillColors.length-1]},
+  hasFills: [true],
+  hasFill: function() {return this.hasFills[this.hasFills.length-1]},
+  strokeColors: [MSImmutableColor.colorWithSVGString("#979797")],
+  strokeColor: function() {return this.strokeColors[this.strokeColors.length-1]},
+  hasStrokes: [true],
+  hasStroke: function() {return this.hasStrokes[this.hasStrokes.length-1];},
+  strokeThiknesses: [1],
+  strokeThikness: function() {return this.strokeThiknesses[this.strokeThiknesses.length-1]},
+  strokeEndings: [0],
+  strokeEnding: function() {return this.strokeEndings[this.strokeEndings.length-1]}
+};
 
 var padding = 50; //distance from p5canvas to the first artboard
 var width = 600 //default
 var height = 800 //default
-var size = drawingStyle[drawingStyle.length-1][0];
-var font = drawingStyle[drawingStyle.length-1][1];
-var fillColor = drawingStyle[drawingStyle.length-1][2];
-var hasFill = drawingStyle[drawingStyle.length-1][3];
-var strokeColor = drawingStyle[drawingStyle.length-1][4];
-var hasStroke = drawingStyle[drawingStyle.length-1][5];
-var strokeThikness = drawingStyle[drawingStyle.length-1][6];
-var strokeEnding = drawingStyle[drawingStyle.length-1][7];
+var size = drawingStyle.size();
+var font = drawingStyle.font();
+var fillColor = drawingStyle.fillColor();
+var hasFill = drawingStyle.hasFill();
+var strokeColor = drawingStyle.strokeColor();
+var hasStroke = drawingStyle.hasStroke();
+var strokeThikness = drawingStyle.strokeThikness();
+var strokeEnding = drawingStyle.strokeEnding();
 var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
@@ -129,11 +142,11 @@ function point(x, y) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Point");
-  var border = shape.style().addStylePartOfType(1);
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  if (drawingStyle.hasStroke() == true) {
+  var border = shape.style().addStylePartOfType(1);
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
@@ -160,11 +173,11 @@ function line(x1, y1, x2, y2) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
-  var border = shape.style().addStylePartOfType(1);
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  if (drawingStyle.hasStroke() == true) {
+  var border = shape.style().addStylePartOfType(1);
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
@@ -218,15 +231,15 @@ function endShape(mode) {
   var shape = MSShapeGroup.shapeWithBezierPath(newShape);
   shape.setName("Shape");
 
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
       var fill = shape.style().addStylePartOfType(0);
-      fill.color = drawingStyle[drawingStyle.length-1][2];
+      fill.color = drawingStyle.fillColor();
   }
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -255,15 +268,15 @@ function rect(x, y, w, h) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
 
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
     var fill = shape.style().addStylePartOfType(0);
-    fill.color = drawingStyle[drawingStyle.length-1][2];
+    fill.color = drawingStyle.fillColor();
   }
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -297,15 +310,15 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
 
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -334,17 +347,17 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
 
   shape.setName("triangle");
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -367,15 +380,15 @@ function ellipse(a, b, c, d) {
 
   var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
   shapeGroup.setName("Oval");
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = shapeGroup.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shapeGroup.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   }
 
   shapeGroup.setRotation(rotationValue);
@@ -409,25 +422,25 @@ function arc(a,b,c,d,start,stop) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
 
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
 
   shape.setName("Arc");
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = mask.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
   mask.setName("Arc");
 
@@ -457,12 +470,13 @@ function text(str, x, y, x2, y2) {
     x2 = x2+deltaX
     y2 = y2+deltaY
   }
-  var textLayer = artboard.addLayerOfType("text");
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
-  textLayer.textColor = drawingStyle[drawingStyle.length-1][2];
+  //var textLayer = artboard.addLayerOfType("text");
+  var textLayer = MSTextLayer.alloc().initWithFrame_(NSMakeRect(0, 0, 100, 100));
+  if (drawingStyle.hasFill() == true) {
+  textLayer.textColor = drawingStyle.fillColor();
   }
-  textLayer.fontSize = drawingStyle[drawingStyle.length-1][0];
-  textLayer.setFontPostscriptName(drawingStyle[drawingStyle.length-1][1].toString());
+  textLayer.fontSize = drawingStyle.size();
+  textLayer.setFontPostscriptName(drawingStyle.font().toString());
   textLayer.setName(str);
   textLayer.setNameIsFixed(true);
   textLayer.setStringValue(str);
@@ -472,13 +486,16 @@ function text(str, x, y, x2, y2) {
   if (x2 == undefined || y2 == undefined || x2 == null || y2 == null) {
     resizeLayerToFitText(textLayer);
   } else {
+    //this doesn't work
+    //textLayer.fixedWidth(true);
     textLayer.frame().setWidth(x2);
     textLayer.frame().setHeight(y2);
   }
 
   textLayer.setRotation(rotationValue);
 
-  return textLayer;
+  //return textLayer;
+  artboard.addLayers_([textLayer]);
 };
 
 function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
@@ -501,17 +518,17 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Bezier");
 
-  if (drawingStyle[drawingStyle.length-1][5] == true) {
+  if (drawingStyle.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle[drawingStyle.length-1][4];
-  border.thickness = drawingStyle[drawingStyle.length-1][6];
+  border.color = drawingStyle.strokeColor();
+  border.thickness = drawingStyle.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
 
-  if (drawingStyle[drawingStyle.length-1][3] == true) {
+  if (drawingStyle.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle[drawingStyle.length-1][2];
+  fill.color = drawingStyle.fillColor();
   }
 
   shape.setRotation(rotationValue);
@@ -521,29 +538,30 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 
 /*----------------
 SET FUNCTIONS
+In set functions we overwrite the latest item in the drawingStyle arrays
 ----------------*/
 
 function textSize(fontSize) {
-  drawingStyle[drawingStyle.length-1][0] = fontSize;
+  drawingStyle.sizes[drawingStyle.sizes.length-1] = fontSize;
 };
 
 function textFont(textFont) {
-  drawingStyle[drawingStyle.length-1][1] = textFont;
+  drawingStyle.fonts[drawingStyle.fonts.length-1] = textFont;
 };
 
 // function fill(color) {
-//   drawingStyle[drawingStyle.length-1][3] = color;
+//   drawingStyle.hasFill = color;
 // };
 
 function fill(r, g, b, a) {
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
-            drawingStyle[drawingStyle.length-1][2] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+            drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
             return
         } else {
         r = r/255;
-        drawingStyle[drawingStyle.length-1][2] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+        drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
         return
         }
       }
@@ -551,7 +569,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingStyle[drawingStyle.length-1][2] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+      drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
       return
       }
     }
@@ -559,7 +577,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingStyle[drawingStyle.length-1][2] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+      drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
       return
     }
   };
@@ -568,11 +586,11 @@ function fill(r, g, b, a) {
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
-              drawingStyle[drawingStyle.length-1][4] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+              drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
               return
           } else {
           r = r/255;
-          drawingStyle[drawingStyle.length-1][4] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
           return
           }
         }
@@ -580,7 +598,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle[drawingStyle.length-1][4] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
         return
         }
       }
@@ -588,13 +606,13 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle[drawingStyle.length-1][4] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        drawingStyle.strokeColors[drawingStyle.strokeColor.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
     };
 
 function strokeWeight(weight) {
-  drawingStyle[drawingStyle.length-1][6] = weight;
+  drawingStyle.strokeThiknesses[drawingStyle.strokeThiknesses-1] = weight;
 };
 
 //Caps and joins values. Only valid in uppercase
@@ -605,7 +623,7 @@ var PROJECT = 2;
 var BEVEL = 2;
 
 function strokeCap(cap) {
-  drawingStyle[drawingStyle.length-1][7] = cap;
+  drawingStyle.strokeEndings[drawingStyle.strokeEndings-1] = cap;
 };
 
 function strokeJoint(join) {
@@ -613,11 +631,11 @@ function strokeJoint(join) {
 };
 
 function noStroke() {
-  drawingStyle[drawingStyle.length-1][5] = false;
+  drawingStyle.hasStrokes[drawingStyle.hasStrokes.length-1] = false;
 };
 
 function noFill() {
-  drawingStyle[drawingStyle.length-1][3] = false;
+  drawingStyle.hasFills[drawingStyle.hasFills.length-1] = false;
 };
 
 function background(r, g, b, a) {
@@ -664,17 +682,18 @@ function translate(x, y) {
 /*----------------
 PUSH AND POP FUNCTIONS
 ----------------*/
-
-function push() {
-  drawingStyle.push([]);
-    for (x=0;x<drawingStyle[drawingStyle.length-2].length;x++) {
-      drawingStyle[drawingStyle.length-1].push(drawingStyle[drawingStyle.length-2][x])
-    }
-}
-
-function pop() {
-  drawingStyle.pop()
-}
+//Push sould go through all the arrays in drawingStyle and duplicating them
+// function push() {
+//   drawingStyle.push([]);
+//     for (x=0;x<drawingStyle[drawingStyle.length-2].length;x++) {
+//       drawingStyle[drawingStyle.length-1].push(drawingStyle[drawingStyle.length-2][x])
+//     }
+// }
+//
+//Pop should go through all the arrays in drawingStyle and deliting the latest, except if it's the last one in the array
+// function pop() {
+//   drawingStyle.pop()
+// }
 
 /*----------------
 RANDOM FUNCTIONS
