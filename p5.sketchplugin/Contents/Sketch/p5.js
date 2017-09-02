@@ -21,8 +21,12 @@ var artboard; //p5Canvas
 // };
 
 var drawingStyle = {
-  //translate: ,
-  //rotate: ,
+  //hasTraslates: [null],
+  //hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
+  //translates: [[0,0]],
+  //translate: function() {return this.translates[this.translates.length-1]},
+  // rotations: [0],
+  // rotate: function() {return this.rotations[this.rotations.length-1]},
   sizes: ['14'],
   size: function() {return this.sizes[this.sizes.length-1]},
   fonts: ['Helvetica'],

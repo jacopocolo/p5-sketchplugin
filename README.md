@@ -263,6 +263,20 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Text stroke should render as border
 
+- Test all the calc functions
+
+- Implement blendMode()
+
+- Add translate() and rotate() in push and pop
+
+- Implement border radius for rect()
+
+- Implement RGBA in fill() and stroke()
+
+- Fix RGB in fill, stroke and background
+
+- Specify that rotate — in absence of an API — acts on the center of the shape.
+
 - ~~Set a default background color when background color is not set and artboard is already created~~
 
 - ~~Code “read just from file”~~
@@ -275,13 +289,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - ~~Implement [all the calculation functions](http://p5js.org/reference/#group-Math)~~
 
-- Test all the calc functions
-
-- Implement blendMode()
-
 - ~~Implement push() and pop()~~
-
-- Add translate() and rotate() in push and pop
 
 - ~~Implement translate()~~
 
@@ -302,7 +310,5 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 - ~~Implement rgba for both fill() and stroke()~~
 
 - ~~Implement rotate()~~
-
-- Implement border radius for rect()
 
 - ~~Implement strokeCap()~~
