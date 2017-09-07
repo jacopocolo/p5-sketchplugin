@@ -1,3 +1,4 @@
+@import "MochaJSDelegate.js";
 @import 'utils.js'
 @import 'notsupported.js'
 
@@ -14,13 +15,13 @@ function exposeContext(context) {
 
 var artboard; //p5Canvas
 
-//values of drawingStyle are: size [0], font [1], fillColor [2], hasFill [3], strokeColor [3], hasStroke [4], strokeThikness [5], strokeEnding [6]
-//var drawingStyle = [[14, "Helvetica", MSImmutableColor.colorWithSVGString("#D8D8D8"), true, MSImmutableColor.colorWithSVGString("#979797"), true, 1, 0]]
+//values of drawingContext are: size [0], font [1], fillColor [2], hasFill [3], strokeColor [3], hasStroke [4], strokeThikness [5], strokeEnding [6]
+//var drawingContext = [[14, "Helvetica", MSImmutableColor.colorWithSVGString("#D8D8D8"), true, MSImmutableColor.colorWithSVGString("#979797"), true, 1, 0]]
 // function returnLatest(array) {
 //   return array[array.length-1];
 // };
 
-var drawingStyle = {
+var drawingContext = {
   //hasTraslates: [null],
   //hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
   //translates: [[0,0]],
@@ -42,20 +43,30 @@ var drawingStyle = {
   strokeThiknesses: [1],
   strokeThikness: function() {return this.strokeThiknesses[this.strokeThiknesses.length-1]},
   strokeEndings: [0],
-  strokeEnding: function() {return this.strokeEndings[this.strokeEndings.length-1]}
+  strokeEnding: function() {return this.strokeEndings[this.strokeEndings.length-1]},
+  reset: function () {
+    this.sizes = ['14'];
+    this.fonts = ['Helvetica'];
+    this.fillColors = [MSImmutableColor.colorWithSVGString("#D8D8D8")];
+    this.hasFills = [true];
+    this.strokeColors = [MSImmutableColor.colorWithSVGString("#979797")];
+    this.hasStrokes = [true];
+    this.strokeThiknesses = [1];
+    this.strokeEndings = [0];
+  }
 };
 
 var padding = 50; //distance from p5canvas to the first artboard
 var width = 600 //default
 var height = 800 //default
-var size = drawingStyle.size();
-var font = drawingStyle.font();
-var fillColor = drawingStyle.fillColor();
-var hasFill = drawingStyle.hasFill();
-var strokeColor = drawingStyle.strokeColor();
-var hasStroke = drawingStyle.hasStroke();
-var strokeThikness = drawingStyle.strokeThikness();
-var strokeEnding = drawingStyle.strokeEnding();
+var size = drawingContext.size();
+var font = drawingContext.font();
+var fillColor = drawingContext.fillColor();
+var hasFill = drawingContext.hasFill();
+var strokeColor = drawingContext.strokeColor();
+var hasStroke = drawingContext.hasStroke();
+var strokeThikness = drawingContext.strokeThikness();
+var strokeEnding = drawingContext.strokeEnding();
 var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
@@ -147,10 +158,10 @@ function point(x, y) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Point");
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
@@ -178,10 +189,10 @@ function line(x1, y1, x2, y2) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
@@ -235,15 +246,15 @@ function endShape(mode) {
   var shape = MSShapeGroup.shapeWithBezierPath(newShape);
   shape.setName("Shape");
 
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
       var fill = shape.style().addStylePartOfType(0);
-      fill.color = drawingStyle.fillColor();
+      fill.color = drawingContext.fillColor();
   }
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -272,15 +283,15 @@ function rect(x, y, w, h) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
 
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
     var fill = shape.style().addStylePartOfType(0);
-    fill.color = drawingStyle.fillColor();
+    fill.color = drawingContext.fillColor();
   }
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -314,15 +325,15 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
 
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -351,17 +362,17 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
 
   shape.setName("triangle");
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   }
 
   shape.setRotation(rotationValue);
@@ -384,15 +395,15 @@ function ellipse(a, b, c, d) {
 
   var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
   shapeGroup.setName("Oval");
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = shapeGroup.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shapeGroup.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   }
 
   shapeGroup.setRotation(rotationValue);
@@ -426,25 +437,25 @@ function arc(a,b,c,d,start,stop) {
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
 
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
 
   shape.setName("Arc");
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = mask.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
   mask.setName("Arc");
 
@@ -476,11 +487,11 @@ function text(str, x, y, x2, y2) {
   }
   //var textLayer = artboard.addLayerOfType("text");
   var textLayer = MSTextLayer.alloc().initWithFrame_(NSMakeRect(0, 0, 100, 100));
-  if (drawingStyle.hasFill() == true) {
-  textLayer.textColor = drawingStyle.fillColor();
+  if (drawingContext.hasFill() == true) {
+  textLayer.textColor = drawingContext.fillColor();
   }
-  textLayer.fontSize = drawingStyle.size();
-  textLayer.setFontPostscriptName(drawingStyle.font().toString());
+  textLayer.fontSize = drawingContext.size();
+  textLayer.setFontPostscriptName(drawingContext.font().toString());
   textLayer.setName(str);
   textLayer.setNameIsFixed(true);
   textLayer.setStringValue(str);
@@ -522,17 +533,17 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Bezier");
 
-  if (drawingStyle.hasStroke() == true) {
+  if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
-  border.color = drawingStyle.strokeColor();
-  border.thickness = drawingStyle.strokeThikness();
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = strokeEnding;
   }
 
-  if (drawingStyle.hasFill() == true) {
+  if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
-  fill.color = drawingStyle.fillColor();
+  fill.color = drawingContext.fillColor();
   }
 
   shape.setRotation(rotationValue);
@@ -542,30 +553,30 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 
 /*----------------
 SET FUNCTIONS
-In set functions we overwrite the latest item in the drawingStyle arrays
+In set functions we overwrite the latest item in the drawingContext arrays
 ----------------*/
 
 function textSize(fontSize) {
-  drawingStyle.sizes[drawingStyle.sizes.length-1] = fontSize;
+  drawingContext.sizes[drawingContext.sizes.length-1] = fontSize;
 };
 
 function textFont(textFont) {
-  drawingStyle.fonts[drawingStyle.fonts.length-1] = textFont;
+  drawingContext.fonts[drawingContext.fonts.length-1] = textFont;
 };
 
 // function fill(color) {
-//   drawingStyle.hasFill = color;
+//   drawingContext.hasFill = color;
 // };
 
 function fill(r, g, b, a) {
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
-            drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+            drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
             return
         } else {
         r = r/255;
-        drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+        drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
         return
         }
       }
@@ -573,7 +584,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
       return
       }
     }
@@ -581,7 +592,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingStyle.fillColors[drawingStyle.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
       return
     }
   };
@@ -590,11 +601,11 @@ function fill(r, g, b, a) {
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
-              drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+              drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
               return
           } else {
           r = r/255;
-          drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
           return
           }
         }
@@ -602,7 +613,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
         return
         }
       }
@@ -610,13 +621,13 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingStyle.strokeColors[drawingStyle.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
     };
 
 function strokeWeight(weight) {
-  drawingStyle.strokeThiknesses[drawingStyle.strokeThiknesses-1] = weight;
+  drawingContext.strokeThiknesses[drawingContext.strokeThiknesses-1] = weight;
 };
 
 //Caps and joins values. Only valid in uppercase
@@ -627,7 +638,7 @@ var PROJECT = 2;
 var BEVEL = 2;
 
 function strokeCap(cap) {
-  drawingStyle.strokeEndings[drawingStyle.strokeEndings-1] = cap;
+  drawingContext.strokeEndings[drawingContext.strokeEndings-1] = cap;
 };
 
 function strokeJoint(join) {
@@ -635,11 +646,11 @@ function strokeJoint(join) {
 };
 
 function noStroke() {
-  drawingStyle.hasStrokes[drawingStyle.hasStrokes.length-1] = false;
+  drawingContext.hasStrokes[drawingContext.hasStrokes.length-1] = false;
 };
 
 function noFill() {
-  drawingStyle.hasFills[drawingStyle.hasFills.length-1] = false;
+  drawingContext.hasFills[drawingContext.hasFills.length-1] = false;
 };
 
 function background(r, g, b, a) {
@@ -686,17 +697,17 @@ function translate(x, y) {
 /*----------------
 PUSH AND POP FUNCTIONS
 ----------------*/
-//Push sould go through all the arrays in drawingStyle and duplicating them
+//Push sould go through all the arrays in drawingContext and duplicating them
 // function push() {
-//   drawingStyle.push([]);
-//     for (x=0;x<drawingStyle[drawingStyle.length-2].length;x++) {
-//       drawingStyle[drawingStyle.length-1].push(drawingStyle[drawingStyle.length-2][x])
+//   drawingContext.push([]);
+//     for (x=0;x<drawingContext[drawingContext.length-2].length;x++) {
+//       drawingContext[drawingContext.length-1].push(drawingContext[drawingContext.length-2][x])
 //     }
 // }
 //
-//Pop should go through all the arrays in drawingStyle and deliting the latest, except if it's the last one in the array
+//Pop should go through all the arrays in drawingContext and deliting the latest, except if it's the last one in the array
 // function pop() {
-//   drawingStyle.pop()
+//   drawingContext.pop()
 // }
 
 /*----------------
@@ -992,70 +1003,106 @@ RUNNING FUNCTIONS
 
 function onRun(context) {
   exposeContext(context);
-	var defaults = [NSUserDefaults standardUserDefaults], default_values = [NSMutableDictionary dictionary];
+
+  var userDefaults = NSUserDefaults.standardUserDefaults();
 
 	// create a window
-	var window = [[NSWindow alloc] init]
-	var windowTitle = "P5Sketch"
-	[window setTitle:windowTitle]
-	[window setFrame:NSMakeRect(0, 0, 500, 420) display:false]
+  var title = "p5xSketchapp";
+  var identifier = "com.jacopocolo.p5xsketchapp";
+  var threadDictionary = NSThread.mainThread().threadDictionary();
 
-  var filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Resources/editor.html";
+  if (threadDictionary[identifier]) {
+        return;
+  }
 
-  var frame = NSMakeRect(0,60,500,340);
-  var url = [NSURL fileURLWithPath:filePath];
-  var webView = [[WebView alloc] initWithFrame:frame]
-  [[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]]]
-  //var mask = NSTitledWindowMask + NSClosableWindowMask + NSMiniaturizableWindowMask + NSResizableWindowMask + NSUtilityWindowMask;
-  [[window contentView] addSubview:webView]
-  [window center]
+  var windowWidth = 600,
+        windowHeight = 450;
+    var p5Window = NSPanel.alloc().init();
+    p5Window.setFrame_display(NSMakeRect(0, 0, windowWidth, windowHeight), true);
+    p5Window.setStyleMask(NSTexturedBackgroundWindowMask | NSTitledWindowMask | NSClosableWindowMask);
+    p5Window.setBackgroundColor(NSColor.whiteColor());
+    p5Window.standardWindowButton(NSWindowMiniaturizeButton).setHidden(true);
+    p5Window.standardWindowButton(NSWindowZoomButton).setHidden(true);
+    p5Window.setTitle(title);
+    p5Window.setTitlebarAppearsTransparent(true);
+    p5Window.becomeKeyWindow();
+    p5Window.setLevel(NSFloatingWindowLevel);
+    threadDictionary[identifier] = p5Window;
+    COScript.currentCOScript().setShouldKeepAround_(true);
 
-	// create OK button
-	var okButton = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)]
-	var userClickedOK = false
-	[okButton setTitle:"  Run  "]
-	[okButton setBezelStyle:NSRoundedBezelStyle]
-	[okButton sizeToFit]
-	[okButton setFrame:NSMakeRect([window frame].size.width - [okButton frame].size.width - 20, 14, [okButton frame].size.width, [okButton frame].size.height)]
-	[okButton setKeyEquivalent:"\r"] // return key
-	[okButton setCOSJSTargetFunction:function(sender) {
-		userClickedOK = true
-		[window orderOut:nil]
-		[NSApp stopModal]
-	}];
+    // Add Web View to window
+      var webView = WebView.alloc().initWithFrame(NSMakeRect(0, 0, windowWidth, windowHeight - 24));
+      var windowObject = webView.windowScriptObject();
+      var delegate = new MochaJSDelegate({
 
-	[[window contentView] addSubview:okButton]
+          "webView:didFinishLoadForFrame:" : (function(webView, webFrame) {
 
-	// create cancel button
-	var cancelButton = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)]
-	var userClickedCancel = false
-	[cancelButton setTitle:"  Cancel  "]
-	[cancelButton setBezelStyle:NSRoundedBezelStyle]
-	[cancelButton sizeToFit]
-	[cancelButton setFrame:NSMakeRect([okButton frame].origin.x - [cancelButton frame].size.width, 14, [cancelButton frame].size.width, [cancelButton frame].size.height)]
-	[cancelButton setKeyEquivalent:@"\033"] // escape key
-	[cancelButton setCOSJSTargetFunction:function(sender) {
-		userClickedCancel = true
-		[window orderOut:nil]
-		[NSApp stopModal]
-	}]
+              windowObject.evaluateWebScript(initCode);
 
-	[[window contentView] addSubview:cancelButton]
+              userDefaults.setObject_forKey(initCode, swatchDefaultKey);
+              userDefaults.synchronize();
 
-	// get the user input
-	[NSApp runModalForWindow:window]
+          }),
 
-	if (!userClickedCancel) {
-    var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
-    saveCode(code);
-    //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
-    eval(code+'; setup(); draw();');
-	}
+          "webView:didChangeLocationWithinPageForFrame:" : (function(webView, webFrame) {
 
-	// let the GC gather these guys (and the targets!)
-	okButton = nil;
-	cancelButton = nil;
-	window = nil;
+              var locationHash = windowObject.evaluateWebScript("window.location.hash");
+              var title = windowObject.evaluateWebScript("document.getElementById('title').innerHTML");
+              var colorName = windowObject.evaluateWebScript("document.getElementById('colorName').innerHTML");
+
+              if (locationHash) {
+                  //We force an update to update what we are selecting
+                  var selection = updateContext().selection;
+                  //We apply the setting
+                  var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
+                  saveCode(code);
+                  //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
+                  eval(code+'; setup(); draw();');
+                  drawingContext.reset();
+                  log("done")
+              }
+
+          })
+      });
+
+      webView.setFrameLoadDelegate_(delegate.getClassInstance());
+      webView.setMainFrameURL_(context.plugin.urlForResourceNamed("editor.html").path());
+
+      p5Window.contentView().addSubview(webView);
+      p5Window.center();
+      p5Window.makeKeyAndOrderFront(nil);
+
+      // Close Window
+      var closeButton = p5Window.standardWindowButton(NSWindowCloseButton);
+      closeButton.setCOSJSTargetFunction(function(sender) {
+          COScript.currentCOScript().setShouldKeepAround(false);
+          threadDictionary.removeObjectForKey(identifier);
+          p5Window.close();
+      });
+      closeButton.setAction("callAction:");
+  };
+
+  function getTitleFromHandler(handler) {
+      for (var i = 0; i < swatches.length; i++) {
+          if (swatches[i].handler == handler) {
+              return swatches[i].title;
+          }
+      }
+  }
+
+  function updateContext() {
+      var doc = NSDocumentController.sharedDocumentController().currentDocument();
+
+      if (MSApplicationMetadata.metadata().appVersion > 41.2) {
+          var selection = doc.selectedLayers().layers();
+      } else {
+          var selection = doc.selectedLayers();
+      }
+
+      return {
+          document: doc,
+          selection: selection
+      }
 };
 
 var runAgain = function(context) {

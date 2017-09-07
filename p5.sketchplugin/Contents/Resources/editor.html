@@ -18,13 +18,21 @@
 		}
 
 		body {
-			border: 1px solid #BEBEBE;
+			border: none;
 			box-sizing: border-box;
+		}
+
+		button {
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+			border: none;
 		}
 
 		.CodeMirror {
 			height: 90%;
 			width: 100%;
+			border-top: 1px solid #ddd;
 		}
 
 		.header {
@@ -33,18 +41,25 @@
 			font-size: 12px;
 			margin-left: 10px;
 		}
+
+		.preset {
+			float: right;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="header">
-		<span>Write some p5.js code or select from preset:</span>
-		<select>
-			<option value="latest">Latest sketch</option>
-			<option value="pieChart">Pie chart</option>
-			<option value="basic">Basic sketch</option>
-			<option value="demo">Demo</option>
-		</select>
+		<button onclick="updateHash()">&#9658;</button>
+		<span class="preset">
+			<span>Select from preset:</span><br>
+			<select>
+				<option value="latest">Latest sketch</option>
+				<option value="pieChart">Pie chart</option>
+				<option value="basic">Basic sketch</option>
+				<option value="demo">Demo</option>
+			</select>
+	</span>
 	</div>
 	<script type="text/javascript">
 		var options = {
@@ -64,6 +79,11 @@
 		var setValue = function(value) {
 			myCodeMirror.setValue(value);
 		};
+
+		//update the window.location hash to tell Sketch that we are ready to Run
+		function updateHash(){
+		  window.location.hash="run"+ new Date().getTime();;
+		}
 
 		/*I tried to code this on the plugin side but without success. So the file is actually loaded in the editor by the webview*/
 		jQuery.get('../Sketch/sketch.js', function(data) {
@@ -93,7 +113,13 @@
 			else if (this.value == "demo") {
 				setValue(demo);
 			}
-	});
+		});
+
+		document.body.addEventListener('keydown', function(e) {
+			if(!(e.keyCode == 13 && e.metaKey)) return;
+			updateHash();
+			return true;
+		});
 	</script>
 </body>
 
