@@ -275,6 +275,8 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Fix RGB in fill, stroke and background
 
+- Implement image() and, potentially, symbol()
+
 - Specify that rotate — in absence of an API — acts on the center of the shape.
 
 - ~~Set a default background color when background color is not set and artboard is already created~~
