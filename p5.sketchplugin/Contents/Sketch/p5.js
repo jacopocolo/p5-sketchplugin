@@ -62,6 +62,8 @@ var drawingContext = {
 };
 
 var padding = 50; //distance from p5canvas to the first artboard
+var width;
+var height;
 var size = drawingContext.size();
 var font = drawingContext.font();
 var fillColor = drawingContext.fillColor();
@@ -89,7 +91,9 @@ var TWO_PI = PI * 2;
 // The idea is to mimic the behaviour of the Processing canvas, where every time you
 // run the code, you create something new.
 function createCanvas(w, h) {
-
+  width = w;
+  height = h;
+  
   var p5canvas = getArtboardWithName("p5canvas");
 
   if (!p5canvas) {
