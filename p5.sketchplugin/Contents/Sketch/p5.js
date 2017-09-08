@@ -22,6 +22,9 @@ var artboard; //p5Canvas
 // };
 
 var drawingContext = {
+  //artboardSize: [[200, 200]],
+  //artboardHasBackgroundColor: [false],
+  //artboardBackgroundColor: [],
   //hasTraslates: [null],
   //hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
   //translates: [[0,0]],
@@ -44,6 +47,8 @@ var drawingContext = {
   strokeThikness: function() {return this.strokeThiknesses[this.strokeThiknesses.length-1]},
   strokeEndings: [0],
   strokeEnding: function() {return this.strokeEndings[this.strokeEndings.length-1]},
+  // seeded: false,
+  // seed: [0],
   reset: function () {
     this.sizes = ['14'];
     this.fonts = ['Helvetica'];
@@ -57,8 +62,6 @@ var drawingContext = {
 };
 
 var padding = 50; //distance from p5canvas to the first artboard
-var width = 600 //default
-var height = 800 //default
 var size = drawingContext.size();
 var font = drawingContext.font();
 var fillColor = drawingContext.fillColor();
@@ -86,12 +89,8 @@ var TWO_PI = PI * 2;
 // The idea is to mimic the behaviour of the Processing canvas, where every time you
 // run the code, you create something new.
 function createCanvas(w, h) {
-  width = w;
-  height = h;
-  //parseCode();
 
   var p5canvas = getArtboardWithName("p5canvas");
-  //var p5code = getArtboardWithName("p5code");
 
   if (!p5canvas) {
     artboard = MSArtboardGroup.new()
@@ -114,11 +113,11 @@ function createCanvas(w, h) {
       firstArtboardFrame = firstArtboard.frame()
       firstArtboardFrameX = firstArtboardFrame.minX()
       firstArtboardFrameY = firstArtboardFrame.minY()
-      frame.x = minX - width - padding
+      frame.x = minX - w - padding
       frame.y = minY
     }
-    frame.setWidth(width)
-    frame.setHeight(height)
+    frame.setWidth(w)
+    frame.setHeight(h)
     artboard.setName("p5canvas")
     artboard.setHasBackgroundColor(false);
     doc.currentPage().addLayers([artboard])
@@ -127,8 +126,8 @@ function createCanvas(w, h) {
     deleteAllLayers("p5canvas");
     artboard = p5canvas;
     frame = artboard.frame()
-    frame.setWidth(width)
-    frame.setHeight(height)
+    frame.setWidth(w)
+    frame.setHeight(h)
     artboard.setHasBackgroundColor(false);
     //setUpP5Code()
   }
@@ -265,8 +264,10 @@ function endShape(mode) {
 
 // A rectangle that starts from x, y and has a height of h and a width of w.
 // The angles are always at 90 degrees. It has both a fill and a stroke color
-// You can call it like this: rect(0,0,100,200)
-function rect(x, y, w, h) {
+// You can call it like this: rect(0,0,100,200).
+//NOTE: rect( is replaced with rectangle( when the code is executed to avoid conflicts with
+//some Sketch native API. It caused a lot of issues
+function rectangle(x, y, w, h) {
   if (hasTraslate) {
     x = x+deltaX
     y = y+deltaY
@@ -284,14 +285,16 @@ function rect(x, y, w, h) {
   shape.setName("Rectangle");
 
   if (drawingContext.hasFill() == true) {
-    var fill = shape.style().addStylePartOfType(0);
-    fill.color = drawingContext.fillColor();
+  var fill = shape.style().addStylePartOfType(0);
+  fill.color = drawingContext.fillColor();
   }
 
   if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
+  var borderOptions = shape.style().borderOptions();
+  borderOptions.lineCapStyle = strokeEnding;
   }
 
   shape.setRotation(rotationValue);
@@ -323,7 +326,7 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   path.closePath();
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
-  shape.setName("Rectangle");
+  shape.setName("Quad");
 
   if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
@@ -1051,15 +1054,20 @@ function onRun(context) {
               var colorName = windowObject.evaluateWebScript("document.getElementById('colorName').innerHTML");
 
               if (locationHash) {
+                  log(locationHash)
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
                   var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
-                  saveCode(code);
+                  //rect() creates some problems with native Sketch API. However…
+                  //We want to allow the users to use it in the code but we swap it way with regex in execution
+                  var code = code.replace('rect(','rectangle(');
+                  //saveCode(code);
+                  log(code);
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
                   drawingContext.reset();
-                  log("done")
+                  log("done");
               }
 
           })

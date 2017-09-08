@@ -90,14 +90,14 @@ function resizeLayerToFitText(layer) {
     [layer select:false byExpandingSelection:false];
 }
 
-function resizeSketchjs(){
-  var sketchjs = getLayerWithName("sketch.js", "p5code");
-    sketchjs.frame().setWidth(450);
-    sketchjs.setTextBehaviour(1);
-    var h = sketchjs.frame().height();
-  var p5code = getArtboardWithName("p5code");
-    var r = p5code.rect();
-    r.size.height = h+100;
-    r.size.width = 500;
-    p5code.setRect(r);
-}
+// function resizeSketchjs(){
+//   var sketchjs = getLayerWithName("sketch.js", "p5code");
+//     sketchjs.frame().setWidth(450);
+//     sketchjs.setTextBehaviour(1);
+//     var h = sketchjs.frame().height();
+//   var p5code = getArtboardWithName("p5code");
+//     var r = p5code.rect();
+//     r.size.height = h+100;
+//     r.size.width = 500;
+//     p5code.setRect(r);
+// }
