@@ -7,11 +7,11 @@ function colorMode() {
 }
 
 function push() {
-  log("colorMode is not supported… YET")
+  log("Not supported… YET")
 }
 
 function pop() {
-  log("colorMode is not supported… YET")
+  log("Not supported… YET")
 }
 
 function frameCount() {

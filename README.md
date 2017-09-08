@@ -265,6 +265,8 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Test all the calc functions
 
+- ~User code should be able to contain rect() but in execution it should be swapped or mapped to rect;~
+
 - Implement blendMode()
 
 - Add translate() and rotate() in push and pop
