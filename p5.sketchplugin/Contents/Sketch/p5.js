@@ -26,10 +26,10 @@ var drawingContext = {
   //artboardSize: [[200, 200]],
   //artboardHasBackgroundColor: [false],
   //artboardBackgroundColor: [],
-  //hasTraslates: [null],
-  //hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
-  //translates: [[0,0]],
-  //translate: function() {return this.translates[this.translates.length-1]},
+  hasTraslates: [null],
+  hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
+  translates: [[0,0]],
+  translate: function() {return this.translates[this.translates.length-1]},
   // rotations: [0],
   // rotate: function() {return this.rotations[this.rotations.length-1]},
   sizes: ['14'],
@@ -76,7 +76,7 @@ var strokeEnding = drawingContext.strokeEnding();
 var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
-var hasTraslate = null;
+var hasTraslate = drawingContext.hasTranslate();
 var deltaX = 0; //default translate
 var deltaY = 0; //default translate
 
@@ -146,9 +146,9 @@ DRAWING FUNCTIONS
 // It does have a fill color, it doesn’t have a stroke color
 // You can call it like this: point(100,100)
 function point(x, y) {
-  if (hasTraslate) {
-    x = x+deltaX
-    y = y+deltaY
+  if (drawingContext.hasTranslate()) {
+    x = x+drawingContext.translate[0]
+    y = y+drawingContext.translate[1]
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -707,9 +707,9 @@ function rotate(rad) {
   }
 
 function translate(x, y) {
-  hasTraslate = true;
-  deltaX += x;
-  deltaY += y;
+  drawingContext.hasTraslates[drawingContext.hasTraslates.length-1] = true;
+  drawingContext.translates[drawingContext.translates.length-1][0] += x;
+  drawingContext.translates[drawingContext.translates.length-1][1] += y;
 }
 
 /*----------------
