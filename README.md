@@ -269,10 +269,6 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Add translate() and rotate() in push and pop
 
-- Implement RGBA in fill() and stroke()
-
-- Fix RGB in fill, stroke and background
-
 - Implement image() and, potentially, symbol()
 
 - Specify that rotate — in absence of an API — acts on the center of the shape.

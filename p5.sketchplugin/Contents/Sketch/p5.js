@@ -600,6 +600,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
+      a = a/255;
       drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
       return
     }
@@ -629,6 +630,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
+        a = a/255;
         drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
@@ -1081,7 +1083,8 @@ function onRun(context) {
                   var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
                   //rect() creates some problems with native Sketch API. However…
                   //We want to allow the users to use it in the code but we swap it way with regex in execution
-                  var code = code.replace('rect(','rectangle(');
+                  var code = code.replace(/\brect\b/g,'rectangle');
+                  log(code);
                   //saveCode(code);
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
