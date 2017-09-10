@@ -259,19 +259,15 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 ## Messy to-do list
 
+### 1.0
+
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
 - Text stroke should render as border
 
-- Test all the calc functions
-
-- ~User code should be able to contain rect() but in execution it should be swapped or mapped to rect;~
-
-- Implement blendMode()
+- Reset artboard with the drawingContext
 
 - Add translate() and rotate() in push and pop
-
-- Implement border radius for rect()
 
 - Implement RGBA in fill() and stroke()
 
@@ -281,38 +277,12 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Specify that rotate — in absence of an API — acts on the center of the shape.
 
-- ~~Set a default background color when background color is not set and artboard is already created~~
+- Test all the calc functions
 
-- ~~Code “read just from file”~~
+### Future releases
 
-- ~~Default should use Sketch default colors: “#D8D8D8” for fill, “#979797” for stroke~~
+- Implement border radius for rect()
 
-- ~~Implement beginShape(), vertex(), bezierVertex(), endShape()~~
+- Implement blendMode()
 
-- ~~Implement cos(), sin() and tan()~~
-
-- ~~Implement [all the calculation functions](http://p5js.org/reference/#group-Math)~~
-
-- ~~Implement push() and pop()~~
-
-- ~~Implement translate()~~
-
-- ~~Limit code layer width~~
-
-- ~~Have p5Code artboard update its size based on code length~~
-
-- ~~Improve p5Code resizing~~
-
-- ~~Implement noise()~~
-
-- ~~Implement noFill()~~
-
-- ~~Implement map()~~
-
-- ~~Make consistent functions for fill() and stroke()~~
-
-- ~~Implement rgba for both fill() and stroke()~~
-
-- ~~Implement rotate()~~
-
-- ~~Implement strokeCap()~~
+- Allow users to create multiple canvas artboards

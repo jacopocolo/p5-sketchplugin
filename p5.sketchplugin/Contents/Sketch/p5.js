@@ -21,6 +21,7 @@ var artboard; //p5Canvas
 //   return array[array.length-1];
 // };
 
+//the drawingContext contains all the information regarding the current style and context of the sketch.
 var drawingContext = {
   //artboardSize: [[200, 200]],
   //artboardHasBackgroundColor: [false],
@@ -35,11 +36,11 @@ var drawingContext = {
   size: function() {return this.sizes[this.sizes.length-1]},
   fonts: ['Helvetica'],
   font: function() {return this.fonts[this.fonts.length-1]},
-  fillColors: [MSImmutableColor.colorWithSVGString("#D8D8D8")],
+  fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF")],
   fillColor: function() {return this.fillColors[this.fillColors.length-1]},
   hasFills: [true],
   hasFill: function() {return this.hasFills[this.hasFills.length-1]},
-  strokeColors: [MSImmutableColor.colorWithSVGString("#979797")],
+  strokeColors: [MSImmutableColor.colorWithSVGString("#000000")],
   strokeColor: function() {return this.strokeColors[this.strokeColors.length-1]},
   hasStrokes: [true],
   hasStroke: function() {return this.hasStrokes[this.hasStrokes.length-1];},
@@ -52,9 +53,9 @@ var drawingContext = {
   reset: function () {
     this.sizes = ['14'];
     this.fonts = ['Helvetica'];
-    this.fillColors = [MSImmutableColor.colorWithSVGString("#D8D8D8")];
+    this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF")];
     this.hasFills = [true];
-    this.strokeColors = [MSImmutableColor.colorWithSVGString("#979797")];
+    this.strokeColors = [MSImmutableColor.colorWithSVGString("#000000")];
     this.hasStrokes = [true];
     this.strokeThiknesses = [1];
     this.strokeEndings = [0];
@@ -93,7 +94,7 @@ var TWO_PI = PI * 2;
 function createCanvas(w, h) {
   width = w;
   height = h;
-  
+
   var p5canvas = getArtboardWithName("p5canvas");
 
   if (!p5canvas) {
@@ -634,7 +635,7 @@ function fill(r, g, b, a) {
     };
 
 function strokeWeight(weight) {
-  drawingContext.strokeThiknesses[drawingContext.strokeThiknesses-1] = weight;
+  drawingContext.strokeThiknesses[drawingContext.strokeThiknesses.length-1] = weight;
 };
 
 //Caps and joins values. Only valid in uppercase
@@ -704,18 +705,34 @@ function translate(x, y) {
 /*----------------
 PUSH AND POP FUNCTIONS
 ----------------*/
-//Push sould go through all the arrays in drawingContext and duplicating them
-// function push() {
-//   drawingContext.push([]);
-//     for (x=0;x<drawingContext[drawingContext.length-2].length;x++) {
-//       drawingContext[drawingContext.length-1].push(drawingContext[drawingContext.length-2][x])
-//     }
-// }
-//
-//Pop should go through all the arrays in drawingContext and deliting the latest, except if it's the last one in the array
-// function pop() {
-//   drawingContext.pop()
-// }
+//A note: I’m sure there's a better way than manually pushing and popping. I haven't found it yet.
+
+//Push sould go through all the arrays in drawingContext and duplicating them.
+//The drawingContext methods always refer to the latest elements in the arrays
+function push() {
+  drawingContext.sizes.push(drawingContext.sizes[drawingContext.sizes.length-1]);
+  drawingContext.fonts.push(drawingContext.fonts[drawingContext.fonts.length-1]);
+  drawingContext.fillColors.push(drawingContext.fillColors[drawingContext.fillColors.length-1]);
+  drawingContext.hasFills.push(drawingContext.hasFills[drawingContext.hasFills.length-1]);
+  drawingContext.strokeColors.push(drawingContext.strokeColors[drawingContext.strokeColors.length-1]);
+  drawingContext.hasStrokes.push(drawingContext.hasStrokes[drawingContext.hasStrokes.length-1]);
+  drawingContext.strokeThiknesses.push(drawingContext.strokeThiknesses[drawingContext.strokeThiknesses.length-1]);
+  drawingContext.strokeEndings.push(drawingContext.strokeEndings[drawingContext.strokeEndings.length-1]);
+}
+//Pop sould go through all the arrays in drawingContext and deletes the latest element in them.
+function pop() {
+  //we only pop if we have things to pop. You should not be allowed to pop the default values
+  if (drawingContext.sizes.length>1) {
+  drawingContext.sizes.pop();
+  drawingContext.fonts.pop();
+  drawingContext.fillColors.pop();
+  drawingContext.hasFills.pop();
+  drawingContext.strokeColors.pop();
+  drawingContext.hasStrokes.pop();
+  drawingContext.strokeThiknesses.pop();
+  drawingContext.strokeEndings.pop();
+  }
+}
 
 /*----------------
 RANDOM FUNCTIONS
@@ -1058,7 +1075,6 @@ function onRun(context) {
               var colorName = windowObject.evaluateWebScript("document.getElementById('colorName').innerHTML");
 
               if (locationHash) {
-                  log(locationHash)
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
@@ -1067,11 +1083,9 @@ function onRun(context) {
                   //We want to allow the users to use it in the code but we swap it way with regex in execution
                   var code = code.replace('rect(','rectangle(');
                   //saveCode(code);
-                  log(code);
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
                   drawingContext.reset();
-                  log("done");
               }
 
           })
