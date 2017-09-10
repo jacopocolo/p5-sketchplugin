@@ -3,17 +3,8 @@ var runFromFile = false; //can be removed?
 //grabs the code from panel and saves it to file for execution
 function saveCode(code) {
     var string = [NSString stringWithFormat: "%@", code],
-      filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
-
-    [string writeToFile: filePath atomically: true
-      encoding: NSUTF8StringEncoding error: nil];
-}
-
-function readCode() {
-  filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
-  var file = [NSData dataWithContentsOfFile:filePath];
-  var codeString = [[NSString alloc] initWithData:file encoding:NSUTF8StringEncoding];
-  return codeString;
+    filePath = "/Users/" + NSUserName() + "/Library/Application Support/com.bohemiancoding.sketch3/Plugins/p5.sketchplugin/Contents/Sketch/sketch.js";
+    [string writeToFile:filePath atomically:true encoding:NSUTF8StringEncoding error:nil];
 }
 
 //get javascript array from NSArray
@@ -89,15 +80,3 @@ function resizeLayerToFitText(layer) {
     [layer setIsEditingText:false];
     [layer select:false byExpandingSelection:false];
 }
-
-// function resizeSketchjs(){
-//   var sketchjs = getLayerWithName("sketch.js", "p5code");
-//     sketchjs.frame().setWidth(450);
-//     sketchjs.setTextBehaviour(1);
-//     var h = sketchjs.frame().height();
-//   var p5code = getArtboardWithName("p5code");
-//     var r = p5code.rect();
-//     r.size.height = h+100;
-//     r.size.width = 500;
-//     p5code.setRect(r);
-// }

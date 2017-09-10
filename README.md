@@ -260,11 +260,6 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 ## Messy to-do list
 
 ### 1.0
-
-- Set a default for create canvas so it create a canvas even if the function is not actually called
-
-- Text stroke should render as border
-
 - Reset artboard with the drawingContext
 
 - Add translate() and rotate() in push and pop
@@ -276,6 +271,8 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 - Test all the calc functions
 
 ### Future releases
+
+- Set a default for create canvas so it create a canvas even if the function is not actually called
 
 - Implement border radius for rect()
 

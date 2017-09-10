@@ -498,6 +498,14 @@ function text(str, x, y, x2, y2) {
   if (drawingContext.hasFill() == true) {
   textLayer.textColor = drawingContext.fillColor();
   }
+
+  if (drawingContext.hasStroke() == true) {
+  var border = textLayer.style().addStylePartOfType(1);
+  border.color = drawingContext.strokeColor();
+  border.thickness = drawingContext.strokeThikness();
+  var borderOptions = textLayer.style().borderOptions();
+  }
+
   textLayer.fontSize = drawingContext.size();
   textLayer.setFontPostscriptName(drawingContext.font().toString());
   textLayer.setName(str);
@@ -1084,8 +1092,8 @@ function onRun(context) {
                   //rect() creates some problems with native Sketch API. However…
                   //We want to allow the users to use it in the code but we swap it way with regex in execution
                   var code = code.replace(/\brect\b/g,'rectangle');
-                  log(code);
-                  //saveCode(code);
+                  //log(code);
+                  saveCode(code);
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
                   drawingContext.reset();
@@ -1132,10 +1140,4 @@ function onRun(context) {
           document: doc,
           selection: selection
       }
-};
-
-var runAgain = function(context) {
-  exposeContext(context)
-  code = readCode();
-  eval(code+'; setup(); draw();');
 };

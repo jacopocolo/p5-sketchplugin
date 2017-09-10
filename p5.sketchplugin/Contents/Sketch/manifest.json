@@ -13,13 +13,6 @@
       "shortcut" : "cmd+alt+ctrl+R",
       "name" : "Edit and run",
       "identifier" : "p5"
-    },
-    {
-      "script" : "p5.js",
-      "handler" : "runAgain",
-      "shortcut" : "cmd+alt+R",
-      "name" : "Run Again",
-      "identifier" : "runAgain"
     }
   ],
   "menu" : {
