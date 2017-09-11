@@ -31,8 +31,8 @@ var drawingContext = {
   translates: [[0,0]],
   translateX: function() {return this.translates[this.translates.length-1][0]},
   translateY: function() {return this.translates[this.translates.length-1][1]},
-  // rotations: [0],
-  // rotate: function() {return this.rotations[this.rotations.length-1]},
+  rotations: [0],
+  rotation: function() {return this.rotations[this.rotations.length-1]},
   sizes: ['14'],
   size: function() {return this.sizes[this.sizes.length-1]},
   fonts: ['Helvetica'],
@@ -54,6 +54,7 @@ var drawingContext = {
   reset: function () {
     this.hasTranslates = [false];
     this.translates = [[0,0]];
+    this.rotations = [0];
     this.sizes = ['14'];
     this.fonts = ['Helvetica'];
     this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF")];
@@ -78,7 +79,7 @@ var strokeThikness = drawingContext.strokeThikness();
 var strokeEnding = drawingContext.strokeEnding();
 var strokeJoining; //default
 var seeded;
-var rotationValue = 0;
+var rotationValue = drawingContext.rotation();
 var hasTranslate = drawingContext.hasTranslate();
 var deltaX = 0; //default translate
 var deltaY = 0; //default translate
@@ -174,7 +175,7 @@ function point(x, y) {
   borderOptions.lineCapStyle = strokeEnding;
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -205,7 +206,7 @@ function line(x1, y1, x2, y2) {
   borderOptions.lineCapStyle = strokeEnding;
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -265,7 +266,7 @@ function endShape(mode) {
   border.thickness = drawingContext.strokeThikness();
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
   firstPoint = true; //reset after you close the shape
@@ -306,7 +307,7 @@ function rectangle(x, y, w, h) {
   borderOptions.lineCapStyle = strokeEnding;
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -348,7 +349,7 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   border.thickness = drawingContext.strokeThikness();
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -387,7 +388,7 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   border.thickness = drawingContext.strokeThikness();
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -418,7 +419,7 @@ function ellipse(a, b, c, d) {
   border.thickness = drawingContext.strokeThikness();
   }
 
-  shapeGroup.setRotation(rotationValue);
+  shapeGroup.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shapeGroup]);
 }
@@ -471,8 +472,8 @@ function arc(a,b,c,d,start,stop) {
   }
   mask.setName("Arc");
 
-  mask.setRotation(rotationValue);
-  shape.setRotation(rotationValue);
+  mask.setRotation(drawingContext.rotation());
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape])
   artboard.addLayers([mask])
@@ -527,7 +528,7 @@ function text(str, x, y, x2, y2) {
     textLayer.frame().setHeight(y2);
   }
 
-  textLayer.setRotation(rotationValue);
+  textLayer.setRotation(drawingContext.rotation());
 
   //return textLayer;
   artboard.addLayers_([textLayer]);
@@ -566,7 +567,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   fill.color = drawingContext.fillColor();
   }
 
-  shape.setRotation(rotationValue);
+  shape.setRotation(drawingContext.rotation());
 
   artboard.addLayers([shape]);
 }
@@ -589,6 +590,7 @@ function textFont(textFont) {
 // };
 
 function fill(r, g, b, a) {
+    drawingContext.hasFills[drawingContext.hasFills.length-1] = true;
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
@@ -619,6 +621,7 @@ function fill(r, g, b, a) {
   };
 
   function stroke(r, g, b, a) {
+      drawingContext.hasStrokes[drawingContext.hasStrokes.length-1] = true;
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
@@ -706,8 +709,8 @@ function background(r, g, b, a) {
 };
 
 function rotate(rad) {
-    rotationValue = rotationValue+degrees(rad);
-    rotationValue = -rotationValue;
+    drawingContext.rotations[drawingContext.rotations.length-1] = drawingContext.rotations[drawingContext.rotations.length-1]+degrees(rad);
+    drawingContext.rotations[drawingContext.rotations.length-1] = -drawingContext.rotations[drawingContext.rotations.length-1];
   }
 
 function translate(x, y) {
@@ -726,6 +729,7 @@ PUSH AND POP FUNCTIONS
 function push() {
   drawingContext.hasTranslates.push(drawingContext.hasTranslates[drawingContext.hasTranslates.length-1]);
   drawingContext.translates.push([drawingContext.translates[drawingContext.translates.length-1][0],drawingContext.translates[drawingContext.translates.length-1][1]]);
+  drawingContext.rotations.push(drawingContext.rotations[drawingContext.rotations.length-1])
   drawingContext.sizes.push(drawingContext.sizes[drawingContext.sizes.length-1]);
   drawingContext.fonts.push(drawingContext.fonts[drawingContext.fonts.length-1]);
   drawingContext.fillColors.push(drawingContext.fillColors[drawingContext.fillColors.length-1]);
@@ -741,6 +745,7 @@ function pop() {
   if (drawingContext.sizes.length>1) {
   drawingContext.hasTranslates.pop();
   drawingContext.translates.pop();
+  drawingContext.rotations.pop();
   drawingContext.sizes.pop();
   drawingContext.fonts.pop();
   drawingContext.fillColors.pop();
