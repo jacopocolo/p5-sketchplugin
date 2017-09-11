@@ -26,10 +26,11 @@ var drawingContext = {
   //artboardSize: [[200, 200]],
   //artboardHasBackgroundColor: [false],
   //artboardBackgroundColor: [],
-  hasTraslates: [null],
-  hasTranslate: function() {return this.hasTraslates[this.hasTraslates.length-1]},
+  hasTranslates: [false],
+  hasTranslate: function() {return this.hasTranslates[this.hasTranslates.length-1]},
   translates: [[0,0]],
-  translate: function() {return this.translates[this.translates.length-1]},
+  translateX: function() {return this.translates[this.translates.length-1][0]},
+  translateY: function() {return this.translates[this.translates.length-1][1]},
   // rotations: [0],
   // rotate: function() {return this.rotations[this.rotations.length-1]},
   sizes: ['14'],
@@ -51,6 +52,8 @@ var drawingContext = {
   // seeded: false,
   // seed: [0],
   reset: function () {
+    this.hasTranslates = [false];
+    this.translates = [[0,0]];
     this.sizes = ['14'];
     this.fonts = ['Helvetica'];
     this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF")];
@@ -76,7 +79,7 @@ var strokeEnding = drawingContext.strokeEnding();
 var strokeJoining; //default
 var seeded;
 var rotationValue = 0;
-var hasTraslate = drawingContext.hasTranslate();
+var hasTranslate = drawingContext.hasTranslate();
 var deltaX = 0; //default translate
 var deltaY = 0; //default translate
 
@@ -147,8 +150,9 @@ DRAWING FUNCTIONS
 // You can call it like this: point(100,100)
 function point(x, y) {
   if (drawingContext.hasTranslate()) {
-    x = x+drawingContext.translate[0]
-    y = y+drawingContext.translate[1]
+    x = x+drawingContext.translateX();
+    y = y+drawingContext.translateY();
+    log("ok");
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -179,11 +183,11 @@ function point(x, y) {
 // It doesn’t have a fill color, it has a stroke color
 // You can call it like this: line(0,0,100,100)
 function line(x1, y1, x2, y2) {
-  if (hasTraslate) {
-    x1 = x1+deltaX
-    y1 = y1+deltaY
-    x2 = x2+deltaX
-    y2 = y2+deltaY
+  if (drawingContext.hasTranslate()) {
+    x1 = x1+drawingContext.translateX();
+    y1 = y1+drawingContext.translateY();
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -216,9 +220,9 @@ function beginShape() {
 }
 
 function vertex(x1, y1) {
-  if (hasTraslate) {
-    x1 = x1+deltaX
-    y1 = y1+deltaY
+  if (drawingContext.hasTranslate()) {
+    x1 = x1+drawingContext.translateX();
+    y1 = y1+drawingContext.translateY();
   }
   //move to point only if it’s the first point of the shape
   if (firstPoint == true) {
@@ -229,13 +233,13 @@ function vertex(x1, y1) {
 }
 
 function bezierVertex(x2,y2,x3,y3,x4,y4) {
-  if (hasTraslate) {
-    x2 = x2+deltaX
-    y2 = y2+deltaY
-    x3 = x3+deltaX
-    y3 = y3+deltaY
-    x4 = x3+deltaX
-    y4 = y3+deltaY
+  if (drawingContext.hasTranslate()) {
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
+    x3 = x3+drawingContext.translateX();
+    y3 = y3+drawingContext.translateY();
+    x4 = x3+drawingContext.translateX();
+    y4 = y3+drawingContext.translateY();
   }
   [newShape curveToPoint:NSMakePoint(x4, y4)
         controlPoint1:NSMakePoint(x2, y2)
@@ -273,9 +277,9 @@ function endShape(mode) {
 //NOTE: rect( is replaced with rectangle( when the code is executed to avoid conflicts with
 //some Sketch native API. It caused a lot of issues
 function rectangle(x, y, w, h) {
-  if (hasTraslate) {
-    x = x+deltaX
-    y = y+deltaY
+  if (drawingContext.hasTranslate()) {
+    x = x+drawingContext.translateX();
+    y = y+drawingContext.translateY();
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -311,15 +315,15 @@ function rectangle(x, y, w, h) {
 // It has both a fill and a stroke color
 // You can call it like this: quad(0,0,100,200,400,400,200,90,20)
 function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
-  if (hasTraslate) {
-    x1 = x1+deltaX
-    y1 = y1+deltaY
-    x2 = x2+deltaX
-    y2 = y2+deltaY
-    x3 = x3+deltaX
-    y3 = y3+deltaY
-    x4 = x4+deltaX
-    y4 = y4+deltaY
+  if (drawingContext.hasTranslate()) {
+    x1 = x1+drawingContext.translateX();
+    y1 = y1+drawingContext.translateY();
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
+    x3 = x3+drawingContext.translateX();
+    y3 = y3+drawingContext.translateY();
+    x4 = x4+drawingContext.translateX();
+    y4 = y4+drawingContext.translateY();
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -353,13 +357,13 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
 // It has both a fill and a stroke color
 // You can call it like this: triangle(0,0,100,200,400,400,200)
 function triangle(x1, y1, x2, y2, x3, y3) {
-  if (hasTraslate) {
-    x1 = x1+deltaX
-    y1 = y1+deltaY
-    x2 = x2+deltaX
-    y2 = y2+deltaY
-    x3 = x3+deltaX
-    y3 = y3+deltaY
+  if (drawingContext.hasTranslate()) {
+    x1 = x1+drawingContext.translateX();
+    y1 = y1+drawingContext.translateY();
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
+    x3 = x3+drawingContext.translateX();
+    y3 = y3+drawingContext.translateY();
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
@@ -392,9 +396,9 @@ function triangle(x1, y1, x2, y2, x3, y3) {
 // It has both a fill and a stroke color
 // You can call it like this: ellipse(250,250,500,100)
 function ellipse(a, b, c, d) {
-  if (hasTraslate) {
-    a = a+deltaX
-    b = b+deltaY
+  if (drawingContext.hasTranslate()) {
+    a = a+drawingContext.translateX();
+    b = b+drawingContext.translateY();
   }
   centerX = a - c / 2;
   centerY = b - d / 2;
@@ -425,9 +429,9 @@ function ellipse(a, b, c, d) {
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
-  if (hasTraslate) {
-    a = a+deltaX
-    b = b+deltaY
+  if (drawingContext.hasTranslate()) {
+    a = a+drawingContext.translateX();
+    b = b+drawingContext.translateY();
   }
   var center = NSMakePoint(a, b)
   rect = NSMakeRect(a-c/2, b-d/2, c, d)
@@ -487,11 +491,11 @@ function arc(a,b,c,d,start,stop) {
 // the bounding box will wrap around the text
 // You can call it like this: text("Hello world",10,10,100,200)
 function text(str, x, y, x2, y2) {
-  if (hasTraslate) {
-    x = x+deltaX
-    y = y+deltaY
-    x2 = x2+deltaX
-    y2 = y2+deltaY
+  if (drawingContext.hasTranslate()) {
+    x = x+drawingContext.translateX();
+    y = y+drawingContext.translateY();
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
   }
   //var textLayer = artboard.addLayerOfType("text");
   var textLayer = MSTextLayer.alloc().initWithFrame_(NSMakeRect(0, 0, 100, 100));
@@ -530,15 +534,15 @@ function text(str, x, y, x2, y2) {
 };
 
 function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
-  if (hasTraslate) {
-    x1 = x1+deltaX
-    y1 = y1+deltaY
-    x2 = x2+deltaX
-    y2 = y2+deltaY
-    x3 = x3+deltaX
-    y3 = y3+deltaY
-    x4 = x4+deltaX
-    y4 = y4+deltaY
+  if (drawingContext.hasTranslate()) {
+    x1 = x1+drawingContext.translateX();
+    y1 = y1+drawingContext.translateY();
+    x2 = x2+drawingContext.translateX();
+    y2 = y2+drawingContext.translateY();
+    x3 = x3+drawingContext.translateX();
+    y3 = y3+drawingContext.translateY();
+    x4 = x4+drawingContext.translateX();
+    y4 = y4+drawingContext.translateY();
   }
   var path = NSBezierPath.bezierPath();
   [path moveToPoint:NSMakePoint(x1, y1)]
@@ -707,7 +711,7 @@ function rotate(rad) {
   }
 
 function translate(x, y) {
-  drawingContext.hasTraslates[drawingContext.hasTraslates.length-1] = true;
+  drawingContext.hasTranslates[drawingContext.hasTranslates.length-1] = true;
   drawingContext.translates[drawingContext.translates.length-1][0] += x;
   drawingContext.translates[drawingContext.translates.length-1][1] += y;
 }
@@ -720,6 +724,8 @@ PUSH AND POP FUNCTIONS
 //Push sould go through all the arrays in drawingContext and duplicating them.
 //The drawingContext methods always refer to the latest elements in the arrays
 function push() {
+  drawingContext.hasTranslates.push(drawingContext.hasTranslates[drawingContext.hasTranslates.length-1]);
+  drawingContext.translates.push([drawingContext.translates[drawingContext.translates.length-1][0],drawingContext.translates[drawingContext.translates.length-1][1]]);
   drawingContext.sizes.push(drawingContext.sizes[drawingContext.sizes.length-1]);
   drawingContext.fonts.push(drawingContext.fonts[drawingContext.fonts.length-1]);
   drawingContext.fillColors.push(drawingContext.fillColors[drawingContext.fillColors.length-1]);
@@ -733,6 +739,8 @@ function push() {
 function pop() {
   //we only pop if we have things to pop. You should not be allowed to pop the default values
   if (drawingContext.sizes.length>1) {
+  drawingContext.hasTranslates.pop();
+  drawingContext.translates.pop();
   drawingContext.sizes.pop();
   drawingContext.fonts.pop();
   drawingContext.fillColors.pop();
