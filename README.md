@@ -262,9 +262,9 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 ### 1.0
 - Reset artboard with the drawingContext
 
-- Add translate() and rotate() in push and pop
-
 - Implement image() and, potentially, symbol()
+
+- Implement textAlign(), textLeading(), textStyle()
 
 - Specify that rotate — in absence of an API — acts on the center of the shape.
 
