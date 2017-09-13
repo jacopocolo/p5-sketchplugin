@@ -37,6 +37,8 @@ var drawingContext = {
   size: function() {return this.sizes[this.sizes.length-1]},
   fonts: ['Helvetica'],
   font: function() {return this.fonts[this.fonts.length-1]},
+  alignments: [0],
+  alignment: function() {return this.alignments[this.alignments.length-1]},
   fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF")],
   fillColor: function() {return this.fillColors[this.fillColors.length-1]},
   hasFills: [true],
@@ -153,7 +155,6 @@ function point(x, y) {
   if (drawingContext.hasTranslate()) {
     x = x+drawingContext.translateX();
     y = y+drawingContext.translateY();
-    log("ok");
   }
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x, y));
@@ -172,7 +173,7 @@ function point(x, y) {
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
-  borderOptions.lineCapStyle = strokeEnding;
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -203,7 +204,7 @@ function line(x1, y1, x2, y2) {
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
-  borderOptions.lineCapStyle = strokeEnding;
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -304,7 +305,7 @@ function rectangle(x, y, w, h) {
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
-  borderOptions.lineCapStyle = strokeEnding;
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -462,7 +463,7 @@ function arc(a,b,c,d,start,stop) {
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
-  borderOptions.lineCapStyle = strokeEnding;
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
   }
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
@@ -516,6 +517,7 @@ function text(str, x, y, x2, y2) {
   textLayer.setName(str);
   textLayer.setNameIsFixed(true);
   textLayer.setStringValue(str);
+  textLayer.setTextAlignment(drawingContext.alignment());
   textLayer.frame().setX(Number(x));
   textLayer.frame().setY(Number(y));
 
@@ -559,7 +561,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
-  borderOptions.lineCapStyle = strokeEnding;
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
   }
 
   if (drawingContext.hasFill() == true) {
@@ -585,9 +587,13 @@ function textFont(textFont) {
   drawingContext.fonts[drawingContext.fonts.length-1] = textFont;
 };
 
-// function fill(color) {
-//   drawingContext.hasFill = color;
-// };
+var LEFT = 0;
+var RIGHT = 1;
+var CENTER = 2;
+
+function textAlign(textAlignment) {
+  drawingContext.alignments[drawingContext.alignments.length-1] = textAlignment;
+}
 
 function fill(r, g, b, a) {
     drawingContext.hasFills[drawingContext.hasFills.length-1] = true;
@@ -663,7 +669,7 @@ var PROJECT = 2;
 var BEVEL = 2;
 
 function strokeCap(cap) {
-  drawingContext.strokeEndings[drawingContext.strokeEndings-1] = cap;
+  drawingContext.strokeEndings[drawingContext.strokeEndings.length-1] = cap;
 };
 
 function strokeJoint(join) {
@@ -732,6 +738,7 @@ function push() {
   drawingContext.rotations.push(drawingContext.rotations[drawingContext.rotations.length-1])
   drawingContext.sizes.push(drawingContext.sizes[drawingContext.sizes.length-1]);
   drawingContext.fonts.push(drawingContext.fonts[drawingContext.fonts.length-1]);
+  drawingContext.alignments.push(drawingContext.alignments[drawingContext.alignments.length-1]);
   drawingContext.fillColors.push(drawingContext.fillColors[drawingContext.fillColors.length-1]);
   drawingContext.hasFills.push(drawingContext.hasFills[drawingContext.hasFills.length-1]);
   drawingContext.strokeColors.push(drawingContext.strokeColors[drawingContext.strokeColors.length-1]);
@@ -748,6 +755,7 @@ function pop() {
   drawingContext.rotations.pop();
   drawingContext.sizes.pop();
   drawingContext.fonts.pop();
+  drawingContext.alignments.pop();
   drawingContext.fillColors.pop();
   drawingContext.hasFills.pop();
   drawingContext.strokeColors.pop();

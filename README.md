@@ -264,11 +264,13 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Implement image() and, potentially, symbol()
 
-- Implement textAlign(), textLeading(), textStyle()
+- Implement textLeading(), textStyle()
 
 - Specify that rotate — in absence of an API — acts on the center of the shape.
 
 - Test all the calc functions
+
+- implement strokeJoint()
 
 ### Future releases
 
