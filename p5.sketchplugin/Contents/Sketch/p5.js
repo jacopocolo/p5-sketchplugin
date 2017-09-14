@@ -51,6 +51,8 @@ var drawingContext = {
   strokeThikness: function() {return this.strokeThiknesses[this.strokeThiknesses.length-1]},
   strokeEndings: [0],
   strokeEnding: function() {return this.strokeEndings[this.strokeEndings.length-1]},
+  strokeJoinings: [0],
+  strokeJoining: function() {return this.strokeJoinings[this.strokeJoinings.length-1]},
   // seeded: false,
   // seed: [0],
   reset: function () {
@@ -65,6 +67,7 @@ var drawingContext = {
     this.hasStrokes = [true];
     this.strokeThiknesses = [1];
     this.strokeEndings = [0];
+    this.strokeJoinings = [0];
   }
 };
 
@@ -79,7 +82,7 @@ var strokeColor = drawingContext.strokeColor();
 var hasStroke = drawingContext.hasStroke();
 var strokeThikness = drawingContext.strokeThikness();
 var strokeEnding = drawingContext.strokeEnding();
-var strokeJoining; //default
+var strokeJoining = drawingContext.strokeJoining();
 var seeded;
 var rotationValue = drawingContext.rotation();
 var hasTranslate = drawingContext.hasTranslate();
@@ -174,6 +177,7 @@ function point(x, y) {
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -205,6 +209,7 @@ function line(x1, y1, x2, y2) {
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -265,6 +270,8 @@ function endShape(mode) {
   var border = shape.style().addStylePartOfType(1);
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
+  borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -306,6 +313,7 @@ function rectangle(x, y, w, h) {
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   shape.setRotation(drawingContext.rotation());
@@ -464,6 +472,7 @@ function arc(a,b,c,d,start,stop) {
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
@@ -562,6 +571,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
   border.thickness = drawingContext.strokeThikness();
   var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
+  borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
   if (drawingContext.hasFill() == true) {
@@ -672,8 +682,8 @@ function strokeCap(cap) {
   drawingContext.strokeEndings[drawingContext.strokeEndings.length-1] = cap;
 };
 
-function strokeJoint(join) {
-  strokeJoining = join;
+function strokeJoin(join) {
+  drawingContext.strokeJoinings[drawingContext.strokeJoinings.length-1] = join;
 };
 
 function noStroke() {
@@ -745,6 +755,7 @@ function push() {
   drawingContext.hasStrokes.push(drawingContext.hasStrokes[drawingContext.hasStrokes.length-1]);
   drawingContext.strokeThiknesses.push(drawingContext.strokeThiknesses[drawingContext.strokeThiknesses.length-1]);
   drawingContext.strokeEndings.push(drawingContext.strokeEndings[drawingContext.strokeEndings.length-1]);
+  drawingContext.strokeJoinings.push(drawingContext.strokeJoinings[drawingContext.strokeJoinings.length-1]);
 }
 //Pop sould go through all the arrays in drawingContext and deletes the latest element in them.
 function pop() {
@@ -762,6 +773,7 @@ function pop() {
   drawingContext.hasStrokes.pop();
   drawingContext.strokeThiknesses.pop();
   drawingContext.strokeEndings.pop();
+  drawingContext.strokeJoinings.pop();
   }
 }
 

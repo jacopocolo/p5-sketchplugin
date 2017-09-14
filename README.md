@@ -270,7 +270,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Test all the calc functions
 
-- implement strokeJoint()
+- Fix beginShape / endShape
 
 ### Future releases
 
