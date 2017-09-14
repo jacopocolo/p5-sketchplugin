@@ -198,7 +198,6 @@ function line(x1, y1, x2, y2) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x2, y2));
-  //path.setLineCapStyle(NSRoundLineCapStyle)
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
@@ -218,9 +217,9 @@ function line(x1, y1, x2, y2) {
 }
 
 //Shapes functions
-var newShape;
+var newShape = null;
 var firstPoint = true;
-var CLOSE = "CLOSE"
+var CLOSE = "CLOSE";
 
 function beginShape() {
   newShape = NSBezierPath.bezierPath();
@@ -231,6 +230,7 @@ function vertex(x1, y1) {
     x1 = x1+drawingContext.translateX();
     y1 = y1+drawingContext.translateY();
   }
+
   //move to point only if it’s the first point of the shape
   if (firstPoint == true) {
   newShape.moveToPoint(NSMakePoint(x1, y1));
@@ -262,14 +262,15 @@ function endShape(mode) {
   shape.setName("Shape");
 
   if (drawingContext.hasFill() == true) {
-      var fill = shape.style().addStylePartOfType(0);
-      fill.color = drawingContext.fillColor();
+  var fill = shape.style().addStylePartOfType(0);
+  fill.color = drawingContext.fillColor();
   }
 
   if (drawingContext.hasStroke() == true) {
   var border = shape.style().addStylePartOfType(1);
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
+  var borderOptions = shape.style().borderOptions();
   borderOptions.lineCapStyle = drawingContext.strokeEnding();
   borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
@@ -278,6 +279,7 @@ function endShape(mode) {
 
   artboard.addLayers([shape]);
   firstPoint = true; //reset after you close the shape
+  newShape = null;
 }
 
 // A rectangle that starts from x, y and has a height of h and a width of w.
