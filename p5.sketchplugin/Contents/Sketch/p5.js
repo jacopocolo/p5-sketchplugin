@@ -34,6 +34,8 @@ var drawingContext = {
   font: function() {return this.fonts[this.fonts.length-1]},
   alignments: [0],
   alignment: function() {return this.alignments[this.alignments.length-1]},
+  lineHeights: [17],
+  lineHeight: function() {return this.lineHeights[this.lineHeights.length-1]},
   fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF")],
   fillColor: function() {return this.fillColors[this.fillColors.length-1]},
   hasFills: [true],
@@ -56,6 +58,8 @@ var drawingContext = {
     this.rotations = [0];
     this.sizes = ['14'];
     this.fonts = ['Helvetica'];
+    this.alignments = [0];
+    this.lineHeights = [17];
     this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF")];
     this.hasFills = [true];
     this.strokeColors = [MSImmutableColor.colorWithSVGString("#000000")];
@@ -156,6 +160,10 @@ function textSize(fontSize) {
 function textFont(textFont) {
   drawingContext.fonts[drawingContext.fonts.length-1] = textFont;
 };
+
+function textLeading(leading) {
+  drawingContext.lineHeights[drawingContext.lineHeights.length-1] = leading;
+}
 
 var LEFT = 0;
 var RIGHT = 1;
@@ -310,6 +318,7 @@ function push() {
   drawingContext.sizes.push(drawingContext.sizes[drawingContext.sizes.length-1]);
   drawingContext.fonts.push(drawingContext.fonts[drawingContext.fonts.length-1]);
   drawingContext.alignments.push(drawingContext.alignments[drawingContext.alignments.length-1]);
+  drawingContext.lineHeights.push(drawingContext.lineHeights[drawingContext.lineHeights.length-1]);
   drawingContext.fillColors.push(drawingContext.fillColors[drawingContext.fillColors.length-1]);
   drawingContext.hasFills.push(drawingContext.hasFills[drawingContext.hasFills.length-1]);
   drawingContext.strokeColors.push(drawingContext.strokeColors[drawingContext.strokeColors.length-1]);
@@ -328,6 +337,7 @@ function pop() {
   drawingContext.sizes.pop();
   drawingContext.fonts.pop();
   drawingContext.alignments.pop();
+  drawingContext.lineHeights.pop();
   drawingContext.fillColors.pop();
   drawingContext.hasFills.pop();
   drawingContext.strokeColors.pop();
@@ -345,24 +355,29 @@ RANDOM FUNCTIONS
 var seeded = false;
 
 function random(min, max) {
-      var rand;
-      if (seeded) {
-        rand = lcg.rand();
+    var rand;
+    if (seeded) {
+      rand  = lcg.rand();
+    } else {
+      rand = Math.random();
+    }
+    if (typeof min === 'undefined') {
+      return rand;
+    } else
+    if (typeof max === 'undefined') {
+      if (min instanceof Array) {
+        return min[Math.floor(rand * min.length)];
       } else {
-        rand = Math.random();
-      }
-      if (arguments.length === 0) {
-        return rand;
-      } else if (arguments.length === 1) {
         return rand * min;
-      } else {
-        if (min > max) {
-          var tmp = min;
-          min = max;
-          max = tmp;
-        }
-        return rand * (max - min) + min;
       }
+    } else {
+      if (min > max) {
+        var tmp = min;
+        min = max;
+        max = tmp;
+      }
+      return rand * (max-min) + min;
+    }
 };
 
 var PERLIN_YWRAPB = 4;

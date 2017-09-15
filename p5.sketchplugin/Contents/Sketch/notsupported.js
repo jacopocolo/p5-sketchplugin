@@ -29,3 +29,7 @@ function createVector() {
 function vector() {
   log("vector() is not supported… YET")
 }
+
+function textStyle() {
+  log("textStyle() is not supported… YET")
+}

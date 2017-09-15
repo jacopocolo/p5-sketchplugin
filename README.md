@@ -262,13 +262,9 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 ### 1.0
 - Reset artboard with the drawingContext
 
-- Implement textLeading(), textStyle()
-
 - Specify that rotate — in absence of an API — acts on the center of the shape.
 
 - Test all the calc functions
-
-- Fix rotate: it does not stack properly
 
 ### Future releases
 
@@ -278,4 +274,4 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Implement blendMode()
 
-- Allow users to create multiple canvas artboards
+- Allow users to create multiple canvas artboards? Maybe?

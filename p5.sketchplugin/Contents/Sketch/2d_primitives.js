@@ -381,6 +381,7 @@ function text(str, x, y, x2, y2) {
   textLayer.setNameIsFixed(true);
   textLayer.setStringValue(str);
   textLayer.setTextAlignment(drawingContext.alignment());
+  textLayer.setLineHeight(drawingContext.lineHeight());
   textLayer.frame().setX(Number(x));
   textLayer.frame().setY(Number(y));
 
