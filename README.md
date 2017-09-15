@@ -262,8 +262,6 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 ### 1.0
 - Reset artboard with the drawingContext
 
-- Implement image() and, potentially, symbol()
-
 - Implement textLeading(), textStyle()
 
 - Specify that rotate — in absence of an API — acts on the center of the shape.

@@ -437,3 +437,15 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 
   artboard.addLayers([shape]);
 }
+
+function symbol(name,x,y) {
+  var symbol = findSymbolByName(name)
+  symbolRect = symbol.frame();
+  symbolRect.setX(x);
+  symbolRect.setY(y);
+  artboard.addLayers([symbol]);
+}
+
+function image(name, x, y) {
+  symbol(name,x,y);
+}

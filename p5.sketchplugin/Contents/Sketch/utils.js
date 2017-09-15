@@ -80,3 +80,14 @@ function resizeLayerToFitText(layer) {
     [layer setIsEditingText:false];
     [layer select:false byExpandingSelection:false];
 }
+
+function findSymbolByName(symbolName) {
+    var targetSymbols = doc.documentData().allSymbols();
+      for (var j = 0; j < targetSymbols.count(); j++) {
+          var targetSymbol = targetSymbols.objectAtIndex(j);
+          if (targetSymbol.name().isEqualToString(symbolName)) {
+              return targetSymbol.newSymbolInstance();
+          }
+      }
+    return false;
+}
