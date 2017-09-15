@@ -13,3 +13,19 @@ function frameCount() {
 function frameRate() {
   log("frameRate() is not supported. It doesn’t make sense in Sketch")
 }
+
+function ellipseMode() {
+  log("ellipseMode() is not supported… YET");
+}
+
+function rectMode() {
+  log("rectMode() is not supported… YET");
+}
+
+function createVector() {
+   log("createVector() is not supported… YET")
+}
+
+function vector() {
+  log("vector() is not supported… YET")
+}
