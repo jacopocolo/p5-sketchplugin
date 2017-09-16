@@ -122,7 +122,7 @@ vertex()
 
 
 
-### 3D Models
+### ~3D Models~
 
 ~loadModel()~: not implemented
 
@@ -130,7 +130,7 @@ vertex()
 
 
 
-### 3D Primitives
+### ~3D Primitives~
 
 ~plane()~: not implemented
 
@@ -266,7 +266,7 @@ translate()
 
 ## Data
 
-### Dictionary
+### ~Dictionary~
 
 ~p5.TypedDict~: not implemented
 
@@ -368,7 +368,7 @@ image()
 
 
 
-### Pixels
+### ~Pixels~
 
 ~pixels~: not implemented
 
@@ -512,9 +512,9 @@ textFont()
 
 
 
-## Lights, Camera
+## ~Lights, Camera~
 
-### Camera
+### ~Camera~
 
 ~camera()~: not implemented
 
@@ -524,7 +524,7 @@ textFont()
 
 
 
-### Lights
+### ~Lights~
 
 ~ambientLight()~: not implemented
 
@@ -534,7 +534,7 @@ textFont()
 
 
 
-### Material
+### ~Material~
 
 ~normalMaterial()~: not implemented
 
