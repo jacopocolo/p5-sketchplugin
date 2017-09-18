@@ -65,6 +65,7 @@
 				<option value="pieChart">Pie chart</option>
 				<option value="basic">Basic sketch</option>
 				<option value="demo">Demo</option>
+				<option value="get">Get</option>
 			</select>
 		</span>
 	</div>
@@ -103,11 +104,67 @@
 			myCodeMirror.setValue(value);
 		};
 
-		var pieChart =
-			"var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];\n\nfunction setup() {\n  createCanvas(720, 400);\n  noStroke();\n  noLoop();  // Run once and stop\n}\n\nfunction draw() {\n  background(100);\n  pieChart(300, angles);\n}\n\nfunction pieChart(diameter, data) {\n  var lastAngle = 0;\n  for (var i = 0; i < data.length; i++) {\n    var gray = map(i, 0, data.length, 0, 255);\n    fill(gray);\n    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));\n    lastAngle += radians(angles[i]);\n  }\n}"
+		var pieChart =`var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
 
-		var demo =
-			"function setup() {\n	createCanvas(500, 500)\n	background('rgb(0,255,0)')\n}\n\nfunction draw() {\n  	textSize(24)\n    textFont('Georgia')\n    fill('#0000FF')\n    stroke('#FF0000')\n    strokeWeight(8)\n    point(100,100);\n  	line(0,0,100,100)\n    rect(0,0,100,200)\n    quad(0,0,100,200,400,400,200,90)\n    triangle(0,0,100,200,400,400)\n    ellipse(250,250,500,100)\n    arc(250,250,500,100,0,PI)\n    text('Hello world',10,10,100,200)\n    bezier(85, 20, 10, 10, 90, 90, 15, 80);\n}";
+function setup() {
+  createCanvas(720, 400);
+  noStroke();
+  noLoop();  // Run once and stop
+}
+
+function draw() {
+  background(100);
+  pieChart(300, angles);
+}
+
+function pieChart(diameter, data) {
+  var lastAngle = 0;
+  for (var i = 0; i < data.length; i++) {
+    var gray = map(i, 0, data.length, 0, 255);
+    fill(gray);
+    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
+    lastAngle += radians(angles[i]);
+  }
+}`;
+
+		var demo =`function setup() {
+	createCanvas(500, 500);
+	background(0,255,0);
+}
+
+function draw() {
+  	textSize(24)
+    textFont('Georgia')
+    fill('#0000FF')
+    stroke('#FF0000')
+    strokeWeight(8)
+    point(100,100);
+  	line(0,0,100,100)
+    rect(0,0,100,200)
+    quad(0,0,100,200,400,400,200,90)
+    triangle(0,0,100,200,400,400)
+    ellipse(250,250,500,100)
+    arc(250,250,500,100,0,PI)
+    text('Hello world',10,10,100,200)
+    bezier(85, 20, 10, 10, 90, 90, 15, 80);
+}`;
+
+		var get = `json = get(['http://api.open-notify.org/astros.json'])
+
+function setup() {
+	createCanvas(200, 200)
+}
+
+function draw() {
+  noStroke();
+  fill(0);
+  text("Astronauts in space now: "+json.number,10,40,200,20);
+  textSize(14);
+  translate(0,65);
+    for (x=0;x<json.people.length;x++) {
+	text(json.people[x].name,10,x*15,200,20);
+  }
+}`;
 
 		$('select').on('change', function() {
 			if (this.value == "basic") {
@@ -118,6 +175,8 @@
 				setValue(pieChart);
 			} else if (this.value == "demo") {
 				setValue(demo);
+			} else if (this.value == "get") {
+				setValue(get);
 			}
 		});
 

@@ -266,6 +266,14 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 - Test all the calc functions
 
+- Document current API
+
+- Add to UI:
+  - Bug report & feedback link
+  - Debug tips
+  - Warning
+  - Potentially cheatsheet with current API?
+
 ### Future releases
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
