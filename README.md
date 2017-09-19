@@ -272,7 +272,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
   - Bug report & feedback link
   - Debug tips
   - Warning
-  - Potentially cheatsheet with current API?
+  - Cheatsheet with current API
 
 ### Future releases
 
@@ -283,3 +283,5 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 - Implement blendMode()
 
 - Allow users to create multiple canvas artboards? Maybe?
+
+- Figure out if it's possible to import external libraries?
