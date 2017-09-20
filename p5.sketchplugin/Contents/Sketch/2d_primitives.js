@@ -340,8 +340,8 @@ function arc(a,b,c,d,start,stop) {
 
   artboard.addLayers([shape])
   artboard.addLayers([mask])
-  mask.select_byExpandingSelection(true, true)
-  shape.select_byExpandingSelection(true, true)
+  mask.select_byExtendingSelection(true, true);
+  shape.select_byExtendingSelection(true, true);
 
   var intersectAction = doc.actionsController().actionForID("MSIntersectAction");
   if (intersectAction.validate()) {

@@ -56,20 +56,20 @@ function shorten(list) {
   return list;
 };
 
- function shuffle(arr, bool) {
-  var isView = ArrayBuffer && ArrayBuffer.isView && ArrayBuffer.isView(arr);
-  arr = bool || isView ? arr : arr.slice();
+function shuffle(arr, boolean) {
+ var isView = ArrayBuffer && ArrayBuffer.isView && ArrayBuffer.isView(arr);
+ arr = boolean || isView ? arr : arr.slice();
 
-  var rnd, tmp, idx = arr.length;
-  while (idx > 1) {
-    rnd = Math.random()*idx | 0;
+ var rnd, tmp, idx = arr.length;
+ while (idx > 1) {
+   rnd = Math.random()*idx | 0;
 
-    tmp = arr[--idx];
-    arr[idx] = arr[rnd];
-    arr[rnd] = tmp;
-  }
+   tmp = arr[--idx];
+   arr[idx] = arr[rnd];
+   arr[rnd] = tmp;
+ }
 
-  return arr;
+ return arr;
 };
 
 function sort(list, count) {

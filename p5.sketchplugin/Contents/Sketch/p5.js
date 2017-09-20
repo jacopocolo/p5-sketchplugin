@@ -1,8 +1,8 @@
 @import "MochaJSDelegate.js";
 @import 'utils.js'
 @import 'notsupported.js'
-@import '2d_primitives.js'
 @import 'array_functions.js'
+@import '2d_primitives.js'
 
 var ctx, doc, selection, page, view, artboards;
 
