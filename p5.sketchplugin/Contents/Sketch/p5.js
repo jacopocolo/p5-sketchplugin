@@ -1,7 +1,6 @@
 @import "MochaJSDelegate.js";
 @import 'utils.js'
 @import 'notsupported.js'
-@import 'array_functions.js'
 @import '2d_primitives.js'
 
 var ctx, doc, selection, page, view, artboards;
@@ -455,40 +454,40 @@ function noise(x,y,z) {
       return r;
     };
 
-var seed;
-
-function noiseSeed(seed) {
-  // Linear Congruential Generator
-  // Variant of a Lehman Generator
-  var lcg = (function() {
-    // Set to values from http://en.wikipedia.org/wiki/Numerical_Recipes
-    // m is basically chosen to be large (as it is the max period)
-    // and for its relationships to a and c
-    var m = 4294967296,
-    // a - 1 should be divisible by m's prime factors
-    a = 1664525,
-     // c and m should be co-prime
-    c = 1013904223,
-    seed, z;
-    return {
-      setSeed : function(val) {
-        // pick a random seed if val is undefined or null
-        // the >>> 0 casts the seed to an unsigned 32-bit integer
-        z = seed = (val == null ? Math.random() * m : val) >>> 0;
-      },
-      getSeed : function() {
-        return seed;
-      },
-      rand : function() {
-        // define the recurrence relationship
-        z = (a * z + c) % m;
-        // return a float in [0, 1)
-        // if z = m then z / m = 0 therefore (z % m) / m < 1 always
-        return z / m;
-      }
-    };
-  }())
-};
+// var seed;
+//
+// function noiseSeed(seed) {
+//   // Linear Congruential Generator
+//   // Variant of a Lehman Generator
+//   var lcg = (function() {
+//     // Set to values from http://en.wikipedia.org/wiki/Numerical_Recipes
+//     // m is basically chosen to be large (as it is the max period)
+//     // and for its relationships to a and c
+//     var m = 4294967296,
+//     // a - 1 should be divisible by m's prime factors
+//     a = 1664525,
+//      // c and m should be co-prime
+//     c = 1013904223,
+//     seed, z;
+//     return {
+//       setSeed : function(val) {
+//         // pick a random seed if val is undefined or null
+//         // the >>> 0 casts the seed to an unsigned 32-bit integer
+//         z = seed = (val == null ? Math.random() * m : val) >>> 0;
+//       },
+//       getSeed : function() {
+//         return seed;
+//       },
+//       rand : function() {
+//         // define the recurrence relationship
+//         z = (a * z + c) % m;
+//         // return a float in [0, 1)
+//         // if z = m then z / m = 0 therefore (z % m) / m < 1 always
+//         return z / m;
+//       }
+//     };
+//   }())
+// };
 
 /*----------------
 MATH FUNCTIONS
@@ -534,8 +533,7 @@ function lerp(start, stop, amt) {
   return amt*(stop-start)+start;
 };
 
-//uncomment on release. It overwrites Sketch log()
-//function log(n) {return Math.log(n)};
+function logarithm(n) {return Math.log(n)};
 
 function mag(x, y) {
   return Math.sqrt(x*x+y*y);
@@ -565,7 +563,7 @@ function norm(n, start, stop) {
   return this.map(n, start, stop, 0, 1);
 };
 
-function pow(n) {return Math.pow(n)};
+function pow(n,e) {return Math.pow(n,e)};
 
 function round(n) {return Math.round(n)};
 

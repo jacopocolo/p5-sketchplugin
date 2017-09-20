@@ -297,94 +297,188 @@ rect(0,0,100,100)
 
 # Data
 ## Array Functions
-append()
-arrayCopy()
-concat()
-reverse()
-shorten()
-shuffle()
-sort()
-splice()
-subset()
+### append(array,value)
+Adds a value to the end of an array. Extends the length of the array by one. Maps to Array.push().
 
-## Conversion
-float()
-int()
-str()
-boolean()
-byte()
-char()
-unchar()
-hex()
-unhex()
+### arrayCopy(src,srcPosition,dst,dstPosition,length)
+Copies an array (or part of an array) to another array. The src array is copied to the dst array, beginning at the position specified by srcPosition and into the position specified by dstPosition. The number of elements to copy is determined by length. Note that copying values overwrites existing values in the destination array. To append values instead of overwriting them, use concat().
 
-## String Functions
-join()
-match()
-matchAll()
-nf()
-nfc()
-nfp()
-nfs()
-split()
-splitTokens()
-trim()
+The simplified version with only two arguments, arrayCopy(src, dst), copies an entire array to another of the same size. It is equivalent to arrayCopy(src, 0, dst, 0, src.length).
+
+Using this function is far more efficient for copying array data than iterating through a for() loop and copying each element individually.
+
+### concat(a,b)
+Concatenates two arrays, maps to Array.concat(). Does not modify the input arrays.
+
+### reverse(list)
+Reverses the order of an array, maps to Array.reverse()
+
+### shorten(list)
+Decreases an array by one element and returns the shortened array, maps to Array.pop().
+
+### shuffle(array,[bool])
+Randomizes the order of the elements of an array.
+
+### sort(list,[count])
+Sorts an array of numbers from smallest to largest, or puts an array of words in alphabetical order. The original array is not modified; a re-ordered array is returned. The count parameter states the number of elements to sort. For example, if there are 12 elements in an array and count is set to 5, only the first 5 elements in the array will be sorted.
+
+### splice(list,value,position)
+Inserts a value or an array of values into an existing array. The first parameter specifies the initial array to be modified, and the second parameter defines the data to be inserted. The third parameter is an index value which specifies the array position from which to insert data. (Remember that array index numbering starts at zero, so the first position is 0, the second position is 1, and so on.)
+
+### subset(list,start,[count])
+Extracts an array of elements from an existing array. The list parameter defines the array from which the elements will be copied, and the start and count parameters specify which elements to extract. If no count is given, elements will be extracted from the start to the end of the array. When specifying the start, remember that the first array element is 0. This function does not change the source array.
 
 ## Loading & Displaying
-image()
+### image(name,x,y)
+Add an image to the artboard. The “name” parameter is the exact name of an existing symbol in string format. The image is placed in (x,y) and maintains the same width and height as defined in the symbol.
 
-symbol()
-This function does not exist in p5.js for browser.
+You can call it like this:
+```javascript
+image("logo",30, 20);
+```
 
-get([])
-This function does not exist in p5.js for browser.
+### image(name,x,y)
+Add a symbol to the artboard. This function does not exist in p5.js for browser. The “name” parameter is the exact name of an existing symbol in string format. The image is placed in (x,y) and maintains the same width and height as defined in the symbol.
+
+You can call it like this:
+```javascript
+image("button",30, 20);
+```
+
+### get([url])
+Returns a .json from a url that you can use in your script. This function does not exist in p5.js for browser but it mimics what jQuery's get would do. The square brackets inside the round brackets are mandatory.
+
+You can call it like this:
+```javascript
+var json = get(['http://api.open-notify.org/astros.json']);
+```
 
 ## Calculation
-abs()
-ceil()
-constrain()
-dist()
-exp()
-floor()
-lerp()
-log()
-mag()
-map()
-max()
-min()
-norm()
-pow()
-round()
-sq()
-sqrt()
+### abs(n)
+Calculates the absolute value (magnitude) of a number. Maps to Math.abs(). The absolute value of a number is always positive.
+
+### ceil(n)
+Calculates the closest int value that is greater than or equal to the value of the parameter. Maps to Math.ceil(). For example, ceil(9.03) returns the value 10.
+
+### constrain(n,low,high)
+Constrains a value between a minimum and maximum value.
+
+### dist(x1,y1,x2,y2)
+Calculates the distance between two points.
+
+### exp(n)
+Returns Euler's number e (2.71828...) raised to the power of the n parameter. Maps to Math.exp().
+
+### floor(n)
+Calculates the closest int value that is less than or equal to the value of the parameter. Maps to Math.floor().
+
+### lerp(start,stop,amt)
+Calculates a number between two numbers at a specific increment. The amt parameter is the amount to interpolate between the two values where 0.0 equal to the first point, 0.1 is very near the first point, 0.5 is half-way in between, etc. The lerp function is convenient for creating motion along a straight path and for drawing dotted lines.
+
+### logarithm(n)
+Calculates the natural logarithm (the base-e logarithm) of a number. This function expects the n parameter to be a value greater than 0.0. Maps to Math.log().
+
+Note: in p5.js this function is called just log(). Sketch however uses log() for logging items to macOS console. Since log() is extremely useful for debugging, I decided to rename this function.
+
+### mag(a,b)
+Calculates the magnitude (or length) of a vector. A vector is a direction in space commonly used in computer graphics and linear algebra. Because it has no "start" position, the magnitude of a vector can be thought of as the distance from the coordinate 0,0 to its x,y value. Therefore, mag() is a shortcut for writing dist(0, 0, x, y).
+
+### map(value,start1,stop1,start2,stop2)
+Re-maps a number from one range to another.
+
+### max(n0)
+Determines the largest value in a sequence of numbers, and then returns that value. max() accepts any number of Number parameters, or an Array of any length.
+
+### min(n0)
+Determines the smallest value in a sequence of numbers, and then returns that value. min() accepts any number of Number parameters, or an Array of any length.
+
+### norm(value,start,stop)
+Normalizes a number from another range into a value between 0 and 1. Identical to map(value, low, high, 0, 1). Numbers outside of the range are not clamped to 0 and 1, because out-of-range values are often intentional and useful.
+
+### pow(n,e)
+Facilitates exponential expressions. The pow() function is an efficient way of multiplying numbers by themselves (or their reciprocals) in large quantities. For example, pow(3, 5) is equivalent to the expression 33333 and pow(3, -5) is equivalent to 1 / 33333. Maps to Math.pow().
+
+### round(n)
+Calculates the integer closest to the n parameter. For example,
+round(133.8) returns the value 134. Maps to Math.round().
+
+### sq(n)
+Squares a number (multiplies a number by itself). The result is always a positive number, as multiplying two negative numbers always yields a positive result. For example, -1 * -1 = 1.
+
+### sqrt(n)
+Calculates the square root of a number. The square root of a number is always positive, even though there may be a valid negative root. The square root s of number a is such that s*s = a. It is the opposite of squaring. Maps to Math.sqrt().
 
 ## Noise
-noise()
-noiseDetail()
-noiseSeed()
-Random
-randomSeed()
-random()
-randomGaussian()
+### noise(x,[y],[z])
+Returns the Perlin noise value at specified coordinates. Perlin noise is a random sequence generator producing a more natural ordered, harmonic succession of numbers compared to the standard random() function
+
+## Random
+### random([min],[max])
+Return a random floating-point number. Takes either 0, 1 or 2 arguments. If no argument is given, returns a random number from 0 up to (but not including) 1. If one argument is given and it is a number, returns a random number from 0 up to (but not including) the number. If one argument is given and it is an array, returns a random element from that array. If two arguments are given, returns a random number from the first argument up to (but not including) the second argument.
 
 ## Trigonometry
-acos()
-asin()
-atan()
-atan2()
-cos()
-sin()
-tan()
-degrees()
-radians()
+### cos(angle)
+Calculates the cosine of an angle. Parameters need to be entered in Radians, you can convert from degrees to radians with radians(). Values are returned in the range -1 to 1.
 
-## Typography
+### sin(angle)
+Calculates the sine of an angle. Parameters need to be entered in Radians, you can convert from degrees to radians with radians(). Values are returned in the range -1 to 1.
 
+### tan()
+Calculates the tangent of an angle. Parameters need to be entered in Radians, you can convert from degrees to radians with radians(). This function takes into account the current angleMode. Values are returned in the range -1 to 1.
+
+### degrees(angle)
+Converts radians to degrees.
+
+### radians()
+Converts degrees to radians.
+
+# Typography
 ## Attributes
-textAlign()
-textLeading()
-textSize()
+### textAlign(horizAlign)
+Sets the current alignment for drawing text. Accepts LEFT, CENTER, or RIGHT as parameters.
+
+You can call it like this:
+```javascript
+textAlign(CENTER);
+text("Lorem ipsum",0,0,100,100);
+```
+
+### textLeading(n)
+Sets the spacing, in pixels, between lines of text. This setting will be used in all subsequent calls to the text() function.
+
+You can call it like this:
+```javascript
+textLeading(8);
+text("Lorem ipsum dolor sit amet",0,0,100,100);
+```
+
+### textSize(size)
+Sets the current font size. This size will be used in all subsequent calls to the text() function. Font size is measured in pixels.
+
+You can call it like this:
+```javascript
+textSize(26);
+text("Lorem ipsum dolor sit amet",0,0,100,100);
+```
 
 ## Loading & Displaying
-text()
-textFont()
+### text(str,x,y,[x2],[y2])
+Draws text to the screen. Displays the information specified in the first parameter on the screen in the position specified by the additional parameters. A default font will be used unless a font is set with the textFont() function and a default size will be used unless a font is set with textSize(). Change the color of the text with the fill() function. Change the outline of the text with the stroke() and strokeWeight() functions.
+
+The text displays in relation to the textAlign() function, which gives the option to draw to the left, right, and center of the coordinates.
+
+The x2 and y2 parameters define a rectangular area to display within and may only be used with string data.
+
+You can call it like this:
+```javascript
+text("Lorem ipsum dolor sit amet",0,0,100,100);
+```
+
+### textFont(fontName)
+Sets the current font that will be drawn with the text() function.
+
+You can call it like this:
+```javascript
+textFont("Georgia")
+text("Lorem ipsum dolor sit amet",0,0,100,100);
+```
