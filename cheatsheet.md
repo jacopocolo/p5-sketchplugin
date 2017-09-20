@@ -1,6 +1,6 @@
-## Color
-### Settings
-##### background()
+# Color
+## Settings
+#### background()
 It sets the background color of the p5canvas artboard. The default color is white. It accepts hex, rgb and rgba values.
 You can call it like this:
 ```javascript
@@ -15,7 +15,7 @@ or
 background(0,255,0,100) //Alpha values are defined in this notation from 0 to 255
 ```
 
-##### fill()
+#### fill()
 Sets the color used for Fills. The default fill color is white. It accepts hex, rgb and rgba values.
 You can call it like this:
 ```javascript
@@ -30,13 +30,13 @@ or
 fill(255,0,0,100) //Alpha values are defined in this notation from 0 to 255
 ```
 
-##### noFill()
+#### noFill()
 Removes Fills. If both noStroke() and noFill() are called, nothing will be drawn.
 
-##### noStroke()
+#### noStroke()
 Removes Borders. If both noStroke() and noFill() are called, nothing will be drawn.
 
-##### stroke()
+#### stroke()
 Sets the color used for Borders. The default fill color is black. It accepts hex, rgb and rgba values.
 
 You can call it like this:
@@ -52,9 +52,9 @@ or
 stroke(0,255,0,100) //Alpha values are defined in this notation from 0 to 255
 ```
 
-## Shape
-### 2D Primitives
-##### arc(x,y,w,h,start,stop)
+# Shape
+## 2D Primitives
+#### arc(x,y,w,h,start,stop)
 Draw an arc. The arc has center in (x, y), has a width of w and an height of h. Start and stop are starting point and ending point of the angle measured in radians. P5.js has another argument for arc: OPEN, CHORD or PIE. Currently all arcs drawn as PIE.
 
 You can call it like this:
@@ -62,7 +62,7 @@ You can call it like this:
 arc(250,250,500,100,0,PI)
 ```
 
-##### ellipse(x,y,w,h)
+#### ellipse(x,y,w,h)
 Draws an ellipse (oval). The ellipse has center in (x, y), has a width of w and an height of h.
 
 You can call it like this:
@@ -70,7 +70,7 @@ You can call it like this:
 ellipse(250,250,500,100)
 ```
 
-##### line(x1,y1,x2,y2)
+#### line(x1,y1,x2,y2)
 Draws a line (a direct path between two points). The line starts in (x1,y1) and ends in (x2,y2). To color a line, use the stroke() function. A line cannot be filled, therefore the fill() function will not affect the color of a line. Lines are drawn with a width of one pixel by default, but this can be changed with the strokeWeight() function.
 
 You can call it like this:
@@ -78,7 +78,7 @@ You can call it like this:
 line(0,0,100,100)
 ```
 
-##### point()
+#### point()
 Draws a point (a 1x1 rectangle). The point has a top left corner in (x1,y1). The color of the point is determined by the current stroke.
 
 You can call it like this:
@@ -102,7 +102,7 @@ You can call it like this:
 rect(30, 20, 55, 55);
 ```
 
-### triangle(x1,y1,x2,y2,x3,y3)
+#### triangle(x1,y1,x2,y2,x3,y3)
 Draws a triangle. A triangle is a plane created by connecting three points. The three points are located in (x1,y1), (x2,y2) and (x3,y3).
 
 You can call it like this:
@@ -110,8 +110,8 @@ You can call it like this:
 triangle(30, 75, 58, 20, 86, 75);
 ```
 
-### Attributes
-#### strokeCap(CAP)
+## Attributes
+##### strokeCap(CAP)
 Sets the style for rendering line endings. The options are: SQUARE, PROJECT, and ROUND. The default cap is SQUARE.
 
 You can call it like this:
@@ -139,7 +139,7 @@ You can call it like this:
 strokeWeight(4);
 ```
 
-### Curves
+## Curves
 #### bezier(x1,y1,x2,y2,x3,y3,x4,y4)
 Draws a cubic Bezier curve on the screen. These curves are defined by a series of anchor and control points. The first two parameters (x1,y1) specify the first anchor point and the last two parameters (x4,y4) specify the other anchor point, which become the first and last points on the curve. The middle parameters (x2,y2) and (x3,y3) specify the two control points which define the shape of the curve. Approximately speaking, control points "pull" the curve towards them.
 
