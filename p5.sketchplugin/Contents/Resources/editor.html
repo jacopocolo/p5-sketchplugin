@@ -104,26 +104,46 @@
 			myCodeMirror.setValue(value);
 		};
 
-		var pieChart =`var angles = [ 30, 10, 45, 35, 60, 38, 75, 67 ];
+		var pieChart =`//The percentages you need to visualize
+var percentages = [30,60,10];
 
 function setup() {
-  createCanvas(720, 400);
+  //Creates an 400x400 artboard
+  createCanvas(400, 400);
+  //Does not render Borders
   noStroke();
-  noLoop();  // Run once and stop
 }
 
 function draw() {
-  background(100);
-  pieChart(300, angles);
+  //Custom function defined underneath
+  pieChart(300, percentages);
 }
 
+//We define a function called pieChart that asks
+//for diameter and percentage
 function pieChart(diameter, data) {
-  var lastAngle = 0;
+
+  //We keep trak of the last angle drawn. The initial value
+  //defines where the pie chart stars. -HALF_PI it 12 on a clock.
+  var lastAngle = -HALF_PI;
+
+  //We run a loop that runs as many times as there
+  //are elements in the percentages array
   for (var i = 0; i < data.length; i++) {
-    var gray = map(i, 0, data.length, 0, 255);
-    fill(gray);
-    arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
-    lastAngle += radians(angles[i]);
+
+    //Every time we run the loop we define a random rgb color
+    //for each section of the pie
+    fill(random(255),random(255),random(255));
+
+    //We draw an arc that is centered at the center of the artboard,
+    //has the first parameter of pieChart as a diameter
+    //and takes one of the values from percentage, divides it by 100
+    //multiplies it by 360 (so we get the percentage in degrees)
+    //and then converts it into radians for angle
+    //The variabile lastAngle is used to make sure we have arcs that
+    //start where the last arc ended.
+    arc(width/2, height/2, diameter, diameter, lastAngle,  lastAngle+radians((data[i]/100)*360));
+    lastAngle += radians((data[i]/100)*360);
   }
 }`;
 
