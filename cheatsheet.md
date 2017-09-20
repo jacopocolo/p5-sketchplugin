@@ -1,6 +1,16 @@
+# Index
+[Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#color)
+  - [Settings](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#settings)
+    - [background()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#background)
+    - [fill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#fill)
+    - [noFill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nofill)
+    - [noStroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nostroke)
+    - [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#stroke)
+
+
 # Color
 ## Settings
-### background()
+### background(color)
 It sets the background color of the p5canvas artboard. The default color is white. It accepts hex, rgb and rgba values.
 You can call it like this:
 ```javascript
@@ -15,7 +25,7 @@ or
 background(0,255,0,100) //Alpha values are defined in this notation from 0 to 255
 ```
 
-### fill()
+### fill(color)
 Sets the color used for Fills. The default fill color is white. It accepts hex, rgb and rgba values.
 You can call it like this:
 ```javascript
@@ -36,7 +46,7 @@ Removes Fills. If both noStroke() and noFill() are called, nothing will be drawn
 ### noStroke()
 Removes Borders. If both noStroke() and noFill() are called, nothing will be drawn.
 
-### stroke()
+### stroke(color)
 Sets the color used for Borders. The default fill color is black. It accepts hex, rgb and rgba values.
 
 You can call it like this:
