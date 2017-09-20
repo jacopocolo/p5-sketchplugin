@@ -276,7 +276,7 @@ Sketch doesn’t have a console but relies on the OSX Console for debugging. If 
 
 ### Future releases
 
-- Implement rgb(255,255,255) and rgba(255,255,255,1) notations for fill and stroke
+- Implement 'rgb(255,255,255)' and 'rgba(255,255,255,1)' notations for fill and stroke
 
 - Set a default for create canvas so it create a canvas even if the function is not actually called
 
