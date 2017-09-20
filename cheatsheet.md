@@ -1,11 +1,11 @@
 # Index
 [Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#color)
   - [Settings](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#settings)
-    - [background()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#background)
-    - [fill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#fill)
+    - [background()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#backgroundcolor)
+    - [fill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#fillcolor)
     - [noFill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nofill)
     - [noStroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nostroke)
-    - [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#stroke)
+    - [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokecolor)
 
 
 # Color
@@ -347,12 +347,12 @@ You can call it like this:
 image("logo",30, 20);
 ```
 
-### image(name,x,y)
+### symbol(name,x,y)
 Add a symbol to the artboard. This function does not exist in p5.js for browser. The “name” parameter is the exact name of an existing symbol in string format. The image is placed in (x,y) and maintains the same width and height as defined in the symbol.
 
 You can call it like this:
 ```javascript
-image("button",30, 20);
+symbol("button",30, 20);
 ```
 
 ### get([url])
