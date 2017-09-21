@@ -3,7 +3,7 @@
   "description" : "A plugin to run some P5.js code inside Sketch",
   "author" : "Jacopo Colò",
   "homepage": "https://github.com/jacopocolo/p5-sketchplugin",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "identifier" : "com.jacopocolo.sketch.p5",
   "appcast": "https://raw.githubusercontent.com/jacopocolo/p5-sketchplugin/master/appcast.xml",
   "commands" : [
