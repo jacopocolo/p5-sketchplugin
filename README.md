@@ -1,6 +1,8 @@
 # p5*Sketchapp
 ##### Version: 0.9
 
+![gif of p5*Sketchapp](https://media.giphy.com/media/l378B3HQ5IodSFHVe/giphy.gif)
+
 p5*Sketchapp is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
 
 After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create manually when you are done.
