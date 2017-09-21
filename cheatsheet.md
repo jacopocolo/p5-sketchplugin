@@ -1,117 +1,101 @@
 # Index
-[Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#color)
-  - [Settings](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#settings)
-    - [background()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#backgroundcolor)
-    - [fill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#fillcolor)
-    - [noFill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nofill)
-    - [noStroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nostroke)
-    - [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokecolor)
-
-Shape
-  - 2D Primitives
-    - arc()
-    - ellipse()
-    - line()
-    - point()
-    - quad()
-    - rect()
-    - triangle()
-
-  - Attributes
-    - strokeCap()
-    - strokeJoin()
-    - strokeWeight()
-
-  - Curves
-    - bezier()
-
-  - Vertex
-    - beginShape()
-    - vertex()
-    - bezierVertex()
-    - endShape()
-
-Constants
-  - HALF_PI
-  - PI
-  - QUARTER_PI
-  - TAU
-  - TWO_PI
-
-Structure
-  - setup()
-  - draw()
-  - push()
-  - pop()
-
-Environment
-  - width
-  - height
-
-Rendering
-  - createCanvas()
-
-Transform
-  - rotate()
-  - translate()
-
-Data
-  - Array functions
-    - append()
-    - arrayCopy()
-    - concat()
-    - reverse()
-    - shorten()
-    - shuffle()
-    - sort()
-    - splice()
-    - subset()
-
-Loading & Displaying
-  - image()
-  - symbol()*
-  - get()*
-
-Calculation
-   - abs()
-   - ceil()
-   - constrain()
-   - dist()
-   - exp()
-   - floor()
-   - lerp()
-   - logarithm()*
-   - mag()
-   - map()
-   - max()
-   - min()
-   - norm()
-   - pow()
-   - round()
-   - sq()
-   - sqrt()
-
-Noise
-  - noise()
-
-Random
-  - random()
-
-Trigonometry
-  - cos()
-  - sin()
-  - tan()
-  - degrees()
-  - radians()
-
-Typography
-  - Attributes
-    - textAlign()
-    - textLeading()
-    - textSize()
-  - Loading & Displaying
-    - text()
-    - textFont()
+- [Color](#color)
+  * [Settings](#settings)
+    + [background()](#background-color-)
+    + [fill()](#fill-color-)
+    + [noFill()](#nofill--)
+    + [noStroke()](#nostroke--)
+    + [stroke()](#stroke-color-)
+- [Shape](#shape)
+  * [2D Primitives](#2d-primitives)
+    + [arc()](#arc-x-y-w-h-start-stop-)
+    + [ellipse()](#ellipse-x-y-w-h-)
+    + [line()](#line-x1-y1-x2-y2-)
+    + [point()](#point-x1-y1-)
+    + [quad()](#quad-x1-y1-x2-y2-x3-y3-x4-y4-)
+    + [rect()](#rect-x-y-w-h-)
+    + [triangle()](#triangle-x1-y1-x2-y2-x3-y3-)
+  * [Attributes](#attributes)
+    + [strokeCap()](#strokecap-cap-)
+    + [strokeJoin()](#strokejoin-join-)
+    + [strokeWeight()](#strokeweight-n-)
+  * [Curves](#curves)
+    + [bezier()](#bezier-x1-y1-x2-y2-x3-y3-x4-y4-)
+    + [Vertex](#vertex)
+    + [beginShape()](#beginshape--)
+    + [vertex()](#vertex-x1-x1-)
+    + [bezierVertex()](#beziervertex-x2-y2-x3-y3-x4-y4-)
+    + [endShape()](#endshape-close-)
+- [Constants](#constants)
+    + [HALF_PI](#half-pi)
+    + [PI](#pi)
+    + [QUARTER_PI](#quarter-pi)
+    + [TAU](#tau)
+    + [TWO_PI](#two-pi)
+- [Structure](#structure)
+    + [setup()](#setup--)
+    + [draw()](#draw--)
+    + [push()](#push--)
+    + [pop()](#pop--)
+- [Environment](#environment)
+    + [width](#width)
+    + [height](#height)
+- [Rendering](#rendering)
+    + [createCanvas()](#createcanvas--)
+- [Transform](#transform)
+    + [rotate()](#rotate-angle-)
+    + [translate()](#translate-x-y-)
+- [Data](#data)
+  * [Array Functions](#array-functions)
+    + [append()](#append-array-value-)
+    + [arrayCopy()](#arraycopy-src-srcposition-dst-dstposition-length-)
+    + [concat()](#concat-a-b-)
+    + [reverse()](#reverse-list-)
+    + [shorten()](#shorten-list-)
+    + [shuffle()](#shuffle-array--bool--)
+    + [sort()](#sort-list--count--)
+    + [splice()](#splice-list-value-position-)
+    + [subset()](#subset-list-start--count--)
+  * [Loading & Displaying](#loading---displaying)
+    + [image()](#image-name-x-y-)
+    + [symbol()](#symbol-name-x-y-)
+    + [get()](#get--url--)
+  * [Calculation](#calculation)
+    + [abs()](#abs-n-)
+    + [ceil()](#ceil-n-)
+    + [constrain()](#constrain-n-low-high-)
+    + [dist()](#dist-x1-y1-x2-y2-)
+    + [exp()](#exp-n-)
+    + [floor()](#floor-n-)
+    + [lerp()](#lerp-start-stop-amt-)
+    + [logarithm()](#logarithm-n-)
+    + [mag()](#mag-a-b-)
+    + [map()](#map-value-start1-stop1-start2-stop2-)
+    + [max()](#max-n0-)
+    + [min()](#min-n0-)
+    + [norm()](#norm-value-start-stop-)
+    + [pow()](#pow-n-e-)
+    + [round()](#round-n-)
+    + [sq()](#sq-n-)
+    + [sqrt()](#sqrt-n-)
+  * [Noise](#noise)
+    + [noise()](#noise-x--y---z--)
+  * [Random](#random)
+    + [random()](#random--min---max--)
+  * [Trigonometry](#trigonometry)
+    + [cos()](#cos-angle-)
+    + [sin()](#sin-angle-)
+    + [tan()](#tan-angle-)
+    + [degrees()](#degrees-angle-)
+    + [radians()](#radians-angle-)
+- [Typography](#typography)
+  * [Attributes](#attributes-1)
+    + [textAlign()](#textalign-horizalign-)
+    + [textLeading()](#textleading-n-)
+    + [textSize()](#textsize-size-)
+  * [Loading & Displaying](#loading---displaying-1)
+    + [text()](#text-str-x-y--x2---y2--)
+    + [textFont()](#textfont-fontname-)
 
 # Color
 ## Settings
