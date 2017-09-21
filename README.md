@@ -19,11 +19,11 @@ Will generate a 200x200 artboard with a line going from 0,0 to 100,100.
 ![](https://github.com/jacopocolo/p5-sketchplugin/blob/master/example.png?raw=true)
 
 
-After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create manually when you are done.
+After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done.
 
 ##### An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
-## Limitations
+### Limitations
 
 p5*Sketchapp doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
 
@@ -31,7 +31,7 @@ The vast majority of the functions implemented match the behaviour available in 
 
 A warning: you are about to execude code inside Sketch. The plugin is designed to act only on a single artboard and tested heavily, but bugs and broken code could still be dangerous. Save your work before using this plugin.
 
-## Reference
+### Reference
 
 - [Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#color)
   * Settings
@@ -131,7 +131,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [text()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textstrxyx2y2)
     + [textFont()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textfontfontname)
 
-## Debugging your sketch
+### Debugging your sketch
 Debugging in Sketch is not simple. Sketch doesn’t have a console but relies on macOS Console for debugging. If your code is not working as expected, you can take a look there and see if something pops up. If you are running macOS Sierra or above, see [this thread](http://sketchplugins.com/d/50-i-can-t-get-anymore-debugging-from-console-app-system-log) to configure your Console to catch Sketch issues.
 
 Even before looking at the console, however, do this:
