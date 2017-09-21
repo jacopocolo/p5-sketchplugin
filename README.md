@@ -1,5 +1,4 @@
 # p5*Sketchapp
-##### Version: 0.9
 
 ![](https://i.imgur.com/gOaUKPk.gif)
 
