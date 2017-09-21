@@ -1,11 +1,17 @@
 # p5*Sketchapp
 ##### Version: 0.9
 
-p5*Sketchapp is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch.
+p5*Sketchapp is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
 
-p5*Sketchapp doesn't match the whole p5.js API but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the reference page to see what is available.
+After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create manually when you are done.
 
-The vast majority of the functions implemented match the behaviour available in p5.js. You can copy and paste code from the p5.js website examples and in most cases it will simply work.
+An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
+
+## Limitations
+
+p5*Sketchapp doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
+
+The vast majority of the functions implemented match the behaviour available in p5.js. You can copy and paste code from the [p5.js website examples](https://p5js.org/examples/) and in most cases it will simply work. If it doesn't, take a look at the [debugging](#debugging) section for tips on how to adjust your code.
 
 A warning: you are about to execude code inside Sketch. The plugin is designed to act only on a single artboard and tested heavily, but bugs and broken code could still be dangerous. Save your work before using this plugin.
 
