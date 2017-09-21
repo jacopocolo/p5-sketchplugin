@@ -5,7 +5,7 @@ p5*Sketchapp is a plugin for running some [p5.js](http://p5js.org/) code inside 
 
 After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create manually when you are done.
 
-An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
+##### An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
 ## Limitations
 
