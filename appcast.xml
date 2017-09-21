@@ -5,6 +5,17 @@
     <link>http://sparkle-project.org/files/sparkletestcast.xml</link>
     <description>A plugin for running p5.js code inside Sketch</description>
     <language>en</language>
+    <item>
+      <title>Version 0.9.2</title>
+      <description>
+        <![CDATA[
+          <ul>
+            <li>Pre-release version</li>
+          </ul>
+        ]]>
+      </description>
+      <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.1/p5.0.9.1.sketchplugin.zip" sparkle:version="1.1" />
+    </item>
       <item>
         <title>Version 0.2</title>
         <description>
