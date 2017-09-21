@@ -61,7 +61,7 @@
 		<span class="preset">
 			<span>Select from preset:</span><br>
 		<select>
-				<option value="latest">Latest sketch</option>
+				<option value="latest">Latest code</option>
 				<option value="basic">Basic sketch</option>
 				<option value="pieChart">Pie chart</option>
 				<option value="get">Get remote json</option>
@@ -76,13 +76,18 @@
 
 		/*I tried to code this on the plugin side but without success. So the file is actually loaded in the editor by the webview*/
 		function getLatest() {
-			jQuery.get({
-			url: '../Sketch/sketch.js',
-			cache: false
-			}).then(function(data) {
-					var code = data.replace(/\brectangle\b/g,'rect');
-					console.log(code);
-					setValue(code);
+			$.ajax({
+			    url: "../Sketch/sketch.js",
+			    cache: false,
+			    error: function(XMLHttpRequest, textStatus, errorThrown){
+							$('select').val("basic");
+							setValue(defaultValue);
+			    },
+			    success: function(data){
+						var code = data.replace(/\brectangle\b/g,'rect');
+						console.log(code);
+						setValue(code);
+					}
 			});
 		};
 
@@ -146,19 +151,28 @@ function pieChart(diameter, data) {
   }
 }`;
 
-		var get = `json = get(['http://api.open-notify.org/astros.json'])
+		var get = `//Get a remote json and assign it to the var json
+var json = get(['http://api.open-notify.org/astros.json'])
 
 function setup() {
 	createCanvas(200, 200)
 }
 
 function draw() {
+  //remove Borders
   noStroke();
+  //set Fills to black
   fill(0);
+  //Set the title with a mix of static text and dynamic text.
+  //If you do log(json) and check the macOS console you’ll see
+  //the content of the file. Dot notation gives you access to values
   text("Astronauts in space now: "+json.number,10,40,200,20);
-  textSize(14);
+  //Let's move a little bit down
   translate(0,65);
+  	//Let's loop through the json.people and write out all the names
     for (x=0;x<json.people.length;x++) {
+    //Tip: you can use the x value from the loop
+    //to space names vertically
 	text(json.people[x].name,10,x*15,200,20);
   }
 }`;

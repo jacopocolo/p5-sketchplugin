@@ -133,7 +133,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [text()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textstrxyx2y2)
     + [textFont()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textfontfontname)
 
-### Debugging your sketch
+### Debugging your code
 Debugging in Sketch is not simple. Sketch doesn’t have a console but relies on macOS Console for debugging. If your code is not working as expected, you can take a look there and see if something pops up. If you are running macOS Sierra or above, see [this thread](http://sketchplugins.com/d/50-i-can-t-get-anymore-debugging-from-console-app-system-log) to configure your Console to catch Sketch issues.
 
 Even before looking at the console, however, do this:
