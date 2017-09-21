@@ -72,7 +72,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [image()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#imagenamexy)
     + [symbol()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#symbolnamexy)
     + [get()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#geturl)
-  * [Calculation](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#calculation)
+  * Calculation
     + [abs()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#absn)
     + [ceil()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#ceiln)
     + [constrain()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#constrainnlowhigh)
