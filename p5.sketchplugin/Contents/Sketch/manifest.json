@@ -1,11 +1,11 @@
 {
   "name" : "p5",
-  "description" : "A plugin to run 2D P5.js code inside Sketch",
+  "description" : "A plugin to run some P5.js code inside Sketch",
   "author" : "Jacopo Colò",
   "homepage": "https://github.com/jacopocolo/p5-sketchplugin",
-  "version": "0.9",
+  "version": "0.9.1",
   "identifier" : "com.jacopocolo.sketch.p5",
-  "appcast": "",
+  "appcast": "https://raw.githubusercontent.com/jacopocolo/p5-sketchplugin/master/appcast.xml",
   "commands" : [
     {
       "script" : "p5.js",
@@ -17,8 +17,7 @@
   ],
   "menu" : {
     "items" : [
-      "p5",
-      "runAgain"
+      "p5"
     ],
     "title" : "p5"
   }
