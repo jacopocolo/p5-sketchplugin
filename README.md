@@ -21,6 +21,8 @@ Will generate a 200x200 artboard with a line going from 0,0 to 100,100.
 
 After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done.
 
+## [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
+
 ##### An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
 ### Limitations
