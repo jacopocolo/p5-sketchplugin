@@ -62,10 +62,9 @@
 			<span>Select from preset:</span><br>
 		<select>
 				<option value="latest">Latest sketch</option>
-				<option value="pieChart">Pie chart</option>
 				<option value="basic">Basic sketch</option>
-				<option value="demo">Demo</option>
-				<option value="get">Get</option>
+				<option value="pieChart">Pie chart</option>
+				<option value="get">Get remote json</option>
 			</select>
 		</span>
 	</div>
@@ -147,28 +146,6 @@ function pieChart(diameter, data) {
   }
 }`;
 
-		var demo =`function setup() {
-	createCanvas(500, 500);
-	background(0,255,0);
-}
-
-function draw() {
-  	textSize(24)
-    textFont('Georgia')
-    fill('#0000FF')
-    stroke('#FF0000')
-    strokeWeight(8)
-    point(100,100);
-  	line(0,0,100,100)
-    rect(0,0,100,200)
-    quad(0,0,100,200,400,400,200,90)
-    triangle(0,0,100,200,400,400)
-    ellipse(250,250,500,100)
-    arc(250,250,500,100,0,PI)
-    text('Hello world',10,10,100,200)
-    bezier(85, 20, 10, 10, 90, 90, 15, 80);
-}`;
-
 		var get = `json = get(['http://api.open-notify.org/astros.json'])
 
 function setup() {
@@ -193,8 +170,6 @@ function draw() {
 				getLatest();
 			} else if (this.value == "pieChart") {
 				setValue(pieChart);
-			} else if (this.value == "demo") {
-				setValue(demo);
 			} else if (this.value == "get") {
 				setValue(get);
 			}
