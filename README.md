@@ -11,16 +11,15 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
 
 ## Reference
 
-# Index
 - [Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#color)
-  * [Settings](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#settings)
+  * Settings
     + [background()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#backgroundcolor)
     + [fill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#fillcolor)
     + [noFill()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nofill)
     + [noStroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nostroke)
     + [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokecolor)
 - [Shape](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#shape)
-  * [2D Primitives](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#2d-primitives)
+  * 2D Primitives
     + [arc()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#arcxywhstartstop)
     + [ellipse()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#ellipsexywh)
     + [line()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#linex1y1x2y2)
@@ -28,11 +27,11 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [quad()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#quadx1y1x2y2x3y3x4y4)
     + [rect()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#rectxywh)
     + [triangle()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#trianglex1y1x2y2x3y3)
-  * [Attributes](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#attributes)
+  * Attributes
     + [strokeCap()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokecapcap)
     + [strokeJoin()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokejoinjoin)
     + [strokeWeight()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokeweightn)
-  * [Curves](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#curves)
+  * Curves
     + [bezier()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#bezierx1y1x2y2x3y3x4y4)
     + [Vertex](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#vertex)
     + [beginShape()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#beginshape)
@@ -59,7 +58,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [rotate()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#rotateangle)
     + [translate()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#translatexy)
 - [Data](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#data)
-  * [Array Functions](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#array-functions)
+  * Array Functions
     + [append()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#appendarrayvalue)
     + [arrayCopy()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#arraycopysrcsrcpositiondstdstpositionlength)
     + [concat()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#concatab)
@@ -69,7 +68,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [sort()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#sortlistcount)
     + [splice()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#splicelistvalueposition)
     + [subset()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#subsetliststartcount)
-  * [Loading & Displaying](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#loading--displaying)
+  * Loading & Displaying
     + [image()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#imagenamexy)
     + [symbol()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#symbolnamexy)
     + [get()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#geturl)
@@ -91,9 +90,9 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [round()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#roundn)
     + [sq()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#sqn)
     + [sqrt()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#sqrtn)
-  * [Noise](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#noise)
+  * Noise
     + [noise()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#noisexyz)
-  * [Random](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#random)
+  * Random
     + [random()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#randomminmax)
   * [Trigonometry](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#trigonometry)
     + [cos()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#cosangle)
@@ -102,11 +101,11 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [degrees()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#degreesangle)
     + [radians()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#radiansangle)
 - [Typography](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#typography)
-  * [Attributes](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#attributes1)
+  * Attributes
     + [textAlign()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textalignhorizalign)
     + [textLeading()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textleadingn)
     + [textSize()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textsizesize)
-  * [Loading & Displaying](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#loading--displaying-1)
+  * Loading & Displaying
     + [text()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textstrxyx2y2)
     + [textFont()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#textfontfontname)
 
