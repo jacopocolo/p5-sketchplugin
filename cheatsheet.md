@@ -32,31 +32,28 @@ Shape
     - endShape()
 
 Constants
-
-    - HALF_PI
-    - PI
-    - QUARTER_PI
-    - TAU
-    - TWO_PI
+  - HALF_PI
+  - PI
+  - QUARTER_PI
+  - TAU
+  - TWO_PI
 
 Structure
-
-    - setup()
-    - draw()
-    - push()
-    - pop()
+  - setup()
+  - draw()
+  - push()
+  - pop()
 
 Environment
-
-    - width
-    - height
+  - width
+  - height
 
 Rendering
-    - createCanvas()
+  - createCanvas()
 
 Transform
-    - rotate()
-    - translate()
+  - rotate()
+  - translate()
 
 Data
   - Array functions
@@ -71,13 +68,11 @@ Data
     - subset()
 
 Loading & Displaying
-
-    - image()
-    - symbol()*
-    - get()*
+  - image()
+  - symbol()*
+  - get()*
 
 Calculation
-
    - abs()
    - ceil()
    - constrain()
@@ -97,20 +92,17 @@ Calculation
    - sqrt()
 
 Noise
-
-    - noise()
+  - noise()
 
 Random
-
-    - random()
+  - random()
 
 Trigonometry
-
-    - cos()
-    - sin()
-    - tan()
-    - degrees()
-    - radians()
+  - cos()
+  - sin()
+  - tan()
+  - degrees()
+  - radians()
 
 Typography
   - Attributes
