@@ -7,6 +7,111 @@
     - [noStroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#nostroke)
     - [stroke()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#strokecolor)
 
+Shape
+  - 2D Primitives
+    - arc()
+    - ellipse()
+    - line()
+    - point()
+    - quad()
+    - rect()
+    - triangle()
+
+  - Attributes
+    - strokeCap()
+    - strokeJoin()
+    - strokeWeight()
+
+  - Curves
+    - bezier()
+
+  - Vertex
+    - beginShape()
+    - vertex()
+    - bezierVertex()
+    - endShape()
+
+Constants
+    - HALF_PI
+    - PI
+    - QUARTER_PI
+    - TAU
+    - TWO_PI
+
+Structure
+    - setup()
+    - draw()
+    - push()
+    - pop()
+
+Environment
+    - width
+    - height
+
+Rendering
+    - createCanvas()
+
+Transform
+    - rotate()
+    - translate()
+
+Data
+  - Array functions
+    - append()
+    - arrayCopy()
+    - concat()
+    - reverse()
+    - shorten()
+    - shuffle()
+    - sort()
+    - splice()
+    - subset()
+
+Loading & Displaying
+    - image()
+    - symbol()*
+    - get()*
+
+Calculation
+   - abs()
+   - ceil()
+   - constrain()
+   - dist()
+   - exp()
+   - floor()
+   - lerp()
+   - logarithm()*
+   - mag()
+   - map()
+   - max()
+   - min()
+   - norm()
+   - pow()
+   - round()
+   - sq()
+   - sqrt()
+
+Noise
+    - noise()
+
+Random
+    - random()
+
+Trigonometry
+    - cos()
+    - sin()
+    - tan()
+    - degrees()
+    - radians()
+
+Typography
+  - Attributes
+    - textAlign()
+    - textLeading()
+    - textSize()
+  - Loading & Displaying
+    - text()
+    - textFont()
 
 # Color
 ## Settings
@@ -88,7 +193,7 @@ You can call it like this:
 line(0,0,100,100)
 ```
 
-### point()
+### point(x1,y1)
 Draws a point (a 1x1 rectangle). The point has a top left corner in (x1,y1). The color of the point is determined by the current stroke.
 
 You can call it like this:
@@ -433,13 +538,13 @@ Calculates the cosine of an angle. Parameters need to be entered in Radians, you
 ### sin(angle)
 Calculates the sine of an angle. Parameters need to be entered in Radians, you can convert from degrees to radians with radians(). Values are returned in the range -1 to 1.
 
-### tan()
+### tan(angle)
 Calculates the tangent of an angle. Parameters need to be entered in Radians, you can convert from degrees to radians with radians(). This function takes into account the current angleMode. Values are returned in the range -1 to 1.
 
 ### degrees(angle)
 Converts radians to degrees.
 
-### radians()
+### radians(angle)
 Converts degrees to radians.
 
 # Typography
