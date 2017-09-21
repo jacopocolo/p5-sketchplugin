@@ -32,6 +32,7 @@ Shape
     - endShape()
 
 Constants
+
     - HALF_PI
     - PI
     - QUARTER_PI
@@ -39,12 +40,14 @@ Constants
     - TWO_PI
 
 Structure
+
     - setup()
     - draw()
     - push()
     - pop()
 
 Environment
+
     - width
     - height
 
@@ -68,11 +71,13 @@ Data
     - subset()
 
 Loading & Displaying
+
     - image()
     - symbol()*
     - get()*
 
 Calculation
+
    - abs()
    - ceil()
    - constrain()
@@ -92,12 +97,15 @@ Calculation
    - sqrt()
 
 Noise
+
     - noise()
 
 Random
+
     - random()
 
 Trigonometry
+
     - cos()
     - sin()
     - tan()
