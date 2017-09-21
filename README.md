@@ -94,7 +94,7 @@ A warning: you are about to execude code inside Sketch. The plugin is designed t
     + [noise()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#noisexyz)
   * Random
     + [random()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#randomminmax)
-  * [Trigonometry](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#trigonometry)
+  * Trigonometry
     + [cos()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#cosangle)
     + [sin()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#sinangle)
     + [tan()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md#tanangle)
