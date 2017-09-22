@@ -19,7 +19,7 @@ Will generate a 200x200 artboard with a line going from 0,0 to 100,100.
 ![](https://github.com/jacopocolo/p5-sketchplugin/blob/master/example.png?raw=true)
 
 
-After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done. Your code will be rendered in the same artboard every time your run it. If you want to keep a copy, duplicate the artboard.
+After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done. Your code will rendered in the same artboard every time your run it. If you want to keep a copy, duplicate the artboard.
 
 ### [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
 

@@ -114,7 +114,7 @@ var percentages = [30,60,10];
 function setup() {
   //Creates an 400x400 artboard
   createCanvas(400, 400);
-  //Does not render Borders
+  //Remove Borders
   noStroke();
 }
 
@@ -159,12 +159,12 @@ function setup() {
 }
 
 function draw() {
-  //remove Borders
+  //Remove Borders
   noStroke();
   //set Fills to black
   fill(0);
   //Set the title with a mix of static text and dynamic text.
-  //If you do log(json) and check the macOS console you’ll see
+  //If you do log(json) and check the macOS console you will see
   //the content of the file. Dot notation gives you access to values
   text("Astronauts in space now: "+json.number,10,40,200,20);
   //Let's move a little bit down
