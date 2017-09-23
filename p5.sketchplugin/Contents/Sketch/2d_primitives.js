@@ -292,6 +292,8 @@ function ellipse(a, b, c, d) {
 // It has both a fill and a stroke color
 // You can call it like this: arc(250,250,500,100,0,PI)
 function arc(a,b,c,d,start,stop) {
+  doc.currentPage().changeSelectionBySelectingLayers(nil);
+
   if (drawingContext.hasTranslate()) {
     a = a+drawingContext.translateX();
     b = b+drawingContext.translateY();
