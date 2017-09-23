@@ -669,7 +669,7 @@ function onRun(context) {
         windowHeight = 450;
     var p5Window = NSPanel.alloc().init();
     p5Window.setFrame_display(NSMakeRect(0, 0, windowWidth, windowHeight), true);
-    p5Window.setStyleMask(NSTexturedBackgroundWindowMask | NSTitledWindowMask | NSClosableWindowMask);
+    p5Window.setStyleMask(NSTexturedBackgroundWindowMask | NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask);
     p5Window.setBackgroundColor(NSColor.whiteColor());
     p5Window.standardWindowButton(NSWindowMiniaturizeButton).setHidden(true);
     p5Window.standardWindowButton(NSWindowZoomButton).setHidden(true);
@@ -682,6 +682,7 @@ function onRun(context) {
 
     // Add Web View to window
       var webView = WebView.alloc().initWithFrame(NSMakeRect(0, 0, windowWidth, windowHeight - 24));
+      webView.setAutoresizingMask(NSViewWidthSizable|NSViewHeightSizable);
       var windowObject = webView.windowScriptObject();
       var delegate = new MochaJSDelegate({
 
