@@ -3,7 +3,7 @@
 
 <head>
 	<link rel="stylesheet" href="codemirror.css" />
-
+	<link rel="stylesheet" href="p5-light.css" />
 	<script type="text/javascript" src="codemirror.js"></script>
 	<script type="text/javascript" src="javascript.js"></script>
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
@@ -79,6 +79,7 @@
 		.CodeMirror {
 			height: 90%;
 			width: 100%;
+			font-size: 1.1em;
 		}
 
 		.header {
@@ -140,7 +141,8 @@
 		var options = {
 			lineNumbers: true,
 			autofocus: true,
-			lineWrapping: true
+			lineWrapping: true,
+			theme: 'p5-light'
 		};
 		var myCodeMirror = CodeMirror(document.body, options);
 
