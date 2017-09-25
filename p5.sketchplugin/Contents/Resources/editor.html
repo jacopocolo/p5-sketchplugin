@@ -3,7 +3,7 @@
 
 <head>
 	<link rel="stylesheet" href="codemirror.css" />
-
+	<link rel="stylesheet" href="p5-light.css" />
 	<script type="text/javascript" src="codemirror.js"></script>
 	<script type="text/javascript" src="javascript.js"></script>
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
@@ -23,12 +23,52 @@
 		}
 
 		button {
-			width: 30px;
+			padding-left: 10px;
+			padding-right: 10px;
 			height: 30px;
-			border-radius: 15px;
-			border: none;
+			border-radius: 3px;
+			border: 1px solid #ed225d;
+			font-size: 1.1em;
 			color: #ed225d;
-			background-color: #f4f4f4;
+			background-color: #fff;
+		}
+
+		select {
+			height: 30px;
+			min-width: 120px;
+			border-radius: 3px;
+			border: 1px solid #ed225d;
+			font-size: 1.1em;
+			color: #ed225d;
+			background-color: #fff;
+			padding-left: 10px;
+			padding-right: 10px;
+			-webkit-appearance: none;
+		}
+
+		label {
+			position: relative
+		}
+
+		label:after {
+			content: '\25BC';
+			color: #ed225d;
+			right: 8px;
+			top: 0px;
+			/*padding: 0 0 2px;*/
+			position: absolute;
+			pointer-events: none;
+		}
+
+		label:before {
+			content: '';
+			right: 6px;
+			top: 0px;
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			pointer-events: none;
+			display: block;
 		}
 
 		button:hover {
@@ -39,14 +79,19 @@
 		.CodeMirror {
 			height: 90%;
 			width: 100%;
-			border-top: 1px solid #ddd;
+			font-size: 1.1em;
 		}
 
 		.header {
-			height: 10%;
-			font-family: Helvetica, Arial, sans-serif;
+			min-height: 40px;
+			max-height: 40px;
+			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 			font-size: 12px;
-			margin-left: 10px;
+			padding-left: 10px;
+			padding-top: 10px;
+			padding-right: 10px;
+			border-bottom: 1px dashed #ed225d;
+			border-top: 1px dashed #ed225d;
 		}
 
 		.preset {
@@ -57,15 +102,17 @@
 
 <body>
 	<div class="header">
-		<button onclick="updateHash()">&#9658;</button>
+		<button onclick="updateHash()">&#9658;  Play</button>
 		<span class="preset">
-			<span>Select from preset:</span><br>
+			<span>Presets:</span>
+		<label>
 		<select>
 				<option value="latest">Latest code</option>
-				<option value="basic">Basic sketch</option>
+				<option value="basic">Basic code</option>
 				<option value="pieChart">Pie chart</option>
-				<option value="get">Get remote json</option>
+				<option value="get">Get json</option>
 			</select>
+		</label>
 		</span>
 	</div>
 	<script type="text/javascript">
@@ -77,29 +124,37 @@
 		/*I tried to code this on the plugin side but without success. So the file is actually loaded in the editor by the webview*/
 		function getLatest() {
 			$.ajax({
-			    url: "../Sketch/sketch.js",
-			    cache: false,
-			    error: function(XMLHttpRequest, textStatus, errorThrown){
-							$('select').val("basic");
-							setValue(defaultValue);
-			    },
-			    success: function(data){
-						var code = data.replace(/\brectangle\b/g,'rect');
-						console.log(code);
-						setValue(code);
-					}
+				url: "../Sketch/sketch.js",
+				cache: false,
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					$("option[value='latest']").remove(); //If there's not sketch.js file we don't show the latest code: there's none
+					$('select').val("basic");
+					setValue(defaultValue);
+				},
+				success: function(data) {
+					var code = data.replace(/\brectangle\b/g, 'rect');
+					console.log(code);
+					setValue(code);
+				}
 			});
 		};
 
 		var options = {
 			lineNumbers: true,
 			autofocus: true,
-			lineWrapping: true
+			lineWrapping: true,
+			theme: 'p5-light'
 		};
 		var myCodeMirror = CodeMirror(document.body, options);
 
 		var initialValue = getLatest();
-		var defaultValue = "function setup() {\n	createCanvas(200, 200) //set up a 200x200 px artboard\n}\n\nfunction draw() {\n	line(0, 0, 100, 100);//draw a line from 0,0 to 100,100\n}"
+		var defaultValue = `function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+}`;
 
 		var getValue = function() {
 			return myCodeMirror.getValue();
@@ -108,7 +163,8 @@
 			myCodeMirror.setValue(value);
 		};
 
-		var pieChart =`//The percentages you need to visualize
+		var pieChart =
+			`//The percentages you need to visualize
 var percentages = [30,60,10];
 
 function setup() {
@@ -151,7 +207,8 @@ function pieChart(diameter, data) {
   }
 }`;
 
-		var get = `//Get a remote json and assign it to the var json
+		var get =
+			`//Get a remote json and assign it to the var json
 var json = get(['http://api.open-notify.org/astros.json'])
 
 function setup() {
@@ -196,4 +253,5 @@ function draw() {
 		});
 	</script>
 </body>
+
 </html>
