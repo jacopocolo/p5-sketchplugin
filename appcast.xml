@@ -27,5 +27,18 @@
         </description>
         <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.3/p5.0.9.3.sketchplugin.zip" sparkle:version="0.9.3" />
       </item>
+      <item>
+        <title>Version 0.9.4</title>
+        <description>
+          <![CDATA[
+            <ul>
+              <li>Fixes bug #2</li>
+              <li>Editor window is now resizeable</li>
+              <li>Editor has a new visual style that should make things a bit easier</li>
+            </ul>
+          ]]>
+        </description>
+        <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.4/p5.0.9.4.sketchplugin.zip" sparkle:version="0.9.4" />
+      </item>
   </channel>
 </rss>
