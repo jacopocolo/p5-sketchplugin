@@ -223,7 +223,7 @@ function draw() {
   //We define how big each element of our pattern is based
   //on a proportion with the width of the artboard. This allows us
   //to tweak the results very easily. Try changing size to 5 or 20
-  var size = width/5
+  var size = width/10
 
   //This is a double loop: basically we have a y loop on the
   //outside and a x loop on the inside. The x loop creates the
@@ -233,20 +233,22 @@ function draw() {
   //than the canvas (height);
   for(y=0;y<height;y=y+size){
     for(x=0;x<width;x=x+size){
-      //Fill with a random color from the array.
+
+      //Set the fill with a random color from the array.
       //The array values can be: 0, 1, 2, 3, 4 so we pick
       //a random number from 1 to 5 and we round it down
-      //to be sure we have a integer between 0 and 5
+      //to be sure we have a integer between 0 and 4
       fill(palette[floor(random(5))]);
+
       //We draw a rect with corner in x and y
       //wide and tall as size defined above
       rect(x,y,size,size);
 
       //To make things a little bit more interesting we also
-      //draw a circle (ellipse) on top of the rect sometimes
+      //sometimes draw a circle (ellipse) on top of the rect
       //we do it if random returns a number above 0.7
       if (random()>0.7){
-      //We fill with another random color from the palette
+      //Set the fill with another random color from the palette
       fill(palette[floor(random(5))]);
 
       //Since circles are created with x and y as the center
