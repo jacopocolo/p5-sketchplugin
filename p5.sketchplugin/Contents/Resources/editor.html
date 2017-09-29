@@ -110,6 +110,7 @@
 				<option value="latest">Latest code</option>
 				<option value="basic">Basic code</option>
 				<option value="pieChart">Pie chart</option>
+				<option value="generative">Generative grid</option>
 				<option value="get">Get json</option>
 			</select>
 		</label>
@@ -207,6 +208,61 @@ function pieChart(diameter, data) {
   }
 }`;
 
+		var generative = `//Simple palette of pretty colors
+var palette = ["#ecd078","#d95b43","#c02942","#542437","#53777a"]
+
+function setup() {
+	//Let's setup a 400x400 canvas
+    createCanvas(400, 400);
+}
+
+function draw() {
+  //Let's remove border
+  noStroke();
+
+  //We define how big each element of our pattern is based
+  //on a proportion with the width of the artboard. This allows us
+  //to tweak the results very easily. Try changing size to 5 or 20
+  var size = width/5
+
+  //This is a double loop: basically we have a y loop on the
+  //outside and a x loop on the inside. The x loop creates the
+  //rows by increasing x until x is wider than the canvas (width)
+  //Every time the x loop is completed the y loop kicks in and
+  //moves the y down. The y loop repeats until y is taller
+  //than the canvas (height);
+  for(y=0;y<height;y=y+size){
+    for(x=0;x<width;x=x+size){
+      //Fill with a random color from the array.
+      //The array values can be: 0, 1, 2, 3, 4 so we pick
+      //a random number from 1 to 5 and we round it down
+      //to be sure we have a integer between 0 and 5
+      fill(palette[floor(random(5))]);
+      //We draw a rect with corner in x and y
+      //wide and tall as size defined above
+      rect(x,y,size,size);
+
+      //To make things a little bit more interesting we also
+      //draw a circle (ellipse) on top of the rect sometimes
+      //we do it if random returns a number above 0.7
+      if (random()>0.7){
+      //We fill with another random color from the palette
+      fill(palette[floor(random(5))]);
+
+      //Since circles are created with x and y as the center
+      //We need to offset the position with translate but
+      //since translate effects stack we create a new drawing
+      //state before translating
+      push();
+      translate(+size/2,+size/2);
+      ellipse(x,y,size,size);
+      //And we remove it after we are done
+      pop();
+      }
+    }
+  }
+}`;
+
 		var get =
 			`//Get a remote json and assign it to the var json
 var json = get(['http://api.open-notify.org/astros.json'])
@@ -241,7 +297,9 @@ function draw() {
 				getLatest();
 			} else if (this.value == "pieChart") {
 				setValue(pieChart);
-			} else if (this.value == "get") {
+			}  else if (this.value == "generative") {
+				setValue(generative);
+			}  else if (this.value == "get") {
 				setValue(get);
 			}
 		});

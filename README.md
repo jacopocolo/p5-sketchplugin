@@ -153,7 +153,15 @@ Even before looking at the console, however, do this:
   - Warning
   - Cheatsheet with current API
 
+- Focus on the p5Canvas after rendering
+
+- Include a couple more demos.
+	- Bar chart
+	- Generative example using random or noise
+
 ### Future releases
+
+- Store latest code in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html)
 
 - Implement 'rgb(255,255,255)' and 'rgba(255,255,255,1)' notations for fill and stroke
 
