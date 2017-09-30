@@ -96,8 +96,8 @@ function bezierVertex(x2,y2,x3,y3,x4,y4) {
     y2 = y2+drawingContext.translateY();
     x3 = x3+drawingContext.translateX();
     y3 = y3+drawingContext.translateY();
-    x4 = x3+drawingContext.translateX();
-    y4 = y3+drawingContext.translateY();
+    x4 = x4+drawingContext.translateX();
+    y4 = y4+drawingContext.translateY();
   }
   [newShape curveToPoint:NSMakePoint(x4, y4)
         controlPoint1:NSMakePoint(x2, y2)
