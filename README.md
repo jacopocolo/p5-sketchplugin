@@ -161,7 +161,9 @@ Even before looking at the console, however, do this:
 
 ### Future releases
 
-- Store latest code in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html)
+- get() broke with Sketch 47. Figure out how to support it again 
+
+- Store latest code in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html)?
 
 - Implement 'rgb(255,255,255)' and 'rgba(255,255,255,1)' notations for fill and stroke
 

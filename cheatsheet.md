@@ -345,13 +345,13 @@ You can call it like this:
 symbol("button",30, 20);
 ```
 
-### get([url])
+<!-- ### get([url])
 Returns a .json from a url that you can use in your script. This function does not exist in p5.js for browser but it mimics what jQuery's get would do. The square brackets inside the round brackets are mandatory.
 
 You can call it like this:
 ```javascript
 var json = get(['http://api.open-notify.org/astros.json']);
-```
+``` -->
 
 ## Calculation
 ### abs(n)

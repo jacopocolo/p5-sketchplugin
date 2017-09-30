@@ -92,40 +92,17 @@ function findSymbolByName(symbolName) {
     return false;
 }
 
-function tryParseJSON (jsonString){
-  try {
-    var o = JSON.parse(jsonString);
+/*function get( url ) {
+  var request = NSMutableURLRequest.new();
+  [request setHTTPMethod:@"GET"];
+  [request setURL:[NSURL URLWithString:url]];
 
-    // Handle non-exception-throwing cases:
-    // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
-    // but... JSON.parse(null) returns 'null', and typeof null === "object",
-    // so we must check for that, too.
-    if (o && typeof o === "object" && o !== null) {
-      return o;
-    }
-  }
-  catch (e) { }
+  var error = NSError.new();
+  var responseCode = null;
 
-  return false;
-}
+  var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
 
-function get(args) {
-  var task = NSTask.alloc().init();
-  task.setLaunchPath("/usr/bin/curl");
-  task.setArguments(args);
-  var outputPipe = [NSPipe pipe];
-  [task setStandardOutput:outputPipe];
-  task.launch();
-  var responseData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-  var responseString = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
-  var parsed = tryParseJSON(responseString);
-  if(!parsed) {
-    log("Error invoking curl");
-    log("args:");
-    log(args);
-    log("responseString");
-    log(responseString);
-    throw "Error communicating with server"
-  }
-  return parsed;
-}
+  var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+
+  return JSON.parse( dataString );
+}*/
