@@ -35,7 +35,7 @@
 
 		select {
 			height: 30px;
-			min-width: 120px;
+			min-width: 130px;
 			border-radius: 3px;
 			border: 1px solid #ed225d;
 			font-size: 1.1em;
@@ -110,6 +110,7 @@
 				<option value="latest">Latest code</option>
 				<option value="basic">Basic code</option>
 				<option value="pieChart">Pie chart</option>
+				<option value="barChart">Bar chart</option>
 				<option value="generative">Generative grid</option>
 				<!-- <option value="get">Get json</option> -->
 			</select>
@@ -208,6 +209,69 @@ function pieChart(diameter, data) {
   }
 }`;
 
+var barChart = `//An array with your data
+var data = [4, 8, 15, 16, 23, 42];
+//Scale is a simple multiplyer to scale bars horizontally
+//try to tweak it
+var scale = 10;
+//How tall you want each bar to be
+var barHeight = 20;
+//The margin between each bar
+var margin = 5;
+//The height of a single bar + margin
+var barPlusMargin = barHeight+margin
+//A simple function to scale the artboard based
+//on the biggest value in the array
+var max = data.reduce(function(a, b) {
+    return Math.max(a, b);
+});
+
+function setup() {
+  //Let's create a canvas. The width is the biggest value in
+  //the array. The height is bar + how many values in the array
+  createCanvas(max*scale,barPlusMargin*data.length);
+}
+
+function draw() {
+  //Let's remove the stroke
+  noStroke();
+
+  //Let's loop through the whole array. Every loop draws one
+  //of the bars by reading one of the values and drawing the
+  //bar. When we are out of values, we exit the loop
+  for(i=0;i<data.length;i=i+1){
+
+    //Let's start by setting a random fill for the bar
+    fill(random(255),0,255);
+    //Let's draw a bar. It stars at 0,0, is as long as the value
+    //from the array element we are reading multiplied
+    //by the scale. As tall as barHeight as defined above
+    rect(0,0,data[i]*scale,barHeight);
+
+    //Let's create a new drawing state for the text
+    push();
+    //Let's set a white fill for text
+    fill(255);
+    //The drawing state moves the text a little bit down
+    //and a little bit to the left to center it within the bar.
+    //You'll need to tweak this manually if you change the bar 		//height
+    translate(5,3);
+    //We always draw the text at 0,0. Exactly as the bar.
+    //The translate at the end of the loop takes care of
+    //moving everything down. Text is also printing the value
+    //we are reading from the array: data[i].
+    text(data[i],0,0);
+    //Let's remove the drawing state so it doesn't stack
+    //with the bar
+    pop();
+
+    //Let's prepare for the next bar by translating everything
+    //down by barPlusMargin so the next bar starts exacly below
+    //the previous one
+    translate(0,barPlusMargin);
+  }
+}`;
+
 		var generative = `//Simple palette of pretty colors
 var palette = ["#ecd078","#d95b43","#c02942","#542437","#53777a"]
 
@@ -299,10 +363,10 @@ function draw() {
 				getLatest();
 			} else if (this.value == "pieChart") {
 				setValue(pieChart);
+			} else if (this.value == "barChart") {
+				setValue(barChart);
 			}  else if (this.value == "generative") {
 				setValue(generative);
-			}  else if (this.value == "get") {
-				setValue(get);
 			}
 		});
 
