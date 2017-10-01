@@ -85,6 +85,11 @@
 			height: 100%;
 			width: 100%;
 			font-size: 1.1em;
+			padding-bottom: 30px;
+		}
+
+		.CodeMirror-vscrollbar {
+			display: none !important;
 		}
 
 		.header {
@@ -99,11 +104,13 @@
 			border-top: 1px dashed #ed225d;
 		}
 
-		.subheader {
+		.footer {
+			position: fixed;
+			bottom: 0;
 			padding-bottom: 3px;
 			min-height: 20px;
 			max-height: 20px;
-			border-bottom: 1px dashed #ed225d;
+			border-top: 1px dashed #ed225d;
 			background-color: white;
 			z-index: 999;
 			width: 100%;
@@ -117,6 +124,12 @@
 			padding-left: 10px;
 			min-height: 20px;
 			max-height: 20px;
+		}
+
+		.twitter {
+			float: right;
+			padding-right: 10px;
+			padding-top: 4px;
 		}
 
 		a {
@@ -146,12 +159,24 @@
 		</label>
 		</span>
 	</div>
-	<div class="subheader">
+	<div id="editor"></div>
+	<div class="footer">
 		<span class="link"><a href="#" onclick="updateHash('reference'); return false;">Reference</a></span>
 		<span class="link"><a href="#" onclick="updateHash('debug'); return false;">Debug help</a></span>
 		<span class="link"><a href="#" onclick="updateHash('feedback'); return false;">Feedback</a></span>
+		<span class="twitter">
+			<a href="#" onclick="updateHash('twitter'); return false;">
+				<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs></defs>
+		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+				<g id="Twitter_Logo_Blue" transform="translate(-3.000000, -4.000000)" fill-rule="nonzero" fill="#1DA1F2">
+						<path d="M7.681,15.0795 C12.398,15.0795 14.978,11.1715 14.978,7.7825 C14.978,7.6715 14.978,7.561 14.9705,7.451 C15.4724157,7.08795543 15.9056777,6.6384397 16.25,6.1235 C15.7819395,6.33090089 15.2854146,6.46691432 14.777,6.527 C15.312372,6.20649103 15.7130618,5.70238599 15.9045,5.1085 C15.4010787,5.40722766 14.8503231,5.61775601 14.276,5.731 C13.4810414,4.88569714 12.2178597,4.67880629 11.1947746,5.22633996 C10.1716896,5.77387364 9.64313749,6.93966286 9.9055,8.07 C7.84344787,7.96662477 5.92223789,6.99266164 4.62,5.3905 C3.93931138,6.56232236 4.28699394,8.06142974 5.414,8.814 C5.0058706,8.80190377 4.60663969,8.69180659 4.25,8.493 C4.25,8.5035 4.25,8.5145 4.25,8.5255 C4.25033407,9.74629649 5.11087574,10.7977676 6.3075,11.0395 C5.9299348,11.14247 5.53379029,11.1575221 5.1495,11.0835 C5.48547396,12.1282114 6.44828728,12.8438919 7.5455,12.8645 C6.63736752,13.578216 5.51552976,13.9656639 4.3605,13.9645 C4.15645178,13.9641083 3.95260203,13.9517537 3.75,13.9275 C4.92281797,14.6801383 6.2874567,15.0793585 7.681,15.0775" id="Shape"></path>
+				</g>
+		</g>
+</svg>
+			</a>
+		</span>
 	</div>
-	<div id="editor"></div>
 	<script type="text/javascript">
 		//update the window.location hash to tell Sketch that we are ready to Run
 		function updateHash(hash) {
