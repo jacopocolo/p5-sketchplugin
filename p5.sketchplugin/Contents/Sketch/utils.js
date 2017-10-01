@@ -92,6 +92,10 @@ function findSymbolByName(symbolName) {
     return false;
 }
 
+function openUrlInBrowser(url) {
+    NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url));
+}
+
 /*function get( url ) {
   var request = NSMutableURLRequest.new();
   [request setHTTPMethod:@"GET"];

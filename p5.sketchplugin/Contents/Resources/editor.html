@@ -76,8 +76,13 @@
 			background-color: #ed225d;
 		}
 
+		#editor {
+			height: 100%;
+			width: 100%;
+		}
+
 		.CodeMirror {
-			height: 90%;
+			height: 100%;
 			width: 100%;
 			font-size: 1.1em;
 		}
@@ -94,6 +99,30 @@
 			border-top: 1px dashed #ed225d;
 		}
 
+		.subheader {
+			padding-bottom: 3px;
+			min-height: 20px;
+			max-height: 20px;
+			border-bottom: 1px dashed #ed225d;
+			background-color: white;
+			z-index: 999;
+			width: 100%;
+		}
+
+		.link {
+			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+			font-size: 12px;
+			border-right: 1px dashed #ed225d;
+			padding-right: 10px;
+			padding-left: 10px;
+			min-height: 20px;
+			max-height: 20px;
+		}
+
+		a {
+			color: #ed225d;
+		}
+
 		.preset {
 			float: right;
 		}
@@ -102,7 +131,7 @@
 
 <body>
 	<div class="header">
-		<button onclick="updateHash()">&#9658;  Play</button>
+		<button onclick="updateHash('run')">&#9658;  Play</button>
 		<span class="preset">
 			<span>Presets:</span>
 		<label>
@@ -117,10 +146,16 @@
 		</label>
 		</span>
 	</div>
+	<div class="subheader">
+		<span class="link"><a href="#" onclick="updateHash('reference'); return false;">Reference</a></span>
+		<span class="link"><a href="#" onclick="updateHash('debug'); return false;">Debug help</a></span>
+		<span class="link"><a href="#" onclick="updateHash('feedback'); return false;">Feedback</a></span>
+	</div>
+	<div id="editor"></div>
 	<script type="text/javascript">
 		//update the window.location hash to tell Sketch that we are ready to Run
-		function updateHash() {
-			window.location.hash = "run" + new Date().getTime();;
+		function updateHash(hash) {
+			window.location.hash = hash + new Date().getTime();;
 		}
 
 		/*I tried to code this on the plugin side but without success. So the file is actually loaded in the editor by the webview*/
@@ -147,7 +182,7 @@
 			lineWrapping: true,
 			theme: 'p5-light'
 		};
-		var myCodeMirror = CodeMirror(document.body, options);
+		var myCodeMirror = CodeMirror(document.getElementById('editor'),options);
 
 		var initialValue = getLatest();
 		var defaultValue = `function setup() {
@@ -372,7 +407,7 @@ function draw() {
 
 		document.body.addEventListener('keydown', function(e) {
 			if (!(e.keyCode == 13 && e.metaKey)) return;
-			updateHash();
+			updateHash("run");
 			return true;
 		});
 	</script>

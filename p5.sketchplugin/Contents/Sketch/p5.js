@@ -701,7 +701,8 @@ function onRun(context) {
               var title = windowObject.evaluateWebScript("document.getElementById('title').innerHTML");
               var colorName = windowObject.evaluateWebScript("document.getElementById('colorName').innerHTML");
 
-              if (locationHash) {
+              if (/run/g.test(locationHash)) {
+                  log(locationHash);
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
@@ -715,6 +716,14 @@ function onRun(context) {
                   drawingContext.reset();
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
+              } else if (/reference/g.test(locationHash)) {
+                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md");
+
+              } else if (/debug/g.test(locationHash)) {
+                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin#debugging-your-code");
+
+              } else if (/feedback/g.test(locationHash)) {
+                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/issues");
               }
 
           })
