@@ -18,7 +18,7 @@ var artboard; //p5Canvas
 
 //the drawingContext contains all the information regarding the current style and context of the sketch.
 var drawingContext = {
-  //artboardSize: [[200, 200]],
+  artboard: [0,0,0,0],
   //artboardHasBackgroundColor: [false],
   //artboardBackgroundColor: [],
   hasTranslates: [false],
@@ -111,6 +111,9 @@ function createCanvas(w, h) {
     if (artboards == nil || [artboards count] == 0) {
       frame.x = 0
       frame.y = 0
+      //Only store them for now
+      drawingContext.artboard[0] = 0;
+      drawingContext.artboard[1] = 0;
     } else {
       //if p5canvas doesn’t exist already, we place it 50px before the first artboard
       var numberOfArtboards = [artboards count];
@@ -128,9 +131,15 @@ function createCanvas(w, h) {
       firstArtboardFrameY = firstArtboardFrame.minY()
       frame.x = minX - w - padding
       frame.y = minY
+      //Only store them for now
+      drawingContext.artboard[0] = minX - w - padding;
+      drawingContext.artboard[1] = minY
     }
     frame.setWidth(w)
     frame.setHeight(h)
+    //Only store them for now
+    drawingContext.artboard[2] = w;
+    drawingContext.artboard[3] = h;
     artboard.setName("p5canvas")
     artboard.setHasBackgroundColor(false);
     doc.currentPage().addLayers([artboard])
@@ -142,7 +151,6 @@ function createCanvas(w, h) {
     frame.setWidth(w)
     frame.setHeight(h)
     artboard.setHasBackgroundColor(false);
-    //setUpP5Code()
   }
 }
 
@@ -702,7 +710,6 @@ function onRun(context) {
               var colorName = windowObject.evaluateWebScript("document.getElementById('colorName').innerHTML");
 
               if (/run/g.test(locationHash)) {
-                  log(locationHash);
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
@@ -716,6 +723,13 @@ function onRun(context) {
                   drawingContext.reset();
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
+
+                  if (/zoom/g.test(locationHash)) {
+                  //Zoom to artboard
+                  var newRect = NSMakeRect(drawingContext.artboard[0], drawingContext.artboard[1], drawingContext.artboard[2], drawingContext.artboard[3]);
+                  view.zoomToFitRect(newRect);
+                  }
+
               } else if (/reference/g.test(locationHash)) {
                 openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md");
 

@@ -143,11 +143,8 @@ Even before looking at the console, however, do this:
 ## To-do list
 
 ### 1.0
-- Reset artboard with the drawingContext
 
 - Test all the calc functions
-
-- Focus on the p5Canvas after rendering
 
 ### Future releases
 

@@ -15,6 +15,7 @@
 			margin: 0;
 			width: 100%;
 			height: 100%;
+			background-color: #efefef;
 		}
 
 		body {
@@ -46,11 +47,11 @@
 			-webkit-appearance: none;
 		}
 
-		label {
+		#dropdown {
 			position: relative
 		}
 
-		label:after {
+		#dropdown:after {
 			content: '\25BC';
 			color: #ed225d;
 			right: 8px;
@@ -60,7 +61,7 @@
 			pointer-events: none;
 		}
 
-		label:before {
+		#dropdown:before {
 			content: '';
 			right: 6px;
 			top: 0px;
@@ -79,6 +80,7 @@
 		#editor {
 			height: 100%;
 			width: 100%;
+			background-color: white;
 		}
 
 		.CodeMirror {
@@ -102,6 +104,8 @@
 			padding-right: 10px;
 			border-bottom: 1px dashed #ed225d;
 			border-top: 1px dashed #ed225d;
+			background-color: white;
+			color: #333;
 		}
 
 		.footer {
@@ -145,9 +149,13 @@
 <body>
 	<div class="header">
 		<button onclick="updateHash('run')">&#9658;  Play</button>
+
+		<input type="checkbox" id="zoom">
+    <label for="zoom">Focus on artboad</label>
+
 		<span class="preset">
 			<span>Presets:</span>
-		<label>
+		<label id="dropdown">
 		<select>
 				<option value="latest">Latest code</option>
 				<option value="basic">Basic code</option>
@@ -180,7 +188,11 @@
 	<script type="text/javascript">
 		//update the window.location hash to tell Sketch that we are ready to Run
 		function updateHash(hash) {
-			window.location.hash = hash + new Date().getTime();;
+			if ($('#zoom').is(':checked') == true && hash == 'run') {
+			window.location.hash = hash + 'zoom' + new Date().getTime();
+			} else {
+			window.location.hash = hash + new Date().getTime();
+			}
 		}
 
 		/*I tried to code this on the plugin side but without success. So the file is actually loaded in the editor by the webview*/
