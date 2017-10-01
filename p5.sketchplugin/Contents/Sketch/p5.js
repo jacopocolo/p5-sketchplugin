@@ -717,7 +717,7 @@ function onRun(context) {
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
                   eval(code+'; setup(); draw();');
               } else if (/reference/g.test(locationHash)) {
-                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/blob/master/cheatsheet.md");
+                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md");
 
               } else if (/debug/g.test(locationHash)) {
                 openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin#debugging-your-code");

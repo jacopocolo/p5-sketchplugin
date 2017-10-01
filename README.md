@@ -29,9 +29,9 @@ After you run the code, all the functions you called are rendered as native Sket
 
 p5*Sketchapp doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
 
-The vast majority of the functions implemented match the behaviour available in p5.js. You can copy and paste code from the [p5.js website examples](https://p5js.org/examples/) and in most cases it will simply work. If it doesn't, take a look at the [debugging](#debugging) section for tips on how to adjust your code.
+The vast majority of the functions implemented match the behaviour available in p5.js. You can copy and paste code from the [p5.js website examples](https://p5js.org/examples/) and in most cases it will simply work. If it doesn't, take a look at the [debugging](#debugging-your-code) section for tips on how to adjust your code.
 
-A warning: you are about to execude code inside Sketch. The plugin is designed to act only on a single artboard and tested heavily, but bugs and broken code could still be dangerous. Save your work before using this plugin.
+A warning: you are about to execute code inside Sketch. The plugin is designed to act only on a single artboard and tested heavily, but bugs and broken code could still be dangerous. Save your work before using this plugin.
 
 ### Reference
 
@@ -147,21 +147,11 @@ Even before looking at the console, however, do this:
 
 - Test all the calc functions
 
-- Add to UI:
-  - Bug report & feedback link
-  - Debug tips
-  - Warning
-  - Cheatsheet with current API
-
 - Focus on the p5Canvas after rendering
-
-- Include a couple more demos.
-	- Bar chart
-	- Generative example using random or noise
 
 ### Future releases
 
-- get() broke with Sketch 47. Figure out how to support it again 
+- get() broke with Sketch 47. Figure out how to support it again
 
 - Store latest code in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html)?
 
