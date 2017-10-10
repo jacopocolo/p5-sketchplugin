@@ -40,5 +40,19 @@
         </description>
         <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.4/p5.0.9.4.sketchplugin.zip" sparkle:version="0.9.4" />
       </item>
+      <item>
+        <title>Version 0.9.5</title>
+        <description>
+          <![CDATA[
+            <ul>
+              <li>Updated the UI</li>
+              <li>Added a generative grid and simple bar chart to presets</li>
+              <li>Fixed a bug with translate in bezierVertex</li>
+              <li>Removed the get() function because it crashed in Sketch 47</li>
+            </ul>
+          ]]>
+        </description>
+        <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.5/p5.0.9.5.sketchplugin.zip" sparkle:version="0.9.5" />
+      </item>
   </channel>
 </rss>
