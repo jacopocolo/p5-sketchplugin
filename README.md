@@ -1,6 +1,6 @@
-# p5*Sketchapp
+# p5.sketchplugin
 
-p5*Sketchapp is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
+p5.sketchplugin is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
 
 In example, the code on the left generates the artboard on the right:
 [![](https://github.com/jacopocolo/p5-sketchplugin/blob/master/img/example-1.png?raw=true)](https://gist.github.com/jacopocolo/5d949e59f4f8fb930c5a4771b2e08d76)
@@ -9,11 +9,11 @@ After you run the code, all the functions you called are rendered as native Sket
 
 ### [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
 
-##### An important note: p5*Sketchapp works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
+##### An important note: p5.sketchplugin works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
 ### Limitations
 
-p5*Sketchapp doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
+p5.sketchplugin doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
 
 The vast majority of the functions implemented match the behaviour available in p5.js. You can copy and paste code from the [p5.js website examples](https://p5js.org/examples/) and in most cases it will simply work. If it doesn't, take a look at the [debugging](#debugging-your-code) section for tips on how to adjust your code.
 
@@ -124,7 +124,7 @@ Debugging in Sketch is not simple. Sketch doesn’t have a console but relies on
 
 Even before looking at the console, however, do this:
 - check if the functions you are using are documented in the reference page and if you are using the right parameters.
-- remember that in p5.js the draw function is called continuously while in p5*Sketchapp it's called only once. Consider if you need to wrap your function in a loop to achieve what you want.
+- remember that in p5.js the draw function is called continuously while in p5.sketchplugin it's called only once. Consider if you need to wrap your function in a loop to achieve what you want.
 
 ## To-do list
 

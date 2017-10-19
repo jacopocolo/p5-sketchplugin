@@ -665,8 +665,8 @@ function onRun(context) {
   var userDefaults = NSUserDefaults.standardUserDefaults();
 
 	// create a window
-  var title = "p5xSketchapp";
-  var identifier = "com.jacopocolo.p5xsketchapp";
+  var title = "p5";
+  var identifier = "com.jacopocolo.p5sketchplugin";
   var threadDictionary = NSThread.mainThread().threadDictionary();
 
   if (threadDictionary[identifier]) {
