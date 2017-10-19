@@ -402,6 +402,10 @@ div.CodeMirror-cursors {
     background: #d7d4f0
 }
 
+.CodeMirror-selected {
+  background:#d7d4f0 !important;
+}
+
 .cm-searching {
     background: #ffa;
     background: rgba(255, 255, 0, .4)
