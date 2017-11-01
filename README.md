@@ -7,7 +7,9 @@ In example, the code on the left generates the artboard on the right:
 
 After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done. Your code will rendered in the same artboard every time your run it. If you want to keep a copy, duplicate the artboard.
 
-### [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
+### Installation
+
+- [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
 
 ##### An important note: p5.sketchplugin works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 

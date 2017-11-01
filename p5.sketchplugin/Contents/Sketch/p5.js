@@ -10,7 +10,7 @@ function exposeContext(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  view = [doc currentView];
+  // view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 }
 
@@ -190,7 +190,7 @@ function fill(r, g, b, a) {
             return
         } else {
         r = r/255;
-        drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+        drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
         return
         }
       }
@@ -198,7 +198,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
       return
       }
     }
@@ -207,7 +207,7 @@ function fill(r, g, b, a) {
       g = g/255;
       b = b/255;
       a = a/255;
-      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
       return
     }
   };
@@ -221,7 +221,7 @@ function fill(r, g, b, a) {
               return
           } else {
           r = r/255;
-          drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
           return
           }
         }
@@ -229,7 +229,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
         return
         }
       }
@@ -238,7 +238,7 @@ function fill(r, g, b, a) {
         g = g/255;
         b = b/255;
         a = a/255;
-        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
         return
       }
     };
@@ -280,21 +280,21 @@ function background(r, g, b, a) {
           backgroundColor = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
       } else {
       r = r/255;
-      backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+      backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
       }
     }
     else {
     r = r/255;
     g = g/255;
     b = b/255;
-    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+    backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
     }
   }
   else {
     r = r/255;
     g = g/255;
     b = b/255;
-    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+    backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
   }
 
   if (artboard != undefined) {artboard.setBackgroundColor(backgroundColor);}
