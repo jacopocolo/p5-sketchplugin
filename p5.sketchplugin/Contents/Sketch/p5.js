@@ -10,7 +10,7 @@ function exposeContext(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  // view = [doc currentView];
+  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 }
 

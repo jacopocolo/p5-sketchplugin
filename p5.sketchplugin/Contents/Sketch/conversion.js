@@ -5,7 +5,7 @@ function float(str) {
   return parseFloat(str);
 };
 
- function int(n, radix) {
+function int(n, radix) {
   radix = radix || 10;
   if (typeof n === 'string') {
     return parseInt(n, radix);
