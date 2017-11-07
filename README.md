@@ -1,4 +1,4 @@
-# p5.sketchplugin
+# p5.sketchplugin `ctrl+alt+cmd+R`
 
 p5.sketchplugin is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
 
