@@ -54,5 +54,16 @@
         </description>
         <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v0.9.5/p5.0.9.5.sketchplugin.zip" sparkle:version="0.9.5" />
       </item>
+      <item>
+        <title>Version 1.0.0</title>
+        <description>
+          <![CDATA[
+            <ul>
+              <li>Minor bug fixes and official 1.0 release</li>
+            </ul>
+          ]]>
+        </description>
+        <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v1.0/p5.1.0.0.sketchplugin.zip" sparkle:version="1.0.0" />
+      </item>
   </channel>
 </rss>
