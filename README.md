@@ -6,7 +6,7 @@ After you run the code, all the functions you called are rendered as native Sket
 
 ## Installation
 
-###[Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
+## [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
 
 ##### An important note: p5.sketchplugin works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
