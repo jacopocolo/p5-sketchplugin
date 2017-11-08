@@ -1,5 +1,5 @@
 # p5.sketchplugin
-## Create rich and editable graphics inside Sketch using only few lines of JavaScript
+### Create rich and editable graphics inside Sketch using only few lines of JavaScript
 
 p5.sketchplugin is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You write simple JavaScript — using the powerful p5.js functions — and it creates editable layers in a new artobard.
 
