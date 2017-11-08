@@ -130,12 +130,6 @@ Even before looking at the console, however, do this:
 
 ## To-do list
 
-### 1.0
-
-- Get it running with Sketch Runner
-
-- Review Github presentation
-
 ### Future releases
 
 - get() broke with Sketch 47. Figure out how to support it again
