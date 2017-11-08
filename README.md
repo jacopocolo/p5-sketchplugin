@@ -1,19 +1,16 @@
 # p5.sketchplugin `ctrl+alt+cmd+R`
 
-p5.sketchplugin is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You can write JavaScript code in an embedded code editor, leverage the powerful p5.js functions and render graphics directly in Sketch.
-
-In example, the code on the left generates the artboard on the right:
-[![](https://github.com/jacopocolo/p5-sketchplugin/blob/master/img/example-1.png?raw=true)](https://gist.github.com/jacopocolo/5d949e59f4f8fb930c5a4771b2e08d76)
+p5.sketchplugin is a plugin for running some [p5.js](http://p5js.org/) code inside Sketch. You write simple JavaScript — using the powerful p5.js functions — and it creates editable layers in a new artobard.
 
 After you run the code, all the functions you called are rendered as native Sketch objects: this means that you can tweak every single object you create when you are done. Your code will rendered in the same artboard every time your run it. If you want to keep a copy, duplicate the artboard.
 
-### Installation
+## Installation
 
-- [Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
+###[Download the latest version here](https://github.com/jacopocolo/p5-sketchplugin/releases)
 
 ##### An important note: p5.sketchplugin works only in one direction CODE > ARTBOARD. If you manually tweak the design, your code won't automatically update.
 
-### Limitations
+## Limitations
 
 p5.sketchplugin doesn't match the whole p5.js library but it gives you access to most of the basic functions for drawing on an artboard. Take a look at the [reference](#reference) below to see what is available and how to call these functions.
 
@@ -21,7 +18,7 @@ The vast majority of the functions implemented match the behaviour available in 
 
 A warning: you are about to execute code inside Sketch. The plugin is designed to act only on a single artboard and tested heavily, but bugs and broken code could still be dangerous. Save your work before using this plugin.
 
-### Reference
+## Reference
 
 - [Color](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#color)
   * Settings
@@ -121,7 +118,7 @@ A warning: you are about to execute code inside Sketch. The plugin is designed t
     + [text()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#textstrxyx2y2)
     + [textFont()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#textfontfontname)
 
-### Debugging your code
+## Debugging your code
 Debugging in Sketch is not simple. Sketch doesn’t have a console but relies on macOS Console for debugging. If your code is not working as expected, you can take a look there and see if something pops up. If you are running macOS Sierra or above, see [this thread](http://sketchplugins.com/d/50-i-can-t-get-anymore-debugging-from-console-app-system-log) to configure your Console to catch Sketch issues.
 
 Even before looking at the console, however, do this:
@@ -132,7 +129,9 @@ Even before looking at the console, however, do this:
 
 ### 1.0
 
-- Test all the calc functions
+- Get it running with Sketch Runner
+
+- Review Github presentation
 
 ### Future releases
 
