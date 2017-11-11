@@ -130,11 +130,17 @@ Even before looking at the console, however, do this:
 
 ## To-do list
 
+### 1.1.0
+
+- Make sure that the code is stored in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html) so updates don’t wipe users work
+
+- Fix typo
+
+- Include autocomplete in editor
+
 ### Future releases
 
 - get() broke with Sketch 47. Figure out how to support it again
-
-- Store latest code in [preferences](http://mail.sketchplugins.com/pipermail/dev_sketchplugins.com/2015-February/003019.html)?
 
 - Implement 'rgb(255,255,255)' and 'rgba(255,255,255,1)' notations for fill and stroke
 
