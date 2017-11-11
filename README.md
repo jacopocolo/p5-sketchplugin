@@ -138,9 +138,9 @@ Even before looking at the console, however, do this:
 
 - Include autocomplete in editor
 
-### Future releases
-
 - get() broke with Sketch 47. Figure out how to support it again
+
+### Future releases
 
 - Implement 'rgb(255,255,255)' and 'rgba(255,255,255,1)' notations for fill and stroke
 
