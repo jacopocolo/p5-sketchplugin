@@ -152,7 +152,7 @@
 		<button onclick="updateHash('run')">&#9658;  Play</button>
 
 		<input type="checkbox" id="zoom">
-    <label for="zoom">Focus on artboad</label>
+    <label for="zoom">Focus on artboard</label>
 
 		<span class="preset">
 			<span>Presets:</span>
@@ -404,7 +404,7 @@ function draw() {
 
 		var get =
 			`//Get a remote json and assign it to the var json
-var json = get(['http://api.open-notify.org/astros.json'])
+var json = get('http://api.open-notify.org/astros.json')
 
 function setup() {
 	createCanvas(200, 200)
