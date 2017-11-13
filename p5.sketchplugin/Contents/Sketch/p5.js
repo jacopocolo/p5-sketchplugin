@@ -738,6 +738,8 @@ function onRun(context) {
 
               } else if (/feedback/g.test(locationHash)) {
                 openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/issues");
+              } else if (/release/g.test(locationHash)) {
+                openUrlInBrowser("https://github.com/jacopocolo/p5-sketchplugin/releases/latest");
               } else if (/twitter/g.test(locationHash)) {
                 openUrlInBrowser("https://twitter.com/jacopocolo");
               }
