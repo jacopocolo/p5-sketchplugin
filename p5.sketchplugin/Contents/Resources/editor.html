@@ -177,7 +177,7 @@
 				<option value="pieChart">Pie chart</option>
 				<option value="barChart">Bar chart</option>
 				<option value="generative">Generative grid</option>
-				<!-- <option value="get">Get json</option> -->
+				<option value="get">Get JSON</option>
 			</select>
 		</label>
 		</span>
@@ -456,6 +456,8 @@ function draw() {
 				setValue(barChart);
 			}  else if (this.value == "generative") {
 				setValue(generative);
+			} else if (this.value == "get") {
+				setValue(get);
 			}
 		});
 
