@@ -36,11 +36,11 @@ var drawingContext = {
   alignment: function() {return this.alignments[this.alignments.length-1]},
   lineHeights: [17],
   lineHeight: function() {return this.lineHeights[this.lineHeights.length-1]},
-  fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF")],
+  fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF").newMutableCounterpart()],
   fillColor: function() {return this.fillColors[this.fillColors.length-1]},
   hasFills: [true],
   hasFill: function() {return this.hasFills[this.hasFills.length-1]},
-  strokeColors: [MSImmutableColor.colorWithSVGString("#000000")],
+  strokeColors: [MSImmutableColor.colorWithSVGString("#000000").newMutableCounterpart()],
   strokeColor: function() {return this.strokeColors[this.strokeColors.length-1]},
   hasStrokes: [true],
   hasStroke: function() {return this.hasStrokes[this.hasStrokes.length-1];},
@@ -60,9 +60,9 @@ var drawingContext = {
     this.fonts = ['Helvetica'];
     this.alignments = [0];
     this.lineHeights = [17];
-    this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF")];
+    this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF").newMutableCounterpart()];
     this.hasFills = [true];
-    this.strokeColors = [MSImmutableColor.colorWithSVGString("#000000")];
+    this.strokeColors = [MSImmutableColor.colorWithSVGString("#000000").newMutableCounterpart()];
     this.hasStrokes = [true];
     this.strokeThiknesses = [1];
     this.strokeEndings = [0];
@@ -186,11 +186,11 @@ function fill(r, g, b, a) {
     if (a == undefined) {
       if (g == undefined && b == undefined) {
         if (r[0] == "#") {
-            drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+            drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithSVGString(r).newMutableCounterpart(); //it’s an hex color
             return
         } else {
         r = r/255;
-        drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+        drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1); //It’s a gray
         return
         }
       }
@@ -198,7 +198,7 @@ function fill(r, g, b, a) {
       r = r/255;
       g = g/255;
       b = b/255;
-      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1); //it’s a RGB color
       return
       }
     }
@@ -207,7 +207,7 @@ function fill(r, g, b, a) {
       g = g/255;
       b = b/255;
       a = a/255;
-      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+      drawingContext.fillColors[drawingContext.fillColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a); //it’s a RGBA color
       return
     }
   };
@@ -217,11 +217,11 @@ function fill(r, g, b, a) {
       if (a == undefined) {
         if (g == undefined && b == undefined) {
           if (r[0] == "#") {
-              drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+              drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithSVGString(r).newMutableCounterpart(); //it’s an hex color
               return
           } else {
           r = r/255;
-          drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+          drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,r,r,1); //It’s a gray
           return
           }
         }
@@ -229,7 +229,7 @@ function fill(r, g, b, a) {
         r = r/255;
         g = g/255;
         b = b/255;
-        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,1); //it’s a RGB color
         return
         }
       }
@@ -238,7 +238,7 @@ function fill(r, g, b, a) {
         g = g/255;
         b = b/255;
         a = a/255;
-        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+        drawingContext.strokeColors[drawingContext.strokeColors.length-1] = MSColor.colorWithRed_green_blue_alpha(r,g,b,a); //it’s a RGBA color
         return
       }
     };
@@ -272,29 +272,29 @@ function noFill() {
 
 function background(r, g, b, a) {
   artboard.setHasBackgroundColor(true);
-  var backgroundColor = MSImmutableColor.colorWithSVGString("#ffffff");
+  var backgroundColor = MSImmutableColor.colorWithSVGString("#ffffff").newMutableCounterpart();
 
   if (a == undefined) {
     if (g == undefined && b == undefined) {
       if (r[0] == "#") {
-          backgroundColor = MSImmutableColor.colorWithSVGString(r); //it’s an hex color
+          backgroundColor = MSImmutableColor.colorWithSVGString(r).newMutableCounterpart(); //it’s an hex color
       } else {
       r = r/255;
-      backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,r,r,1) //It’s a gray
+      backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,r,r,1); //It’s a gray
       }
     }
     else {
     r = r/255;
     g = g/255;
     b = b/255;
-    backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,1) //it’s a RGB color
+    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,1); //it’s a RGB color
     }
   }
   else {
     r = r/255;
     g = g/255;
     b = b/255;
-    backgroundColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a) //it’s a RGBA color
+    backgroundColor = MSColor.colorWithRed_green_blue_alpha(r,g,b,a); //it’s a RGBA color
   }
 
   if (artboard != undefined) {artboard.setBackgroundColor(backgroundColor);}
