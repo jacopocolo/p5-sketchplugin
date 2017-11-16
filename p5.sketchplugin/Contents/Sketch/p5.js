@@ -36,11 +36,11 @@ var drawingContext = {
   alignment: function() {return this.alignments[this.alignments.length-1]},
   lineHeights: [17],
   lineHeight: function() {return this.lineHeights[this.lineHeights.length-1]},
-  fillColors: [MSImmutableColor.colorWithSVGString("#FFFFFF").newMutableCounterpart()],
+  fillColors: [MSColor.colorWithRed_green_blue_alpha(1,1,1,1)],
   fillColor: function() {return this.fillColors[this.fillColors.length-1]},
   hasFills: [true],
   hasFill: function() {return this.hasFills[this.hasFills.length-1]},
-  strokeColors: [MSImmutableColor.colorWithSVGString("#000000").newMutableCounterpart()],
+  strokeColors: [MSColor.colorWithRed_green_blue_alpha(0,0,0,1)],
   strokeColor: function() {return this.strokeColors[this.strokeColors.length-1]},
   hasStrokes: [true],
   hasStroke: function() {return this.hasStrokes[this.hasStrokes.length-1];},
@@ -60,9 +60,9 @@ var drawingContext = {
     this.fonts = ['Helvetica'];
     this.alignments = [0];
     this.lineHeights = [17];
-    this.fillColors = [MSImmutableColor.colorWithSVGString("#FFFFFF").newMutableCounterpart()];
+    this.fillColors = [MSColor.colorWithRed_green_blue_alpha(1,1,1,1)];
     this.hasFills = [true];
-    this.strokeColors = [MSImmutableColor.colorWithSVGString("#000000").newMutableCounterpart()];
+    this.strokeColors = [MSColor.colorWithRed_green_blue_alpha(0,0,0,1)];
     this.hasStrokes = [true];
     this.strokeThiknesses = [1];
     this.strokeEndings = [0];

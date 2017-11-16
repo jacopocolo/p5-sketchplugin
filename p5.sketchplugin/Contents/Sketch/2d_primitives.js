@@ -367,7 +367,13 @@ function text(str, x, y, x2, y2) {
   //var textLayer = artboard.addLayerOfType("text");
   var textLayer = MSTextLayer.alloc().initWithFrame_(NSMakeRect(0, 0, 100, 100));
   if (drawingContext.hasFill() == true) {
-  textLayer.textColor = drawingContext.fillColor();
+    //I can't believe this is the only way to do this but at least it works
+    //I’m unpacking the MSColor and rebuilding it as MSImmutableColor
+    var r = drawingContext.fillColor().toString().substring(3,11)
+    var g = drawingContext.fillColor().toString().substring(14,22)
+    var b = drawingContext.fillColor().toString().substring(25,33)
+    var a = drawingContext.fillColor().toString().substring(36,44)
+  textLayer.textColor = MSImmutableColor.colorWithRed_green_blue_alpha(r,g,b,a);
   }
 
   if (drawingContext.hasStroke() == true) {
