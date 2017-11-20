@@ -662,6 +662,10 @@ RUNNING FUNCTIONS
 function onRun(context) {
   exposeContext(context);
 
+  //Let's make sure we have a Sketch.js file by restoring from the preferences
+  storedCode = context.api().settingForKey(context.plugin.identifier() + ".p5code")
+  saveCode(storedCode);
+
   var userDefaults = NSUserDefaults.standardUserDefaults();
 
 	// create a window
@@ -719,6 +723,8 @@ function onRun(context) {
                   var code = code.replace(/\brect\b/g,'rectangle');
                   //log(code);
                   saveCode(code);
+                  //Let's store the code in the preferences so it's always saved somewhere and we can retreive when a new version is rolled out
+                  context.api().setSettingForKey(context.plugin.identifier() + ".p5code", code)
                   //Reset the context so we are sure everything starts from a clean slate
                   drawingContext.reset();
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.

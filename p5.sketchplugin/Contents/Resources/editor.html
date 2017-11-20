@@ -120,10 +120,6 @@
 			width: 100%;
 		}
 
-		.releaseNotes {
-			display: none;
-		}
-
 		.link {
 			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 			font-size: 12px;
@@ -187,7 +183,7 @@
 		<span class="link"><a href="#" onclick="updateHash('reference'); return false;">Reference</a></span>
 		<span class="link"><a href="#" onclick="updateHash('debug'); return false;">Debug help</a></span>
 		<span class="link"><a href="#" onclick="updateHash('feedback'); return false;">Feedback</a></span>
-		<span class="link releaseNotes"><span class="badge">NEW</span><a href="#" onclick="updateHash('release'); return false;">Release notes</a></span>
+		<span class="link"><a href="#" onclick="updateHash('release'); return false;">Release notes</a></span>
 		<span class="twitter">
 			<a href="#" onclick="updateHash('twitter'); return false;">
 				<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -217,7 +213,6 @@
 				url: "../Sketch/sketch.js",
 				cache: false,
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					$(".releaseNotes").show();
 					$("option[value='latest']").remove(); //If there's not sketch.js file we don't show the latest code: there's none
 					$('select').val("basic");
 					setValue(defaultValue);
