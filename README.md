@@ -83,7 +83,7 @@ A warning: you are about to execute code inside Sketch. The plugin is designed t
   * Loading & Displaying
     + [image()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#imagenamexy)
     + [symbol()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#symbolnamexy)
-    <!--+ [get()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#geturl)-->
+    + [get()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#geturl)
   * Calculation
     + [abs()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#absn)
     + [ceil()](https://github.com/jacopocolo/p5-sketchplugin/blob/master/reference.md#ceiln)
