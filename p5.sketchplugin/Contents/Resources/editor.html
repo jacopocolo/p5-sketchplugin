@@ -130,6 +130,16 @@
 			max-height: 20px;
 		}
 
+		.badge {
+			font-size: 8px;
+			padding: 2px;
+			color: #fff;
+			background-color: #ed225d;
+			border-radius: 2px;
+			margin-right: 5px;
+			margin-left: -5px;
+		}
+
 		.twitter {
 			float: right;
 			padding-right: 10px;
@@ -152,7 +162,7 @@
 		<button onclick="updateHash('run')">&#9658;  Play</button>
 
 		<input type="checkbox" id="zoom">
-    <label for="zoom">Focus on artboad</label>
+    <label for="zoom">Focus on artboard</label>
 
 		<span class="preset">
 			<span>Presets:</span>
@@ -163,7 +173,7 @@
 				<option value="pieChart">Pie chart</option>
 				<option value="barChart">Bar chart</option>
 				<option value="generative">Generative grid</option>
-				<!-- <option value="get">Get json</option> -->
+				<option value="get">Get JSON</option>
 			</select>
 		</label>
 		</span>
@@ -173,6 +183,7 @@
 		<span class="link"><a href="#" onclick="updateHash('reference'); return false;">Reference</a></span>
 		<span class="link"><a href="#" onclick="updateHash('debug'); return false;">Debug help</a></span>
 		<span class="link"><a href="#" onclick="updateHash('feedback'); return false;">Feedback</a></span>
+		<span class="link"><a href="#" onclick="updateHash('release'); return false;">Release notes</a></span>
 		<span class="twitter">
 			<a href="#" onclick="updateHash('twitter'); return false;">
 				<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -404,7 +415,7 @@ function draw() {
 
 		var get =
 			`//Get a remote json and assign it to the var json
-var json = get(['http://api.open-notify.org/astros.json'])
+var json = get('http://api.open-notify.org/astros.json')
 
 function setup() {
 	createCanvas(200, 200)
@@ -440,6 +451,8 @@ function draw() {
 				setValue(barChart);
 			}  else if (this.value == "generative") {
 				setValue(generative);
+			} else if (this.value == "get") {
+				setValue(get);
 			}
 		});
 

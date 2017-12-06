@@ -96,17 +96,35 @@ function openUrlInBrowser(url) {
     NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(url));
 }
 
-/*function get( url ) {
-  var request = NSMutableURLRequest.new();
-  [request setHTTPMethod:@"GET"];
-  [request setURL:[NSURL URLWithString:url]];
+function tryParseJSON (jsonString){
+  try {
+    var o = JSON.parse(jsonString);
+    if (o && typeof o === "object" && o !== null) {
+      return o;
+    }
+  }
+  catch (e) { }
+  return false;
+}
 
-  var error = NSError.new();
-  var responseCode = null;
-
-  var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
-
-  var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-
-  return JSON.parse( dataString );
-}*/
+function get( url ) {
+  var url = [url];
+  var task = NSTask.alloc().init();
+  task.setLaunchPath("/usr/bin/curl");
+  task.setArguments(url);
+  var outputPipe = [NSPipe pipe];
+  [task setStandardOutput:outputPipe];
+  task.launch();
+  var responseData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+  var responseString = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
+  var parsed = tryParseJSON(responseString);
+  if(!parsed) {
+    log("Error invoking curl");
+    log("args:");
+    log(args);
+    log("responseString");
+    log(responseString);
+    throw "Error communicating with server"
+  }
+  return parsed;
+}
