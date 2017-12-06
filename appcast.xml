@@ -65,5 +65,20 @@
         </description>
         <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/v1.0/p5.1.0.0.sketchplugin.zip" sparkle:version="1.0.0" />
       </item>
+      <item>
+        <title>Version 1.1.0</title>
+        <description>
+          <![CDATA[
+          <ul>
+            <li>Ready for Sketch 48</li>
+            <li>Added get() function for fetching remote JSON and get() code example</li>
+            <li>Added release notes in the UI 👋🏻</li>
+            <li>Stored code between updates in preferences</li>
+            <li>Fixed a shameful typo in the UI 🤦🏻</li>
+          </ul>
+          ]]>
+        </description>
+        <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/V1.1.0/p5.1.1.0.sketchplugin.zip" sparkle:version="1.1.0" />
+      </item>
   </channel>
 </rss>
