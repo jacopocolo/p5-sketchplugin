@@ -346,7 +346,7 @@ symbol("button",30, 20);
 ```
 
 ### get(url)
-Returns a .json from a url that you can use in your script. This function does not exist in p5.js for browser but it mimics what jQuery's get would do. The square brackets inside the round brackets are mandatory.
+Returns a .json from a url that you can use in your script. This function does not exist in p5.js for browser but it mimics what jQuery's get would do.
 
 You can call it like this:
 ```javascript
