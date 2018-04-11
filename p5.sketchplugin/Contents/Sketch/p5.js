@@ -728,7 +728,19 @@ function onRun(context) {
                   //Reset the context so we are sure everything starts from a clean slate
                   drawingContext.reset();
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
-                  eval(code+'; setup(); draw();');
+
+                  try {
+                    eval(code+'; setup(); draw();');
+                  } catch (e) {
+                      if (e) {
+                        //If we have errors we don't even evaluate
+                        [webView stringByEvaluatingJavaScriptFromString:@"$('.notification').addClass('error').fadeIn(function(){$(this).delay(2000).fadeOut();});"];
+                      } else {
+                        //If we don't have errors, we evaluate
+                        eval(code+'; setup(); draw();');
+                      }
+                  }
+                  //eval(code+'; setup(); draw();')
 
                   if (/zoom/g.test(locationHash)) {
                   //Zoom to artboard
