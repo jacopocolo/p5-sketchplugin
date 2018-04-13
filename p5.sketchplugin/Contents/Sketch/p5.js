@@ -734,6 +734,7 @@ function onRun(context) {
                   } catch (e) {
                       if (e) {
                         //If we have errors we don't even evaluate
+                        console.log(e);
                         [webView stringByEvaluatingJavaScriptFromString:@"$('.notification').addClass('error').fadeIn(function(){$(this).delay(2000).fadeOut();});"];
                       } else {
                         //If we don't have errors, we evaluate
