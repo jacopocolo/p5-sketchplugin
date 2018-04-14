@@ -732,9 +732,11 @@ function onRun(context) {
                   try {
                     eval(code+'; setup(); draw();');
                   } catch (e) {
+                      var errorMessage = JSON.stringify(e.message);
                       if (e) {
                         //If we have errors we don't even evaluate
-                        console.log(e);
+                        //windowObject.evaluateWebScript("$('.notification').text("+e.name+": "+e[0]+")");
+                        windowObject.evaluateWebScript("$('.notification').text("+errorMessage+");");
                         [webView stringByEvaluatingJavaScriptFromString:@"$('.notification').addClass('error').fadeIn(function(){$(this).delay(2000).fadeOut();});"];
                       } else {
                         //If we don't have errors, we evaluate
