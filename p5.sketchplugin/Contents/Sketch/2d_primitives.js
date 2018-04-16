@@ -141,7 +141,7 @@ function endShape(mode) {
 // You can call it like this: rect(0,0,100,200).
 //NOTE: rect( is replaced with rectangle( when the code is executed to avoid conflicts with
 //some Sketch native API. It caused a lot of issues
-function rectangle(x, y, w, h) {
+function rect(x, y, w, h) {
   if (drawingContext.hasTranslate()) {
     x = x+drawingContext.translateX();
     y = y+drawingContext.translateY();
