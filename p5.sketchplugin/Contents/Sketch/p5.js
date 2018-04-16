@@ -720,7 +720,7 @@ function onRun(context) {
                   var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
                   //rect() creates some problems with native Sketch API. However…
                   //We want to allow the users to use it in the code but we swap it way with regex in execution
-                  var code = code.replace(/\brect\b/g,'rectangle');
+                  //var code = code.replace(/\brect\b/g,'rectangle');
                   //log(code);
                   saveCode(code);
                   //Let's store the code in the preferences so it's always saved somewhere and we can retreive when a new version is rolled out
