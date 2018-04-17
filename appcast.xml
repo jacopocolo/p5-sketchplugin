@@ -80,5 +80,17 @@
         </description>
         <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/V1.1.0/p5.1.1.0.sketchplugin.zip" sparkle:version="1.1.0" />
       </item>
+      <item>
+        <title>Version 1.1.1</title>
+        <description>
+          <![CDATA[
+          <ul>
+            <li>Added a warning message in case the code has errors</li>
+            <li>(Hopefully) fixed a terrible case of: https://xkcd.com/1171/</li>
+          </ul>
+          ]]>
+        </description>
+        <enclosure url="https://github.com/jacopocolo/p5-sketchplugin/releases/download/V1.1.1/p5.1.1.1.sketchplugin.zip" sparkle:version="1.1.0" />
+      </item>
   </channel>
 </rss>
