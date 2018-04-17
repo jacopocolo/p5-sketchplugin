@@ -265,7 +265,9 @@ function draw() {
 }`;
 
 		var getValue = function() {
-			return myCodeMirror.getValue();
+			//rect() creates some problems with native Sketch API. However…
+			//We want to allow the users to use it in the code but we swap it way with regex in execution
+			return myCodeMirror.getValue().replace(/\brect\(\b/,"rectangle(");
 		};
 		var setValue = function(value) {
 			myCodeMirror.setValue(value);

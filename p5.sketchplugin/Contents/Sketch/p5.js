@@ -717,11 +717,8 @@ function onRun(context) {
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
-                  var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
-                  //rect() creates some problems with native Sketch API. However…
-                  //We want to allow the users to use it in the code but we swap it way with regex in execution
-                  //var code = code.replace(/\brect\b/g,'rectangle');
-                  //log(code);
+                  var code = [webView stringByEvaluatingJavaScriptFromString:@"getValue();"];
+                  log(code);
                   saveCode(code);
                   //Let's store the code in the preferences so it's always saved somewhere and we can retreive when a new version is rolled out
                   context.api().setSettingForKey(context.plugin.identifier() + ".p5code", code)
