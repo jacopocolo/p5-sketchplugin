@@ -717,18 +717,30 @@ function onRun(context) {
                   //We force an update to update what we are selecting
                   var selection = updateContext().selection;
                   //We apply the setting
-                  var code = [webView stringByEvaluatingJavaScriptFromString:@"myCodeMirror.getValue();"];
-                  //rect() creates some problems with native Sketch API. However…
-                  //We want to allow the users to use it in the code but we swap it way with regex in execution
-                  //var code = code.replace(/\brect\b/g,'rectangle');
-                  //log(code);
+                  var code = [webView stringByEvaluatingJavaScriptFromString:@"getValue();"];
+                  log(code);
                   saveCode(code);
                   //Let's store the code in the preferences so it's always saved somewhere and we can retreive when a new version is rolled out
                   context.api().setSettingForKey(context.plugin.identifier() + ".p5code", code)
                   //Reset the context so we are sure everything starts from a clean slate
                   drawingContext.reset();
                   //hacky hack: I’m running the code the user wrote and calling the two functions with eval. But apparently it’s the only way to prevent Sketch from using the chached version of the file I’m saving.
-                  eval(code+'; setup(); draw();');
+
+                  try {
+                    eval(code+'; setup(); draw();');
+                  } catch (e) {
+                      var errorMessage = JSON.stringify(e.message);
+                      if (e) {
+                        //If we have errors we don't even evaluate
+                        //windowObject.evaluateWebScript("$('.notification').text("+e.name+": "+e[0]+")");
+                        windowObject.evaluateWebScript("$('.notification').text("+errorMessage+");");
+                        [webView stringByEvaluatingJavaScriptFromString:@"$('.notification').addClass('error').fadeIn(function(){$(this).delay(2000).fadeOut();});"];
+                      } else {
+                        //If we don't have errors, we evaluate
+                        eval(code+'; setup(); draw();');
+                      }
+                  }
+                  //eval(code+'; setup(); draw();')
 
                   if (/zoom/g.test(locationHash)) {
                   //Zoom to artboard

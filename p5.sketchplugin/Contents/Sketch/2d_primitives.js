@@ -18,6 +18,7 @@ function point(x, y) {
   path.lineToPoint(NSMakePoint(x, y + 1));
   path.lineToPoint(NSMakePoint(x, y));
   path.closePath();
+  //path = MSPath.pathWithBezierPath(path);
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Point");
@@ -49,6 +50,7 @@ function line(x1, y1, x2, y2) {
   var path = NSBezierPath.bezierPath();
   path.moveToPoint(NSMakePoint(x1, y1));
   path.lineToPoint(NSMakePoint(x2, y2));
+  //path = MSPath.pathWithBezierPath(path);
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Line");
@@ -109,6 +111,7 @@ function endShape(mode) {
   newShape.closePath();
   }
 
+  //newShape = MSPath.pathWithBezierPath(newShape);
   var shape = MSShapeGroup.shapeWithBezierPath(newShape);
   shape.setName("Shape");
 
@@ -138,7 +141,7 @@ function endShape(mode) {
 // You can call it like this: rect(0,0,100,200).
 //NOTE: rect( is replaced with rectangle( when the code is executed to avoid conflicts with
 //some Sketch native API. It caused a lot of issues
-function rect(x, y, w, h) {
+function rectangle(x, y, w, h) {
   if (drawingContext.hasTranslate()) {
     x = x+drawingContext.translateX();
     y = y+drawingContext.translateY();
@@ -151,6 +154,7 @@ function rect(x, y, w, h) {
   path.lineToPoint(NSMakePoint(x, y + h));
   path.lineToPoint(NSMakePoint(x, y));
   path.closePath();
+  //path = MSPath.pathWithBezierPath(path);
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Rectangle");
@@ -196,6 +200,7 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   path.lineToPoint(NSMakePoint(x4, y4));
   path.lineToPoint(NSMakePoint(x1, y1));
   path.closePath();
+  //path = MSPath.pathWithBezierPath(path);
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Quad");
@@ -235,6 +240,7 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   path.lineToPoint(NSMakePoint(x3, y3));
   path.lineToPoint(NSMakePoint(x1, y1));
   path.closePath();
+  //path = MSPath.pathWithBezierPath(path);
 
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   if (drawingContext.hasFill() == true) {
@@ -312,6 +318,7 @@ function arc(a,b,c,d,start,stop) {
   [path appendBezierPathWithOvalInRect:rect]
   [path closePath]
 
+  //path = MSPath.pathWithBezierPath(path);
   var shape = MSShapeGroup.shapeWithBezierPath(path);
 
   if (drawingContext.hasFill() == true) {
@@ -330,6 +337,7 @@ function arc(a,b,c,d,start,stop) {
   borderOptions.lineJoinStyle = drawingContext.strokeJoining();
   }
 
+  //clipPath = MSPath.pathWithBezierPath(clipPath);
   var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
   if (drawingContext.hasFill() == true) {
   var fill = mask.style().addStylePartOfType(0);
@@ -425,6 +433,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
         controlPoint1:NSMakePoint(x2, y2)
         controlPoint2:NSMakePoint(x3, y3)]
 
+  //path = MSPath.pathWithBezierPath(path);
   var shape = MSShapeGroup.shapeWithBezierPath(path);
   shape.setName("Bezier");
 
@@ -450,8 +459,8 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 function symbol(name,x,y) {
   var symbol = findSymbolByName(name)
   symbolRect = symbol.frame();
-  symbolRect.setX(x);
-  symbolRect.setY(y);
+  symbolRect.setX(x+drawingContext.translateX());
+  symbolRect.setY(y+drawingContext.translateY());
   artboard.addLayers([symbol]);
 }
 

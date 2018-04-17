@@ -154,6 +154,27 @@
 			float: right;
 		}
 
+		.notification {
+			display: none;
+			font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+			color: #fff;
+			font-size: 12px;
+			width: auto;
+			height: 18px;
+			position: absolute;
+			margin: 0 auto;
+			bottom: 40px;
+			right: 10px;
+			padding-right: 5px;
+			padding-left: 5px;
+			border-radius: 2px;
+			z-index: 1000;
+		}
+
+		.error {
+			background-color: red;
+		}
+
 	</style>
 </head>
 
@@ -179,6 +200,7 @@
 		</span>
 	</div>
 	<div id="editor"></div>
+	<div class="notification">Your code constains errors. See macOS console for debugging</div>
 	<div class="footer">
 		<span class="link"><a href="#" onclick="updateHash('reference'); return false;">Reference</a></span>
 		<span class="link"><a href="#" onclick="updateHash('debug'); return false;">Debug help</a></span>
@@ -243,7 +265,9 @@ function draw() {
 }`;
 
 		var getValue = function() {
-			return myCodeMirror.getValue();
+			//rect() creates some problems with native Sketch API. However…
+			//We want to allow the users to use it in the code but we swap it way with regex in execution
+			return myCodeMirror.getValue().replace(/\brect\(\b/g,"rectangle(");
 		};
 		var setValue = function(value) {
 			myCodeMirror.setValue(value);
