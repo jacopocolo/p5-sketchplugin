@@ -459,8 +459,8 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
 function symbol(name,x,y) {
   var symbol = findSymbolByName(name)
   symbolRect = symbol.frame();
-  symbolRect.setX(x);
-  symbolRect.setY(y);
+  symbolRect.setX(x+drawingContext.translateX());
+  symbolRect.setY(y+drawingContext.translateY());
   artboard.addLayers([symbol]);
 }
 
