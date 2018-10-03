@@ -20,7 +20,7 @@ function point(x, y) {
   path.closePath();
   path = MSPath.pathWithBezierPath(path);
 
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   shape.setName("Point");
 
   if (drawingContext.hasStroke() == true) {
@@ -52,7 +52,7 @@ function line(x1, y1, x2, y2) {
   path.lineToPoint(NSMakePoint(x2, y2));
   path = MSPath.pathWithBezierPath(path);
 
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   shape.setName("Line");
 
   if (drawingContext.hasStroke() == true) {
@@ -112,7 +112,7 @@ function endShape(mode) {
   }
 
   newShape = MSPath.pathWithBezierPath(newShape);
-  var shape = MSShapeGroup.shapeWithBezierPath(newShape);
+  var shape = MSShapeGroup.layerWithPath(newShape);
   shape.setName("Shape");
 
   if (drawingContext.hasFill() == true) {
@@ -156,7 +156,7 @@ function rectangle(x, y, w, h) {
   path.closePath();
   path = MSPath.pathWithBezierPath(path);
 
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   shape.setName("Rectangle");
 
   if (drawingContext.hasFill() == true) {
@@ -202,7 +202,7 @@ function quad(x1, y1, x2, y2, x3, y3, x4, y4) {
   path.closePath();
   path = MSPath.pathWithBezierPath(path);
 
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   shape.setName("Quad");
 
   if (drawingContext.hasFill() == true) {
@@ -242,7 +242,7 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   path.closePath();
   path = MSPath.pathWithBezierPath(path);
 
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingContext.fillColor();
@@ -271,25 +271,35 @@ function ellipse(a, b, c, d) {
   }
   centerX = a - c / 2;
   centerY = b - d / 2;
-  var ovalShape = MSOvalShape.alloc().init();
-  ovalShape.frame = MSRect.rectWithRect(NSMakeRect(centerX, centerY, c, d));
+  var center = NSMakePoint(centerX, centerY)
+  rect = NSMakeRect(a-c/2, b-d/2, c, d)
+  var rad = c;
+  clipPath = [NSBezierPath bezierPath]
+  [clipPath moveToPoint:center]
+  [clipPath appendBezierPathWithArcWithCenter:center radius:rad+1.0 startAngle:0 endAngle:1]
+  [clipPath closePath]
 
-  var shapeGroup = MSShapeGroup.shapeWithPath(ovalShape);
-  shapeGroup.setName("Oval");
+  path = [NSBezierPath bezierPath]
+  [path appendBezierPathWithOvalInRect:rect]
+  [path closePath]
+
+  path = MSPath.pathWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
+  shape.setName("Oval");
   if (drawingContext.hasFill() == true) {
-  var fill = shapeGroup.style().addStylePartOfType(0);
+  var fill = shape.style().addStylePartOfType(0);
   fill.color = drawingContext.fillColor();
   }
 
   if (drawingContext.hasStroke() == true) {
-  var border = shapeGroup.style().addStylePartOfType(1);
+  var border = shape.style().addStylePartOfType(1);
   border.color = drawingContext.strokeColor();
   border.thickness = drawingContext.strokeThikness();
   }
 
-  shapeGroup.setRotation(drawingContext.rotation());
+  shape.setRotation(drawingContext.rotation());
 
-  artboard.addLayers([shapeGroup]);
+  artboard.addLayers([shape]);
 }
 
 // An arc with the center in (a, b) a width of c and an height of d
@@ -319,7 +329,7 @@ function arc(a,b,c,d,start,stop) {
   [path closePath]
 
   path = MSPath.pathWithBezierPath(path);
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
 
   if (drawingContext.hasFill() == true) {
   var fill = shape.style().addStylePartOfType(0);
@@ -338,7 +348,7 @@ function arc(a,b,c,d,start,stop) {
   }
 
   clipPath = MSPath.pathWithBezierPath(clipPath);
-  var mask = MSShapeGroup.shapeWithBezierPath(clipPath);
+  var mask = MSShapeGroup.layerWithPath(clipPath);
   if (drawingContext.hasFill() == true) {
   var fill = mask.style().addStylePartOfType(0);
   fill.color = drawingContext.fillColor();
@@ -434,7 +444,7 @@ function bezier(x1,y1,x2,y2,x3,y3,x4,y4) {
         controlPoint2:NSMakePoint(x3, y3)]
 
   path = MSPath.pathWithBezierPath(path);
-  var shape = MSShapeGroup.shapeWithBezierPath(path);
+  var shape = MSShapeGroup.layerWithPath(path);
   shape.setName("Bezier");
 
   if (drawingContext.hasStroke() == true) {
