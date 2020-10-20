@@ -1,4 +1,4 @@
-# p5.sketchplugin
+# p5.sketchplugin (⚠️ not under active development anymore)
 ### Create rich and editable graphics inside Sketch using only few lines of JavaScript
 
 ![p5.sketchplugin](https://github.com/jacopocolo/p5-sketchplugin/blob/master/img/Preview@2x.png)
